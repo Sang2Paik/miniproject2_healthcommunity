@@ -123,11 +123,12 @@ insert into meal_type values(null, 'morning_snack');
 insert into meal_type values(null, 'afternoon_snack');																																																																																														
 insert into meal_type values(null, 'night_snack');																																																																																														
 
+
 create table food_kcal
 (
 	f_idx		int primary key auto_increment,
 	f_name		varchar(200) not null,
-	f_type		varchar(200),
+	f_eattime	datetime default now(),
 	m_idx		int,
 	m_name		varchar(200),
 	f_regdate	datetime default now(),
@@ -144,5 +145,12 @@ alter table food_kcal
 alter table food_kcal
 		add constraint fk_food_kcal_user_idx foreign key(user_idx)
 											references user(user_idx);
+
+insert into food_kcal values(null, "슈프림피자,냉동", 
+
+select 
+	(f_unit_kcal/f_unit_g)*f_csum_g as f_csum_kcal 
+from food_kcal
+
 
 */
