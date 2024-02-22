@@ -11,23 +11,28 @@ drop table comment
 drop table board
 
 
-create table user
+drop table user
+
+create table user 
 (
-	user_idx 			int primary key auto_increment,
-	user_name 			varchar(100) not null,
-	user_id				varchar(200) unique,
-	user_pwd			varchar(200) not null,
-	user_email			varchar(200) not null,
-	user_ip				varchar(200) not null,
-	user_created_date 	datetime default now(),	
-	user_modified_date	datetime default now(),
-	user_grade			varchar(100) not null,
-	user_age			int not null,
-	user_gender			varchar(100) not null,
-	user_kg				double,
-	user_height			double,
-	user_target			double
+	 user_idx  			 int primary key not null auto_increment,
+	 user_name  	 	 varchar(100) not null,
+	 user_id    		 varchar(100) unique not null,
+	 user_pwd   	 	 varchar(100) not null,
+	 user_age		 	 int		  not null,
+	 user_email	         varchar(100) not null,
+	 user_gender		 varchar(100) not null,
+	 user_height		 double,
+	 user_kg			 double,
+	 user_target		 double,
+	 user_grade          varchar(100) not null,
+	 user_created_date   datetime default now(),
+	 user_modified_date  datetime default now(),
+	 user_ip			 varchar(100) default null
 )
+
+insert into user values(null, 'c_test', 'a', 'a', 23, 'a@a.com', 'man', 25.5, 155.7, 68.8,'user_admin', now(), now()+10000, '1.1.1.1' )
+
 
 create table category
 (
