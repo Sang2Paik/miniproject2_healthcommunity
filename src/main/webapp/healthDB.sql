@@ -3,7 +3,7 @@
 
 drop table user
 
-create table user 
+create table user
 	(
 		 user_idx  			 int primary key not null auto_increment,
 		 user_name  	 	 varchar(100) not null,
@@ -12,9 +12,9 @@ create table user
 		 user_age		 	 int		  not null,
 		 user_email	         varchar(100) not null,
 		 user_gender		 varchar(100) not null,
-		 user_height		 double 	  not null,
-		 user_kg			 double 	  not null,
-		 user_target		 double		  not null,
+		 user_height		 double,
+		 user_kg			 double,
+		 user_target		 double,
 		 user_grade          varchar(100) not null,
 		 user_created_date   datetime default now(),
 		 user_modified_date  datetime default now(),
