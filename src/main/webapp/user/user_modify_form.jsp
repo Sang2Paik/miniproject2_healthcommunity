@@ -72,26 +72,6 @@
 		  return;
 	  }
 	  
-	  if(user_height==''){
-		  alert('키를 입력하세요!');
-		  f.user_height.value='';
-		  f.user_height.focus();
-		  return;
-	  }
-	  
-	  if(user_kg==''){
-		  alert('몸무게를 입력하세요!');
-		  f.user_kg.value='';
-		  f.user_kg.focus();
-		  return;
-	  }
-	  if(user_target==''){
-		  alert('목표 몸무게를 입력하세요!');
-		  f.user_kg.value='';
-		  f.user_kg.focus();
-		  return;
-	  }
-	  
 	  f.action = "modify.do";//UserberModifyAction
 	  f.submit();//전송
   }
@@ -121,29 +101,29 @@
 				<div class="panel-body">
 				   <table class="table">
 		              <tr>
-		                 <th><label>이름</label></th>
+		                 <th><label><font color="red">*</font>이름</label></th>
 		                 <td><input class="form-control" name="user_name" value="${ vo.user_name }"></td>
 		              </tr>		   
 		              <tr>
-		                 <th><label>아이디</label></th>
+		                 <th><label><font color="red">*</font>아이디</label></th>
 		                 <td>
 		                    <input class="form-control" name="user_id"  readonly="readonly" value="${ vo.user_id }">
 		                 </td>
 		              </tr>		
 		              <tr>
-		                 <th><label>비밀번호</label></th>
+		                 <th><label><font color="red">*</font>비밀번호</label></th>
 		                 <td><input class="form-control" name="user_pwd" value="${ vo.user_pwd }"></td>
 		              </tr>
 		               <tr>
-		                 <th><label>나이</label></th>
+		                 <th><label><font color="red">*</font>나이</label></th>
 		                 <td><input class="form-control" name="user_age"  value="${ vo.user_age }"></td>
 		              </tr>
 		              <tr>
-		                 <th><label>이메일</label></th>
+		                 <th><label><font color="red">*</font>이메일</label></th>
 		                 <td><input class="form-control"  name="user_email" value="${ vo.user_email }"></td>
 		              </tr>
 		              <tr>
-		                 <th><label>성별</label></th>
+		                 <th><label><font color="red">*</font>성별</label></th>
 		                 <td>
 		                 	<c:if test="${ vo.user_gender eq 'man'}">
 			                 	<input type="radio" class="form-control"  name="user_gender" 

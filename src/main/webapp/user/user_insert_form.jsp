@@ -69,21 +69,7 @@
 	  
   });//end: $(document).ready()
   
-  
-  function find_addr(){
-	  
-	  new daum.Postcode({
-	        oncomplete: function(data) {
-	            
-	        	//data = {"zonecode":"13529", "address":"경기 성남시 분당구 판교역로 166","roadAddress":"",...}
-	        	
-	        	//주소창에서 선택된 주소값을 입력창에 넣어준다
-	        	$("#user_zipcode").val(data.zonecode);
-	        	$("#user_addr").val(data.roadAddress);
-	        }
-	  }).open();
-	  
-  }//end: find_addr()
+
   
   
   const regular_email = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
@@ -128,26 +114,6 @@
 		  return;
 	  }
 	  
-	  if(user_height==''){
-		  alert('키를 입력하세요!');
-		  f.user_height.value='';
-		  f.user_height.focus();
-		  return;
-	  }
-	  
-	  if(user_kg==''){
-		  alert('몸무게를 입력하세요!');
-		  f.user_kg.value='';
-		  f.user_kg.focus();
-		  return;
-	  }
-	  if(user_target==''){
-		  alert('목표 몸무게를 입력하세요!');
-		  f.user_kg.value='';
-		  f.user_kg.focus();
-		  return;
-	  }
-	  
 	  
 	  f.action = "insert.do";//userberInsertAction
 	  f.submit();//전송
@@ -169,30 +135,30 @@
 				<div class="panel-body">
 				   <table class="table">
 		              <tr>
-		                 <th><label>이름</label></th>
+		                 <th><label><font color="red">*</font>이름</label></th>
 		                 <td><input class="form-control"  name="user_name"></td>
 		              </tr>		   
 		              <tr>
-		                 <th><label>아이디</label></th>
+		                 <th><label><font color="red">*</font>아이디</label></th>
 		                 <td>
 		                    <input class="form-control" name="user_id"  id="user_id">
 		                    <span id="id_msg"></span>
 		                 </td>
 		              </tr>		
 		              <tr>
-		                 <th><label>비밀번호</label></th>
+		                 <th><label><font color="red">*</font>비밀번호</label></th>
 		                 <td><input class="form-control"  type="password" name="user_pwd"></td>
 		              </tr>
 		              <tr>
-		                 <th><label>나이</label></th>
+		                 <th><label><font color="red">*</font>나이</label></th>
 		                 <td><input class="form-control" name="user_age"></td>
 		              </tr>
 		              <tr>
-		                 <th><label>이메일</label></th>
+		                 <th><label><font color="red">*</font>이메일</label></th>
 		                 <td><input class="form-control"  name="user_email"></td>
 		              </tr>		
 		              <tr>
-		                 <th><label>성별</label></th>
+		                 <th><label><font color="red">*</font>성별</label></th>
 		                 <td>
 		                 	<input type="radio" class="form-control"  name="user_gender" 
 		                 				value="man" checked="checked">남자&nbsp;&nbsp;&nbsp;
