@@ -94,7 +94,10 @@
    <!-- 회원가입 -->
    <div style="margin-bottom: 5px;">
       <button  class="btn btn-primary" onclick="location.href='insert_form.do'" >회원가입</button>
+   <!-- 게시판가기 -->
+      <button  class="btn btn-primary" onclick="location.href='../board/list.do'" >게시판가기</button>
    </div> 
+
    
    <table class="table">
       <!-- head -->
