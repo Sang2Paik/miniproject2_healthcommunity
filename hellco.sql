@@ -33,6 +33,11 @@ create table user
 
 insert into user values(null, 'c_test', 'a', 'a', 23, 'a@a.com', 'man', 25.5, 155.7, 68.8,'user_admin', now(), now()+10000, '1.1.1.1' )
 
+drop table category
+
+drop table product
+
+drop table cart
 
 create table category
 (
@@ -40,8 +45,13 @@ create table category
 	c_name			varchar(200)
 )
 
+
 insert into category values (null, "workout");
 insert into category values (null, "food");
+
+select c_idx from category where c_name='food'
+
+select * from category order by c_idx desc
 
 create table board
 (
@@ -61,6 +71,16 @@ create table board
 	user_id			varchar(200),
 	user_name		varchar(100)
 )
+
+drop table board
+
+drop table comment
+
+select * from board
+
+INSERT INTO board (b_subject, c_idx, c_name, b_content, b_photo, b_ip, b_readhit, b_like, user_idx, user_id, user_name)
+VALUES ('제목 예시', 1, '카테고리명', '내용 예시', '이미지파일명.jpg', '127.0.0.1', 0, 0, 1, '사용자ID', '사용자이름');
+
 
 alter table board
 		add constraint fk_category_idx foreign key(c_idx)
@@ -128,12 +148,11 @@ insert into meal_type values(null, 'morning_snack');
 insert into meal_type values(null, 'afternoon_snack');																																																																																														
 insert into meal_type values(null, 'night_snack');																																																																																														
 
-
 create table food_kcal
 (
 	f_idx		int primary key auto_increment,
 	f_name		varchar(200) not null,
-	f_eattime	datetime default now(),
+	f_type		varchar(200),
 	m_idx		int,
 	m_name		varchar(200),
 	f_regdate	datetime default now(),
@@ -150,12 +169,5 @@ alter table food_kcal
 alter table food_kcal
 		add constraint fk_food_kcal_user_idx foreign key(user_idx)
 											references user(user_idx);
-
-insert into food_kcal values(null, "슈프림피자,냉동", 
-
-select 
-	(f_unit_kcal/f_unit_g)*f_csum_g as f_csum_kcal 
-from food_kcal
-
 
 */

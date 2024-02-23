@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comment">
+
+ 	<!-- 전체조회 -->
+ 	<select id="comment_list" parameterType="int" resultType="vo.CommentVo">
+ 		select * from comment where b_idx=#{ b_idx } order by cmt_idx desc
+ 	</select>
+ 	
+ 	<!-- 조건별(페이징) 조회 -->
+ 	<select id="comment_condition_list" parameterType="Map" resultType="vo.CommentVo">
+			select * from
+ 			(
+	 			select *,
+	 			rank() over(order by cmt_idx desc) as no
+	 			from comment 
+	 			where b_idx=#{ b_idx }
+ 			) c
+ 			where no between #{ start } and #{ end }
+ 	</select>
+ 	
+ 	<!-- b_idx별 전체댓글 수 -->
+ 	<select id="comment_row_total" parameterType="int" resultType="int">
+ 		select ifnull(count(*),0) from comment where b_idx=#{ b_idx }
+ 	</select>
+ 	
+	<!-- 추가 -->
+	<insert id="comment_insert" parameterType="vo.CommentVo">
+		insert into comment values(null, 
+		                            #{ cmt_content }, 
+									#{ cmt_ip }, 
+									now(), 
+									#{ b_idx }, 
+									#{ mem_idx}, 
+									#{ mem_id }, 
+									#{ mem_name } )
+	</insert>
+	<!-- 삭제 -->
+	<delete id="comment_delete" parameterType="int">
+		delete from comment where cmt_idx=#{ cmt_idx }
+	</delete>
+	
+	<!-- 게시글 삭제시 달린댓글 모두 삭제 -->
+	<delete id="comment_delete_b_idx" parameterType="int">
+		delete from comment where b_idx=#{ b_idx }
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
