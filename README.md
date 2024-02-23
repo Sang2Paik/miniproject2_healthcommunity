@@ -1,3 +1,6 @@
+## 2024-02-23 이영준
+- weather 업로드 (vo, Controller, Utils, jsp(main, list), web.xml에 controller 추가)
+
 ## 2024-02-22 최시환
 - user DB 회원가입,로그인 업로드
 
