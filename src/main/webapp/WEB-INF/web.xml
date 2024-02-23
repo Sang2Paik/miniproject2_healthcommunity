@@ -11,6 +11,7 @@
 			<param-value>
 				controller.action.UserController,
 				controller.action.BoardController,
+				controller.action.CommentController,
 				controller.action.WeatherController
 			</param-value>
 		</init-param>
