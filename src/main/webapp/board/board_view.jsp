@@ -46,6 +46,11 @@
 </style>
 
 <script type="text/javascript">
+	function like_board(b_idx) {
+		
+		location.href='board_like.do?b_idx='+ b_idx + '&page=${param.page}&search=${ param.search }&search_text=${ param.search_text }';
+	}
+	
 	function delete_board(b_idx) {
 		if(confirm("위 글을 삭제하시겠습니까?")==false)return;
 		
@@ -63,11 +68,11 @@
 
 	var g_cmt_page=1;
 
-	$(document).ready(function(){
+	/* $(document).ready(function(){
 		comment_list(1);
-	});
+	}); */
 	
-	function comment_list(p) {
+/* 	function comment_list(p) {
 		//Ajax로 댓글목록 요청
 		$.ajax({
 			url		:	"comment_list.do",
@@ -80,17 +85,17 @@
 				
 				alert(err.responseText);
 			}
-		});
+		}); */
 		
 		
-	} // end : comment_list()
+//	} // end : comment_list()
 	
 	
 	function comment_insert() {
 		if("${ empty user }" == "true") {
 			if(confirm("댓글은 로그인 후에 가능합니다\n로그인 하시겠습니까?")==false) return;
 		
-			location.href="../member/login_form.do?url=" + encodeURIComponent(location.href);
+			location.href="../user/login_form.do?url=";
 			return;
 		}
 	
@@ -103,15 +108,15 @@
 			return;
 		}
 	
-		//Ajax로 전송
+		/* //Ajax로 전송
 		$.ajax({
 			url		:	"comment_insert.do",
 			data	:	{
 							"b_idx" 		: "${ vo.b_idx }",
 				       		"cmt_content"	: cmt_content,
-				       		"mem_idx"		: "${ user.mem_idx }",
-				       		"mem_id"		: "${ user.mem_id }",
-				       		"mem_name"		: "${ user.mem_name }"
+				       		"user_idx"		: "${ user.user_idx }",
+				       		"user_id"		: "${ user.user_id }",
+				       		"user_name"		: "${ user.user_name }"
 			            },
 			dataType :	"json",
 			success	 :	function(res_data){
@@ -130,7 +135,7 @@
 			error	 : function(err) {
 				alert(err.responseText);
 			}
-		});
+		}); */
 		
 		
 		
@@ -144,24 +149,26 @@
 
 	<div id="box">
 		<div class="panel panel-primary">
-			<div class="panel-heading"><b>${ vo.mem_name }</b>님의 글:</div>
+			<div class="panel-heading"><b>${ vo.user_name }</b>님의 글:</div>
 			<div class="panel-body">
 			
 				<div id="subject"><b>제목 : ${ vo.b_subject }</b></div>
 				<div id="content">${ vo.b_content }</div>
+				<div><img src="../upload/${ vo.b_photo }"></div>
+				
 				<div id="regdate"><b>작성일자 : ${ vo.b_regdate }</b></div>
 				
 				<div>
 					
-					<!-- 로그인상태면서 메인글(b_depth==5인 (검색조건 search가 비어있던지 아니면 전체검색(all)인 경우 -->
-					<c:if test="${ not empty user and vo.b_depth lt 5 and (empty param.search or param.search eq 'all')}">
-						<input class="btn btn-success"	type="button" value="답글달기" 
-								onclick="location.href='reply_form.do?b_idx=${ vo.b_idx }'">					
+					<!-- 로그인 상태일때만 좋아요버튼을 누를 수 있도록 작성 -->
+					<c:if test="${ not empty user }">
+						<input class="btn btn-success"	type="button" value="좋아요" 
+								onclick="like_board(${ vo.b_idx })">${ vo.b_like }				
 					</c:if>
 				
 					
 					<!-- 글 주인 또는 관리자만 사용 가능하도록 활성화 -->
-					<c:if test="${ ( vo.mem_idx eq user.mem_idx ) or ( user.mem_grade eq '관리자' ) }">
+					<c:if test="${ ( vo.user_idx eq user.user_idx ) or ( user.user_grade eq '관리자' ) }">
 						<input class="btn btn-info" 	type="button" value="수정하기" onclick="modify_board(${ vo.b_idx })">
 						<input class="btn btn-danger"	type="button" value="삭제하기" onclick="delete_board(${ vo.b_idx })">
 					</c:if>

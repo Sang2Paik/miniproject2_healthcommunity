@@ -99,6 +99,7 @@ public class BoardController {
 
 		//세션에 게시물을 봤다는 정보를 삭제
 		request.getSession().removeAttribute("show");
+		request.getSession().removeAttribute("like");
 
 
 		//request binding
@@ -227,11 +228,30 @@ public class BoardController {
 	
 	
 	
-	//답글쓰기폼
-	@RequestMapping("/board/reply_form.do")
-	public String reply_form(HttpServletRequest request, HttpServletResponse response) {
+	//좋아요 누르면 좋아요 수 증가
+	@RequestMapping("/board/board_like.do")
+	public String board_like(HttpServletRequest request, HttpServletResponse response) {
 
-		return "board_reply_form.jsp";
+		int		b_idx		= Integer.parseInt(request.getParameter("b_idx"));
+		String	page		= request.getParameter("page");
+		String	search		= request.getParameter("search");
+		String	search_text	= request.getParameter("search_text");
+		
+		if(search==null || search.isEmpty())
+			search = "all";
+		
+		
+		//세션에서 게시물을 봤는지에 대한 체크
+		if(request.getSession().getAttribute("like")==null) {
+			
+			BoardVo vo = BoardDao.getInstance().selectOne(b_idx);
+			//조회수 증가
+			BoardDao.getInstance().update_like(vo);
+			request.getSession().setAttribute("like", true);
+		}
+		
+		return String.format("redirect:board_view.do?b_idx=%d&page=%s&search=%s&search_text=%s",
+		b_idx, page, search, search_text);
 	}
 	
 	

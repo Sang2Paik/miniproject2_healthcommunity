@@ -19,7 +19,7 @@
 
 <style type="text/css">
 #box {
-	width: 1000px;
+	width: 100%;
 	margin: auto;
 	margin-top: 20px;
 }
@@ -30,6 +30,17 @@
 	font-weight: bold;
 	color: #3366ff;
 	text-shadow: 1px 1px 2px black;
+}
+
+#gird {
+	padding 0;
+	margin: 0;
+}
+#pageMenu{
+	text-align: center;
+}
+.row{
+	text-align: center;
 }
 </style>
 
@@ -43,7 +54,7 @@
 			if (confirm("글쓰기는 로그인후에 가능합니다\n로그인 하시겠습니까?") == false)
 				return;
 
-			location.href = "../member/login_form.do";
+			location.href = "../user/login_form.do";
 
 			return;
 		}
@@ -91,114 +102,90 @@
 	});
 </script>
 
+<script>
+	// 이미지 URL을 클릭한 경우, 해당 URL로 이동합니다.
+	function image_view(b_idx) {
+		window.location.href='board_view.do?b_idx='+b_idx;
+	}
+</script>
 
 </head>
 <body>
 
 	<div id="box">
-		<h1 id="title">:::: 게시판 ::::</h1>
-
-		<div class="row" style="margin-bottom: 5px;">
-			<div class="col-sm-3">
-				<input class="btn btn-primary" type="button" value="글쓰기"
-					onclick="insert_form();">
-
+		<h1 id="title">제목혹은로고</h1>
+		
+		<div class="row" id="gird">
+			<div class="col-sm-1" style="margin-bottom: 5px; width: 5%">
+					<input class="btn btn-primary" type="button" value="글쓰기"
+						onclick="insert_form();">
 			</div>
-			<div class="col-sm-9" style="text-align: right;">
-				<!-- 로그인 안된경우 -->
-				<c:if test="${ empty user }">
-					<input class="btn btn-primary" type="button" value="로그인"
-						onclick="location.href='../member/login_form.do'">
-				</c:if>
-
-				<!-- 로그인 된경우 -->
-				<c:if test="${ not empty user }">
-					<b>${ user.mem_name }</b>님 환영합니다
-         	<input class="btn btn-primary" type="button" value="로그아웃"
-						onclick="location.href='../member/logout.do'">
-				</c:if>
-
-			</div>
-		</div>
-
-		<table class="table">
-			<tr class="info">
-				<th width="100">번호</th>
-				<th width="400">제목</th>
-				<th>작성자</th>
-				<th>작성일자</th>
-				<th>조회수</th>
-			</tr>
-
-			<!-- for(BoardVo vo : list)  -->
-			<c:forEach var="vo" items="${ list }">
-				<tr>
-					<td>${ vo.no }</td>
-
-					<!-- 제목 -->
-					<td>
-						<!-- 답글이면 들여쓰기 --> 
-						<c:forEach begin="1" end="${ vo.b_depth }">
-                  			&nbsp;&nbsp;&nbsp;
-              			</c:forEach> 
-              			<!-- 메인글이 아니면 ㄴ 붙이기 --> 
-              			<c:if test="${ vo.b_step ne 0 }">┖</c:if>
-
-						<!-- 사용중  --> 
-						<c:if test="${ vo.b_use eq 'Y' }">
-							<a href="view.do?b_idx=${ vo.b_idx }&page=${ empty param.page ? 1 : param.page }&search=${ param.search }&search_text=${ param.search_text }">${ vo.b_subject }</a>
-							<c:if test="${ vo.cmt_count gt 0 }">
-								<span class="badge" style="background: #ff3366;">${ vo.cmt_count }</span>
-							</c:if>
-							
-						</c:if> <!-- 삭제게시물  --> <c:if test="${ vo.b_use eq 'N' }">
-							<font color="red">삭제된 게시물(${ vo.b_subject })</font>
-						</c:if>
-
-					</td>
-
-					<td>${ vo.mem_name }</td>
-					<td>${ fn:substring(vo.b_regdate,0,16) }</td>
-					<td>${ vo.b_readhit }</td>
-				</tr>
-			</c:forEach>
-
-
-			<!-- 게시물이 없는 경우 -->
-			<c:if test="${ empty list }">
-				<tr>
-					<td colspan="5" align="center"><font color="red">등록된게시글이 없습니다</font></td>
-				</tr>
-			</c:if>
-
-
-
-
+			
+			
 			<!-- 검색 및  Page Menu  -->
-			<tr>
-				<td colspan="5" align="center"><br> <!-- 검색메뉴 -->
-					<form class="form-inline">
+				<form class="form-inline">
+					<div class="col-sm-1" id="gird" style="width: 5%">
 						<select id="search" class="form-control">
 							<option value="all">전체보기</option>
 							<option value="name">이름</option>
 							<option value="subject">제목</option>
 							<option value="content">내용</option>
 							<option value="subject_content">제목+내용</option>
-						</select> <input id="search_text" class="form-control"
-							value="${ param.search_text }"> <input type="button"
-							value="검색" class="btn btn-primary" onclick="find();">
+						</select> 
+					</div>
+					<div class="col-sm-9" id="gird" style="width: 75%; min-width: 10%;">
+						<input id="search_text" class="form-control" value="${ param.search_text }" style="width: 95%;">
+						<input type="button" value="검색" class="btn btn-primary" onclick="find();" style="width: auto;">
+					</div>
+					
+				</form>
+	
+				<div class="col-sm-1" id="gird" style="width: 15%;">
+					<div class="form-inline">
+						<!-- 로그인 안된경우 -->
+						<c:if test="${ empty user }">
+							<input class="btn btn-primary" type="button" value="로그인"
+									onclick="location.href='${ pageContext.request.contextPath }/user/login_form.do'">
+						</c:if>
+		
+						<!-- 로그인 된경우 -->
+						<c:if test="${ not empty user }">
+							<b>${ user.user_name }</b>님 환영합니다
+		         			<input class="btn btn-primary" type="button" value="로그아웃"
+									onclick="location.href='${ pageContext.request.contextPath }/user/logout.do'">
+						</c:if>
+					</div>
+				</div>
+				
+			</div> <!-- end : grid -->
 
-					</form> <!-- Page Menu --> ${ pageMenu } <!-- <ul class='pagination'>
-				<li><a href='#'>◀</a></li>
-				<li class='active'><a href='#'>1</a></li>
-				<li><a href='list.do?page=2'>2</a></li>
-				<li><a href='list.do?page=3'>3</a></li>
-				<li><a href='list.do?page=4'>▶</a></li>
-			</ul> --></td>
-			</tr>
+		<br>
+		
+			<!-- 이미지 출력 -->
+			<div>
+				<!-- for(Boardboard_vo board_vo : list)  -->
+				<c:forEach var="board_vo" items="${ list }">
+					<c:if test="${ board_vo.b_open eq 'Y' }">
+		
+					<%-- <input type="image" onclick="image_view(${board_vo.b_idx})"> --%>
+					   <img src="../upload/${ board_vo.b_photo }" onclick="image_view('${board_vo.b_idx}');">  
+					</c:if>
+				</c:forEach>
 
-		</table>
-	</div>
 
+					<!-- 게시물이 없는 경우 -->
+					<c:if test="${ empty list }">
+						<tr>
+							<td colspan="5" align="center"><font color="red">등록된게시글이 없습니다</font></td>
+						</tr>
+					</c:if>
+			</div>
+		</div>
+
+		
+		<div id="pageMenu">
+			<!-- Page Menu -->
+			${ pageMenu }
+		</div>
 </body>
 </html>
