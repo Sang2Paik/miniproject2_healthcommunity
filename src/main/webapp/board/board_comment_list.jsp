@@ -60,13 +60,7 @@
 	<c:if test="${ not empty cmt_list }">
 		${ pageMenu }
 	</c:if>
-	<!-- <ul class="pagination">
-		<li><a href="#" onclick="comment_list(1);">1</a></li>
-		<li><a href="#" onclick="comment_list(2);">2</a></li>
-		<li><a href="#" onclick="comment_list(3);">3</a></li>
-		<li><a href="#" onclick="comment_list(4);">4</a></li>
-		<li><a href="#" onclick="comment_list(5);">5</a></li>
-	</ul> -->
+
 	
 	
 	<c:forEach var="cmt" items="${ cmt_list }">
@@ -74,11 +68,11 @@
 		<!-- 1번째줄 -->
 		<div class="row" class="cmt_1">
 			<div class="col-sm-9">
-				<b>(${ cmt.no })${ cmt.mem_mask_id }</b>
+				<b>(${ cmt.no })${ cmt.user_mask_id }</b>
 			</div>
 			<div class="col-sm-3">
 				<!-- 본인글인 경우만 보여준다 -->
-				<c:if test="${ user.mem_idx eq cmt.mem_idx }">
+				<c:if test="${ user.user_idx eq cmt.user_idx }">
 					<input class="btn btn-warning" type="button" value="x" 
 							onclick="delete_comment(${ cmt.cmt_idx });">
 				</c:if>

@@ -68,11 +68,11 @@
 
 	var g_cmt_page=1;
 
-	/* $(document).ready(function(){
+	$(document).ready(function(){
 		comment_list(1);
-	}); */
+	});
 	
-/* 	function comment_list(p) {
+ 	function comment_list(p) {
 		//Ajax로 댓글목록 요청
 		$.ajax({
 			url		:	"comment_list.do",
@@ -82,13 +82,10 @@
 				$("#disp").html(res_data);
 			},
 			error	:	function(err) {
-				
 				alert(err.responseText);
 			}
-		}); */
-		
-		
-//	} // end : comment_list()
+		}); 
+ 	}//	} // end : comment_list()
 	
 	
 	function comment_insert() {
@@ -107,23 +104,20 @@
 			$("#cmt_content").focus();
 			return;
 		}
-	
-		/* //Ajax로 전송
+		
+		//Ajax로 전송
 		$.ajax({
 			url		:	"comment_insert.do",
 			data	:	{
 							"b_idx" 		: "${ vo.b_idx }",
-				       		"cmt_content"	: cmt_content,
-				       		"user_idx"		: "${ user.user_idx }",
-				       		"user_id"		: "${ user.user_id }",
-				       		"user_name"		: "${ user.user_name }"
+				       		"cmt_content"	: cmt_content
 			            },
 			dataType :	"json",
 			success	 :	function(res_data){
 				// res_data = { "result" : true } or { "result" : false }
 				if(res_data.result){
 					//성공시
-					comment_list(1);
+					comment_list(1); //1페이지를 보여준다
 				}else{
 					//실패시
 					alert("댓글쓰기에 실패했습니다")
@@ -135,12 +129,12 @@
 			error	 : function(err) {
 				alert(err.responseText);
 			}
-		}); */
+		});
 		
 		
 		
 		
-	}
+	} // comment_insert();
 	
 </script>
 

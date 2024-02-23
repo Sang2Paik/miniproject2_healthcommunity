@@ -248,6 +248,19 @@ public class BoardDao {
 		return res;
 	}
 
+	public int update_like(BoardVo vo) {
+		// TODO Auto-generated method stub
+		int res = 0;
+		
+		SqlSession sqlSession = factory.openSession(true);
+		
+		sqlSession.update("board.board_like_update", vo);
+		
+		sqlSession.close();
+		
+		return res;
+	}
+
 	
 	
 	

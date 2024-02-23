@@ -8,4 +8,11 @@
 	</buildSpec>
 	<natures>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/main/webapp/upload</name>
+			<type>2</type>
+			<location>C:/Work/WebStudy/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/mini2/upload</location>
+		</link>
+	</linkedResources>
 </projectDescription>

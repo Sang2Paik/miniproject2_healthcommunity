@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
  	
  	<!-- 조건별(페이징) 조회 -->
- 	<select id="comment_condition_list" parameterType="Map" resultType="vo.CommentVo">
+ 	<!-- <select id="comment_condition_list" parameterType="Map" resultType="vo.CommentVo">
 			select * from
  			(
 	 			select *,
@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 			where b_idx=#{ b_idx }
  			) c
  			where no between #{ start } and #{ end }
- 	</select>
+ 	</select> -->
  	
  	<!-- b_idx별 전체댓글 수 -->
  	<select id="comment_row_total" parameterType="int" resultType="int">
@@ -33,9 +33,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 									#{ cmt_ip }, 
 									now(), 
 									#{ b_idx }, 
-									#{ mem_idx}, 
-									#{ mem_id }, 
-									#{ mem_name } )
+									#{ user_idx}, 
+									#{ user_id }, 
+									#{ user_name } )
 	</insert>
 	<!-- 삭제 -->
 	<delete id="comment_delete" parameterType="int">

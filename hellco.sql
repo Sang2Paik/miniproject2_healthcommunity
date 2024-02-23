@@ -100,10 +100,12 @@ create table comment
 	cmt_regdate		datetime default now(),
 	b_idx			int,
 	user_idx		int,
-	user_id			varchar(200),
-	c_idx			int,
-	c_name			varchar(200)
+	user_id			varchar(200)
 )
+
+select * from comment
+
+drop table comment
 
 alter table comment 
 		add constraint fk_board_idx foreign key(b_idx)
@@ -117,9 +119,6 @@ alter table comment
 		add constraint fk_board_user_id foreign key(user_id)
 										references user(user_id);											
 
-alter table comment 
-		add constraint fk_board_c_idx foreign key(c_idx)
-										references category(c_idx);	
 
 create table workout_kcal
 (
