@@ -9,7 +9,7 @@
 		<init-param>
 			<param-name>action</param-name>
 			<param-value>
-				controller.action.UserController, controller.action.WeatherController,
+				controller.action.UserController,controller.action.WeatherController
 			</param-value>
 		</init-param>
 	</servlet>
