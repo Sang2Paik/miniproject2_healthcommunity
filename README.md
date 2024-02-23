@@ -1,3 +1,6 @@
+## 2024-02-23 최시환
+- BoardController,board.xml.board_list.jsp,board_view.jsp 변경하였습니다
+
 ## 2024-02-23 이영준
 - weather 업로드 (vo, Controller, Utils, jsp(main, list), web.xml에 controller 추가)
 
