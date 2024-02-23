@@ -145,9 +145,30 @@ public class UserController {
 		int    user_age			=	Integer.parseInt(request.getParameter("user_age"));
 		String user_email		=	request.getParameter("user_email");
 		String user_gender		=	request.getParameter("user_gender");
-		Double user_height		=	Double.parseDouble(request.getParameter("user_height"));
-		Double user_kg			=	Double.parseDouble(request.getParameter("user_kg"));
-		Double user_target		=	Double.parseDouble(request.getParameter("user_target"));
+		Double user_height;
+		try {
+			user_height = Double.parseDouble(request.getParameter("user_height"));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			user_height = 0.0;
+			//e.printStackTrace();
+		}
+		Double user_kg;
+		try {
+			user_kg = Double.parseDouble(request.getParameter("user_kg"));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			user_kg = 0.0;
+			//e.printStackTrace();
+		}
+		Double user_target;
+		try {
+			user_target = Double.parseDouble(request.getParameter("user_target"));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			user_target = 0.0;
+			//e.printStackTrace();
+		}
 		String user_grade		=	request.getParameter("user_grade");
 		//2.IP 구하기
 		String user_ip			=	request.getRemoteAddr();
@@ -189,10 +210,32 @@ public class UserController {
 		int	   user_age 		=	Integer.parseInt(request.getParameter("user_age"));
 		String user_email		=	request.getParameter("user_email");
 		String user_gender		=	request.getParameter("user_gender");
-		Double user_height		=	Double.parseDouble(request.getParameter("user_height"));
-		Double user_kg			=	Double.parseDouble(request.getParameter("user_kg"));
-		Double user_target		=	Double.parseDouble(request.getParameter("user_target"));
+		Double user_height;
+		try {
+			user_height = Double.parseDouble(request.getParameter("user_height"));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			user_height = 0.0;
+			//e.printStackTrace();
+		}
+		Double user_kg;
+		try {
+			user_kg = Double.parseDouble(request.getParameter("user_kg"));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			user_kg = 0.0;
+			//e.printStackTrace();
+		}
+		Double user_target;
+		try {
+			user_target = Double.parseDouble(request.getParameter("user_target"));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			user_target = 0.0;
+			//e.printStackTrace();
+		}
 		String user_grade		=	request.getParameter("user_grade");
+		
 		
 		//2.IP
 		String user_ip		=	request.getRemoteAddr();
