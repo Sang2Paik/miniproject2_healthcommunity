@@ -10,6 +10,8 @@
 			<param-name>action</param-name>
 			<param-value>
 				controller.action.UserController,
+				controller.action.BoardController,
+				controller.action.WeatherController
 			</param-value>
 		</init-param>
 	</servlet>
