@@ -25,26 +25,22 @@ public class FoodAddAction extends HttpServlet{
 		String f_name = request.getParameter("f_name");
 		int f_unit_g  = Integer.parseInt(request.getParameter("f_unit_g"));
 		double f_unit_kcal = Double.parseDouble(request.getParameter("f_unit_kcal"));
-		String animal_plant = request.getParameter("animal_plant");
 		
 		FoodVo vo = new FoodVo();
 		vo.setF_name(f_name);
 		vo.setF_unit_g(f_unit_g);
 		vo.setF_unit_kcal(f_unit_kcal);
-		vo.setAnimal_plant(animal_plant);
+		vo.setAnimal_plant(f_name);
 		
 		FoodVo findVo = FoodDao.getInstance().selectOne(vo);
-		int total_kcal = 0;
 		
 		if(findVo == null) {
 			int res = FoodDao.getInstance().insert(vo);
-			total_kcal = FoodDao.getInstance().selectOne();
 		}
 		
 		List<FoodVo> add_food_list = FoodDao.getInstance().selectList();
 		
 		request.setAttribute("add_food_list", add_food_list);
-		request.setAttribute("total_kcal", total_kcal);
 		
 		String forward_page = "add_food_list.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(forward_page);

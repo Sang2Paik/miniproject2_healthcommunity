@@ -95,6 +95,7 @@ public class FoodDao {
 
 				//현재 rs위치의 레코드내의 필드(컬럼)값 얻어오기->포장
 				//컬럼값 가져오기
+				vObj.setF_idx(rs.getInt("f_idx"));
 				vObj.setF_name(rs.getString("f_name"));
 				vObj.setF_unit_g(rs.getInt("f_unit_g"));
 				vObj.setF_unit_kcal(rs.getDouble("f_unit_kcal"));
@@ -137,7 +138,7 @@ public class FoodDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from food_kcal where f_name=? and animal_plant=?";
+		String sql = "select * from food_kcal where f_name=? and f_unit_kcal=? and animal_plant=?";
 
 		try {
 			//JDBC본코드 작성
@@ -147,7 +148,8 @@ public class FoodDao {
 			//2.PreparedStatement 얻어온다
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getF_name());
-			pstmt.setString(2, vo.getAnimal_plant());
+			pstmt.setDouble(2, vo.getF_unit_kcal());
+			pstmt.setString(3, vo.getAnimal_plant());
 						
 			//3.ResultSet 얻어온다
 			rs = pstmt.executeQuery();
@@ -237,6 +239,43 @@ public class FoodDao {
 		}
 		
 		return total_kcal;
+	}
+
+	public int delete(int f_idx) {
+		// TODO Auto-generated method stub
+		int res = 0;
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete from food_kcal where f_idx=?";
+
+		
+			try {
+				//JDBC 본코드 작성
+				//1. Connection 얻어오기
+				conn = DBService.getInstance().getConnection();
+
+				//2. 명령 처리객체 (PreparedStatement 얻어오기)
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, f_idx);
+				
+				res = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				try {
+					if(pstmt != null)
+						pstmt.close();
+					if(conn != null)
+						conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		return res;
 	}
 
 }

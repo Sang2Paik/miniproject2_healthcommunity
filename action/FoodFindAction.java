@@ -22,6 +22,9 @@ public class FoodFindAction extends HttpServlet{
 		request.setCharacterEncoding("utf-8");
 		
 		String desc_kor = request.getParameter("desc_kor");
+		if(desc_kor==null || desc_kor.equals("")) {
+			desc_kor = "김치찌개";
+		}
 //		System.out.println(desc_kor);
 		
 		try {

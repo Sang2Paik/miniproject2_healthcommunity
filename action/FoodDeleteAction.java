@@ -10,31 +10,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import util.FoodInfoSearchUtils;
+import dao.FoodDao;
 import vo.FoodVo;
 
-@WebServlet("/food/list.do")
-public class FoodListAction extends HttpServlet{
+@WebServlet("/food/delete.do")
+public class FoodDeleteAction extends HttpServlet{
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//수신인코딩 설정
 		request.setCharacterEncoding("utf-8");
 		
-		String desc_kor = "김치찌개";
-		try {
-			List<FoodVo> food_basic_list = FoodInfoSearchUtils.search_food_json(desc_kor);
-			request.setAttribute("food_basic_list", food_basic_list);
-			
-			String forward_page = "main.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(forward_page);
-			dispatcher.forward(request, response);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		int f_idx = Integer.parseInt(request.getParameter("f_idx"));
 		
+		int res = FoodDao.getInstance().delete(f_idx);
+	
+		List<FoodVo> add_food_list = FoodDao.getInstance().selectList();
 		
-			
+		request.setAttribute("add_food_list", add_food_list);
+		
+		String forward_page = "add_food_list.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(forward_page);
+		dispatcher.forward(request, response);
 	}
 }
