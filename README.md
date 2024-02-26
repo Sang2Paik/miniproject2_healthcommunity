@@ -1,3 +1,6 @@
+## 2024-02-26 최시환
+- Comment기능(Dao,Vo,Controller,Comment.xml,Comment.jsp폴더) 추가하였습니다
+
 ## 2024-02-23 최시환
 - BoardController,board.xml.board_list.jsp,board_view.jsp 변경하였으며 board_reply삭제하였습니다
 
