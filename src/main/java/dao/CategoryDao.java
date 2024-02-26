@@ -36,7 +36,19 @@ public class CategoryDao {
 		
 		return list;
 		
-	} 
+	}
+	
+	public String selectListName(int c_idx) {
+		// TODO Auto-generated method stub
+		
+		SqlSession sqlSession = factory.openSession();
+		
+		String c_name = sqlSession.selectOne("category.category_search_c_name",c_idx);
+		
+		sqlSession.close();
+		
+		return c_name;
+	}
 	
 	public int selectInsert(String c_name) {
 		int res = 0;
@@ -75,5 +87,7 @@ public class CategoryDao {
 		
 		return res;
 	}
+
+	
 	
 }

@@ -168,7 +168,7 @@
 						<input class="btn btn-danger"	type="button" value="삭제하기" onclick="delete_board(${ vo.b_idx })">
 					</c:if>
 					<input class="btn btn-primary"	type="button" value="목록보기"
-							onclick="location.href='list.do?page=${ param.page }&search=${ param.search }&search_text=${ param.search_text }'">
+							onclick="location.href='list.do?page=${ param.page }&search=${ param.search }&search_text=${ param.search_text }&c_idx=${ c_idx }'">
 				</div>
 				
 			</div>

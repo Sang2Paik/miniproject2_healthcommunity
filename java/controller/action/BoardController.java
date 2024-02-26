@@ -28,6 +28,12 @@ import vo.UserVo;
 
 public class BoardController {
 
+	//보드 목록으로 redirect
+	@RequestMapping(value = "/board/board_home.do")
+	public String board_list_redirect(HttpServletRequest request, HttpServletResponse response) {
+
+		return "redirect:list.do";
+	}
 	
 	//목록보기
 	@RequestMapping("/board/list.do")
@@ -43,6 +49,7 @@ public class BoardController {
 		String  page 		= request.getParameter("page");
 		String  search		= request.getParameter("search"); 
 		String  search_text	= request.getParameter("search_text"); 
+		
 		
 		if(search==null || search.isEmpty())
 			search = "all";
@@ -78,9 +85,8 @@ public class BoardController {
 			map.put("content", search_text);
 		}
 
-
 		//게시판 목록 가져오기
-		List<BoardVo> list = BoardDao.getInstance().selectList();
+		List<BoardVo> list = BoardDao.getInstance().selectList(map);
 
 		//Page Menu생성
 		int rowTotal = BoardDao.getInstance().selectRowTotal(map);
@@ -94,16 +100,16 @@ public class BoardController {
 				                             MyConstant.Board.BLOCK_LIST,  //1화면에 보여질 게시물수 
 				                             MyConstant.Board.BLOCK_PAGE); //1화면에 보여질 메뉴수
 
-		//System.out.println(pageMenu);
-
-
 		//세션에 게시물을 봤다는 정보를 삭제
 		request.getSession().removeAttribute("show");
 		request.getSession().removeAttribute("like");
 
+		//카테고리얻어오기
+		List<CategoryVo> category_list = CategoryDao.getInstance().selectList();
 
 		//request binding
-		request.setAttribute("list", list);	
+		request.setAttribute("list", list);
+		request.setAttribute("category_list", category_list);
 		request.setAttribute("pageMenu", pageMenu);
 
 
@@ -115,14 +121,14 @@ public class BoardController {
 	@RequestMapping("/board/board_view.do")
 	public String view(HttpServletRequest request, HttpServletResponse response) {
 		// /board/view.do?b_idx=1
-		int b_idx = Integer.parseInt(request.getParameter("b_idx"));
+		int 	b_idx = Integer.parseInt(request.getParameter("b_idx"));
 		String	page		= request.getParameter("page");
 		String	search		= request.getParameter("search");
 		String	search_text	= request.getParameter("search_text");
 		
+		
 		if(search==null || search.isEmpty())
 			search = "all";
-		
 		
 		BoardVo vo = BoardDao.getInstance().selectOne(b_idx);
 		
@@ -414,7 +420,30 @@ public class BoardController {
 		return String.format("redirect:board_view.do?b_idx=%d&page=%s&search=%s&search_text=%s", b_idx, page, search, search_text);
 	}
 	
-	
+	//카테고리 클릭시 카테고리출력
+	@RequestMapping(value = "/board/board_category_search.do")
+	public String board_category_search(HttpServletRequest request, HttpServletResponse response) {
+		// /board/board_category.do?c_idx=2
+
+		
+		//파라메터 얻어오기
+		int	   c_idx	= Integer.parseInt(request.getParameter("c_idx"));
+		//c_idx와 동일한 c_name 얻어오기(카테고리 이름 얻어오기)
+		String c_name	= CategoryDao.getInstance().selectListName(c_idx);
+		
+		//c_name과 동일한 카테고리 얻어오기
+		List<BoardVo> board_c_name_list = BoardDao.getInstance().selectListCategoryName(c_name);
+		
+		//출력할 카테고리 메뉴
+		List<CategoryVo> category_list = CategoryDao.getInstance().selectList();
+		
+		//request binding
+		request.setAttribute("board_c_name_list", board_c_name_list);
+		request.setAttribute("category_list", category_list);
+		
+		
+		return "board_list.jsp";
+	}
 }
 
 

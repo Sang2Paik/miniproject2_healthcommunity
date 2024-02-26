@@ -9,6 +9,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from board order by b_idx
 	</select>
 
+	<!-- 검색된 게시물 수 얻어오기 -->
+	<select id="board_condition_row_total" parameterType="Map"
+		resultType="int">
+		select ifnull(count(*),0) from board
+		<trim prefix="where" prefixOverrides="or">
+
+			<if test="name!=null">
+				user_name like concat('%',#{ name },'%')
+			</if>
+			<if test="subject!=null">
+				b_subject like concat('%',#{ subject },'%')
+			</if>
+			<if test="content!=null">
+				or b_content like concat('%',#{ content },'%')
+			</if>
+
+		</trim>
+	</select>
+
 	<!-- b_idx에 해당하는 게시물 1건 얻어오기 -->
 	<select id="board_one" parameterType="int" resultType="vo.BoardVo">
 		select * from board where b_idx=#{ b_idx }
@@ -60,12 +79,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update board set b_like=ifnull(#{ b_like },0)+1 where b_idx=#{ b_idx }
 	</update>
 	
-	<!-- 검색된 게시물 수 얻어오기 -->
-	<select id="board_condition_row_total" parameterType="Map"
-		resultType="int">
-		select ifnull(count(*),0) from board
+	<!-- 보드페이지에서 검색된 값 반환 -->
+	<select id="board_condition_list" parameterType="Map" 
+				resultType="vo.BoardVo">
+		select * from board
 		<trim prefix="where" prefixOverrides="or">
-
+			
 			<if test="name!=null">
 				user_name like concat('%',#{ name },'%')
 			</if>
@@ -75,11 +94,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="content!=null">
 				or b_content like concat('%',#{ content },'%')
 			</if>
-
 		</trim>
+		order by b_idx desc
 	</select>
 
-
+	<!-- 같은 이름의 보드리스트 얻어오기 -->
+ 	<select id="board.board_list_c_name" parameterType="String" resultType="vo.BoardVo">
+ 		select * from board where c_name=#{ c_name } order by b_idx desc
+ 	</select>
 
 </mapper>
 

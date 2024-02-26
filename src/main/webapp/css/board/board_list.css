@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+#box{
+	min-width: 805px;
+}
+
+#category_span > input, #category_all {
+    border: none; /* 버튼의 테두리를 없앱니다 */
+    background-color: transparent; /* 배경색을 투명하게 설정합니다 */
+    color: blue; /* 텍스트 색상을 하이퍼링크 색상으로 설정합니다 */
+    text-decoration: underline; /* 텍스트에 밑줄을 추가합니다 */
+    cursor: pointer; /* 마우스를 올렸을 때 포인터 모양으로 변경됩니다 */
+    font-size: 16px; /* 글꼴 크기를 16px로 설정합니다 */
+}
+
+
+
+/* 이미지에 마우스를 올렸을 때 마우스 포인터 변경 */
+.image-hover:hover {
+    cursor: pointer; /* 마우스 포인터를 포인터 형태로 변경 */
+}
+
+/* 이미지 크기 조절 */
+#board_image{
+	margin: 10px;
+    width: 300px; /* 이미지의 가로 크기를 100px로 설정 */
+    height: 300px; /* 이미지의 세로 크기를 100px로 설정 */
+}
+
+/* 반응형 웹 */ 
+/* 1300px 이하인 경우에 유저 닉네임을 숨깁니다 */
+@media (max-width: 1300px) {
+	.welcome_tag {
+		display: none;
+	}
+	/* 1300px 이하일 시 크기를 줄어들게 합니다  */
+	#search{
+		width: 10%;
+	}
+	#search_text {
+		width: auto;
+	}
+	#search_btn{
+		width: 5%
+	}
+}
+
+/* 1300px 이하인 경우에 검색 태그를 숨깁니다 */
+@media (max-width: 1000px) {
+	#search{
+		display: none;  /* 1000px 이하일 때 search 요소 숨김 */
+	}
+}
+
+/* 805px 이하인 경우에 화면을 고정합니다 */
+@media (max-width: 805px) {
+	.box {
+		overflow-x: hidden; /* 가로 스크롤 막기 */
+	}
+	
+}

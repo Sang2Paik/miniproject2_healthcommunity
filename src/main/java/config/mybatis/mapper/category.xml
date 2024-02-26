@@ -6,12 +6,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
  	<!-- 카테고리리스트 얻어오기 -->
  	<select id="category_list" resultType="vo.CategoryVo">
- 		select * from category order by c_idx desc
+ 		select * from category order by c_idx
  	</select>
  	
  	<!-- 카테고리 idx 얻어오기 -->
  	<select id="category_search_c_idx" parameterType="String" resultType="int">
  		select c_idx from category where c_name=#{ c_name }
+ 	</select>
+ 	
+ 	<!-- 카테고리 이름 얻어오기 -->
+ 	<select id="category_search_c_name" parameterType="int" resultType="String">
+ 		select c_name from category where c_idx=#{ c_idx }
  	</select>
  	
  	<!-- 카테고리추가 -->

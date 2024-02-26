@@ -62,6 +62,20 @@ public class BoardDao {
 		return list;
 	}
 	
+	//같은 카테고리 이름의 보드리스트 가져오기
+	public List<BoardVo> selectListCategoryName(String c_name) {
+		// TODO Auto-generated method stub
+		
+		List<BoardVo> list = null;
+		
+		SqlSession sqlSession = factory.openSession(true);
+		//작업수행
+		list = sqlSession.selectList("board.board_list_c_name", c_name);
+		//닫기
+		sqlSession.close();
+		
+		return list;
+	}
 	
 
 	//게시물 1건 얻어오기
