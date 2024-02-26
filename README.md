@@ -1,4 +1,7 @@
 ## 2024-02-26 최시환
+- Board 검색기능, 카테고리기능 추가하였습니다
+
+## 2024-02-26 최시환
 - Comment기능(Dao,Vo,Controller,Comment.xml,Comment.jsp폴더) 추가하였습니다
 
 ## 2024-02-23 최시환
