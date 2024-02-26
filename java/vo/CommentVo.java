@@ -34,7 +34,7 @@ public class CommentVo {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+	//commentInsert
 	public CommentVo(String cmt_content, String cmt_ip, int b_idx, int user_idx, String user_id, String user_name) {
 		super();
 		this.cmt_content = cmt_content;

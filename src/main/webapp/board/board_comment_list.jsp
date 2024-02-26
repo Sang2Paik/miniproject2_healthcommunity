@@ -68,7 +68,7 @@
 		<!-- 1번째줄 -->
 		<div class="row" class="cmt_1">
 			<div class="col-sm-9">
-				<b>(${ cmt.no })${ cmt.user_mask_id }</b>
+				<b>${ cmt.no }. ${ cmt.user_name }(${ cmt.user_mask_id })</b>
 			</div>
 			<div class="col-sm-3">
 				<!-- 본인글인 경우만 보여준다 -->

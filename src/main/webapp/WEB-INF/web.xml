@@ -11,7 +11,8 @@
 			<param-value>
 				controller.action.UserController,
 				controller.action.BoardController,
-				controller.action.WeatherController
+				controller.action.WeatherController,
+				controller.action.CommentController
 			</param-value>
 		</init-param>
 	</servlet>

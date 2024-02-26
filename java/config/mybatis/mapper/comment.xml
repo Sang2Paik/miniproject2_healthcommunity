@@ -10,16 +10,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
  	
  	<!-- 조건별(페이징) 조회 -->
- 	<!-- <select id="comment_condition_list" parameterType="Map" resultType="vo.CommentVo">
-			select * from
- 			(
+ 	<select id="comment_condition_list" parameterType="Map" resultType="vo.CommentVo">
+		select * from
+			(
 	 			select *,
 	 			rank() over(order by cmt_idx desc) as no
 	 			from comment 
 	 			where b_idx=#{ b_idx }
- 			) c
- 			where no between #{ start } and #{ end }
- 	</select> -->
+			) c
+		where no between #{ start } and #{ end }
+ 	</select>
  	
  	<!-- b_idx별 전체댓글 수 -->
  	<select id="comment_row_total" parameterType="int" resultType="int">

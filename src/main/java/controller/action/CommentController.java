@@ -73,8 +73,6 @@ public class CommentController {
 		String user_name 	= user_vo.getuser_name();
 		String user_id		= user_vo.getuser_id();
 		
-		System.out.println(b_idx);
-		System.out.println(cmt_content);
 		
 		//2.작성자 아이피구하기
 		String cmt_ip 		= request.getRemoteAddr();
@@ -83,11 +81,11 @@ public class CommentController {
 		CommentVo vo 		= new CommentVo(cmt_content, cmt_ip, b_idx, user_idx, user_id, user_name);
 		
 		//4.DB Insert : res <-처리된 행수
-		int res 			= CommentDao.getInstance().insert(vo);
+		int res 			= CommentDao.getInstance().commentInsert(vo);
 		
 		//5.결과를 JSON객체로 생성
 		JSONObject json 	= new JSONObject();
-		json.put("result", res==1); // {"result" : true}
+		json.put("result", res == 1); // {"result" : true}
 		
 		return json.toString();
 	}

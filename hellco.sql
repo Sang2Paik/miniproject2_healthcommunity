@@ -100,7 +100,8 @@ create table comment
 	cmt_regdate		datetime default now(),
 	b_idx			int,
 	user_idx		int,
-	user_id			varchar(200)
+	user_id			varchar(200),
+	user_name		varchar(200)
 )
 
 select * from comment

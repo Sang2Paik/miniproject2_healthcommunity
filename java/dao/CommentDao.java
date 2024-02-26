@@ -63,7 +63,7 @@ public class CommentDao {
 		return res;
 	}
 	
-	public int insert(CommentVo vo) {
+	public int commentInsert(CommentVo vo) {
 		
 		int res = 0;
 		//sqlSession 얻어오기                          auto commit
