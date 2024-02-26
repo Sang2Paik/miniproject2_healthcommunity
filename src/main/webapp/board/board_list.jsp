@@ -183,9 +183,9 @@
 		</div>
 
 		
-		<div id="pageMenu">
+		<%-- <div id="pageMenu">
 			<!-- Page Menu -->
 			${ pageMenu }
-		</div>
+		</div> --%>
 </body>
 </html>
