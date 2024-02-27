@@ -253,7 +253,7 @@ public class UserController {
 		String user_ip		=	request.getRemoteAddr();
 		
 		//3.VO포장
-		UserVo vo = new UserVo(user_name, user_id, user_pwd, user_age ,user_email, user_gender, user_height, user_kg, user_target,user_grade, user_ip);
+		UserVo vo = new UserVo(user_name, user_id, user_pwd, user_age ,user_email, user_gender, user_height, user_kg, user_target, user_grade, user_ip);
 		
 		//4.DB insert
 		UserDao.getInstance().insert(vo);
