@@ -246,8 +246,7 @@ public class UserController {
 			user_target = 0.0;
 			//e.printStackTrace();
 		}
-		String user_grade		=	request.getParameter("user_grade");
-		
+		String user_grade	=	request.getParameter("user_grade");
 		
 		//2.IP
 		String user_ip		=	request.getRemoteAddr();
@@ -258,7 +257,7 @@ public class UserController {
 		//4.DB insert
 		UserDao.getInstance().insert(vo);
 		
-		return "redirect:../user/list.do";
+		return "redirect:../user/login_form.do";
 	} // end : user_insert
 	
 	
@@ -279,7 +278,7 @@ public class UserController {
 			//실패
 		}
 		
-		return "redirect:../user/list.do";
+		return "redirect:../main.do";
 	} // end : user_delete
 	
 	//멤버 id 여부 확인

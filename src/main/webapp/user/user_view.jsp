@@ -55,7 +55,11 @@
 		              <tr>
 		                 <th><label>나이</label></th>
 		                 <td>${ vo.user_age }</td>
-		              </tr>		   	   
+		              </tr>
+		              <tr>
+		                 <th><label>성별</label></th>
+		                 <td>${ vo.user_gender }</td>
+		              </tr> 	   
 		              <tr>
 		                 <th><label>가입일자</label></th>
 		                 <td>${ fn:substring(vo.user_created_date,0,16) }</td>
@@ -64,10 +68,6 @@
 		                 <th><label>마지막수정일자</label></th>
 		                 <td>${ fn:substring(vo.user_modified_date,0,16) }</td>
 		              </tr>		
-		              <tr>
-		                 <th><label>회원등급</label></th>
-		                 <td>${fn:substring(vo.user_grade, 5, fn:length(vo.user_grade))}</td>
-		              </tr>
 		              <tr>
 		                 <th><label>키</label></th>
 		                 <td>${ vo.user_height }</td>
@@ -79,6 +79,10 @@
 		              <tr>
 		                 <th><label>목표몸무게</label></th>
 		                 <td>${ vo.user_target }</td>
+		              </tr>
+		              <tr>
+		                 <th><label>회원등급</label></th>
+		                 <td>${fn:substring(vo.user_grade, 5, fn:length(vo.user_grade))}</td>
 		              </tr>
 		              
 		              <tr>

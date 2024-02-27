@@ -56,10 +56,10 @@
   function del(user_idx){
 	  
 	  //삭제확인
-	  if(confirm("정말 삭제하시겠습니까?")==false) return;
+	  if(confirm("회원번호 "+user_idx+"번을 정말 삭제하시겠습니까?")==false) return;
 	  
 	  //삭제처리
-	  location.href = "delete.do?user_idx=" + user_idx;
+	  location.href = "admin_user_delete.do?user_idx=" + user_idx;
 	  
 	  
   }
@@ -95,7 +95,7 @@
    <div style="margin-bottom: 5px;">
       <button  class="btn btn-primary" onclick="location.href='${ pageContext.request.contextPath }/user/insert_form.do'" >회원가입</button>
    <!-- 게시판가기 -->
-      <button  class="btn btn-primary" onclick="location.href='../board/list.do'" >게시판가기</button>
+      <button  class="btn btn-primary" onclick="location.href='${ pageContext.request.contextPath }/board/list.do'" >게시판가기</button>
    </div> 
 
    
@@ -105,9 +105,6 @@
          <th>회원번호</th>
          <th>회원명</th>
          <th>아이디</th>
-         <!-- <th>비밀번호</th>
-         <th>이메일</th>
-         <th width="15%">(우편번호)주소</th> -->
          <th>이메일</th>
          <th>가입(갱신)일자</th>
          <th>회원등급</th>
@@ -131,10 +128,10 @@
              
 	                <input class="btn btn-success" type="button"  value="수정"
 	                       onclick="location.href='${ pageContext.request.contextPath }/admin/admin_user_modify_form.do?user_idx=${ user_vo.user_idx }'">
-	                <input class="btn btn-danger"  type="button"  value="삭제"  onclick="del('${user_vo.user_idx}');">
+	                <input class="btn btn-danger"  type="button"  value="삭제"  onclick="del(${ user_vo.user_idx });">
 	                
 	                <input class="btn btn-info" type="button"  value="보기"
-	                       onclick="location.href='${ pageContext.request.contextPath }/user/view.do?user_idx=${user_vo.user_idx}'">
+	                       onclick="location.href='${ pageContext.request.contextPath }/user/view.do?user_idx=${ user_vo.user_idx }'">
 	                       
                 </c:if>
                        

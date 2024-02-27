@@ -22,26 +22,6 @@ public class UserVo {
 	/* ${ vo.user_mask_pwd } */
 	public String getuser_mask_pwd() {
 		
-		//                h
-		//            01234567     len:8  half:4
-		// user_pwd = "password";
-		
-		//비밀번호 반만 노출 + 나머지 *** 처리
-		
-//		int len = user_pwd.length();
-//		int half = len / 2;
-//
-//		StringBuffer sb = new StringBuffer();
-//		for (int i = 0; i < len; i++) {
-//			if (i < half)
-//				sb.append(user_pwd.charAt(i));
-//			else
-//				sb.append("*");
-//		}
-//		 
-//	    return sb.toString();
-		
-		
 		int len = user_pwd.length();
 		StringBuffer sb = new StringBuffer();
 		sb.append(user_pwd.substring(0, len / 2));
@@ -50,7 +30,6 @@ public class UserVo {
 			sb.append("*");
 		}
 		return sb.toString();
-		
 		
 	}
 
