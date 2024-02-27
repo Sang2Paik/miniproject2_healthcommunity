@@ -1,3 +1,6 @@
+## 2024-02-27 이영준
+- 메인페이지(wepapp - index.html) 추가 (제컴에선 회원가입 등등 링크가 동작이 안되는데 주소는 잘 넘어가서 각자 컴에선 되시는지 확인 부탁드려요)
+
 ## 2024-02-27 백상희
 - 음식 칼로리 계산 기능 파일 추가 (FoodVo, MealTypeVo, FoodController, FoodSearchUtils, Mapper, jsp)
 
