@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import annotation.RequestMapping;
 import annotation.ResponseBody;
+import dao.FoodDao;
 import dao.UserDao;
 import vo.UserVo;
 
@@ -307,4 +308,17 @@ public class UserController {
 		return "index.jsp";
 	}
 	
+	@RequestMapping("/user/mypage_main.do")
+    public String mypage(HttpServletRequest request, HttpServletResponse response) {
+        
+        UserVo user = (UserVo) request.getSession().getAttribute("user");
+        int user_idx = user.getuser_idx();
+                        
+        double today_food_kcal = FoodDao.getInstance().today_f_cal(user_idx);
+        
+        request.setAttribute("today_food_kcal", today_food_kcal);
+        
+        return "mypage_main.jsp";
+}
+//
 }
