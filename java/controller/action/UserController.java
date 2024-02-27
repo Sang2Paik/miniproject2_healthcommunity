@@ -72,8 +72,8 @@ public class UserController {
 		
 		//메인페이지 이동: 현재경로 /user/login.do
 		if(url.isEmpty()) {
-			//response.sendRedirect("../product/list.do");
-			return "redirect:../user/list.do";
+			
+			return "redirect:../main.do";
 		}else {
 			//response.sendRedirect(url);
 			return "redirect:" + url;
@@ -130,7 +130,7 @@ public class UserController {
 	} // end : user_modify_form
 	
 	
-	//회원가입
+	//회원수정
 	@RequestMapping(value = "/user/modify.do")
 	public String user_modify(HttpServletRequest request, HttpServletResponse response) {
 

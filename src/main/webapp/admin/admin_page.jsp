@@ -59,7 +59,7 @@
 	  if(confirm("정말 삭제하시겠습니까?")==false) return;
 	  
 	  //삭제처리
-	  location.href = "delete.do?user_idx=" + user_idx;  //userberDeleteAction
+	  location.href = "delete.do?user_idx=" + user_idx;
 	  
 	  
   }
@@ -71,7 +71,7 @@
 <body>
 
 <div id="box">
-   <h1 id="title">::::회원목록::::</h1>
+   <h1 id="title">::::관리자화면::::</h1>
    
    <!-- 로그인 / 로그아웃 -->
    <div style="text-align: right;">
@@ -79,7 +79,7 @@
         <!-- 로그인이 안된경우 : session영역에 user가 없냐? -->
         <c:if test="${ empty sessionScope.user }">
             <input class="btn btn-primary" type="button"  value="로그인"
-                   onclick="location.href='login_form.do'">
+                   onclick="location.href='${ pageContext.request.contextPath }/user/login_form.do'">
         </c:if>
         
         <!-- 로그인이 된 경우 : session영역에 user가 있냐? -->
@@ -93,7 +93,7 @@
    
    <!-- 회원가입 -->
    <div style="margin-bottom: 5px;">
-      <button  class="btn btn-primary" onclick="location.href='insert_form.do'" >회원가입</button>
+      <button  class="btn btn-primary" onclick="location.href='${ pageContext.request.contextPath }/user/insert_form.do'" >회원가입</button>
    <!-- 게시판가기 -->
       <button  class="btn btn-primary" onclick="location.href='../board/list.do'" >게시판가기</button>
    </div> 
@@ -114,29 +114,29 @@
          <th>편집</th>
       </tr>
       <!-- Data출력 -->
-      <!-- for(userberVo vo : list)   -->
-      <c:forEach var="vo"  items="${ list }">
+      <!-- for( Uservo user_vo : admin_user_list )   -->
+      <c:forEach var="user_vo"  items="${ admin_user_list }">
          <tr>
-            <td>${ vo.user_idx }</td>
-            <td>${ vo['user_name'] }</td>
-            <td><span id="user_id">${ vo.user_id }</span></td>
-            <td>${ vo.user_email }</td>
-            <td>${ fn:substring(vo.user_created_date,0,10) }<br>
-            	(${ fn:substring(vo.user_modified_date,0,10) })</td>
-            <td>${ fn:substring(vo.user_grade, 5, fn:length(vo.user_grade)) }</td>
+            <td>${ user_vo.user_idx }</td>
+            <td>${ user_vo['user_name'] }</td>
+            <td><span id="user_id">${ user_vo.user_id }</span></td>
+            <td>${ user_vo.user_email }</td>
+            <td>${ fn:substring(user_vo.user_created_date,0,10) }<br>
+            	(${ fn:substring(user_vo.user_modified_date,0,10) })</td>
+            <td>${ fn:substring(user_vo.user_grade, 5, fn:length(user_vo.user_grade)) }</td>
             <td>
             
                 <!-- 3개의 버튼이 활성화되는 조건: (로그인유저가 관리자) 또는 (로그인 본인) --> 
-                <c:if test="${ (user.user_grade eq '관리자')  or (user.user_idx == vo.user_idx) }">
+                <c:if test="${ (user.user_grade eq 'user_admin')  or (user.user_idx == user_vo.user_idx) }">
              
 	                <input class="btn btn-success" type="button"  value="수정"
-	                       onclick="location.href='modify_form.do?user_idx=${ vo.user_idx }'">
-	                <input class="btn btn-danger"  type="button"  value="삭제"  onclick="del('${vo.user_idx}');">
+	                       onclick="location.href='${ pageContext.request.contextPath }/admin/admin_user_modify_form.do?user_idx=${ user_vo.user_idx }'">
+	                <input class="btn btn-danger"  type="button"  value="삭제"  onclick="del('${user_vo.user_idx}');">
 	                
 	                <input class="btn btn-info" type="button"  value="보기"
-	                       onclick="location.href='view.do?user_idx=${vo.user_idx}'">
+	                       onclick="location.href='${ pageContext.request.contextPath }/user/view.do?user_idx=${user_vo.user_idx}'">
 	                       
-                </c:if>       
+                </c:if>
                        
             </td>
          </tr>

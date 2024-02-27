@@ -444,6 +444,21 @@ public class BoardController {
 		
 		return "board_list.jsp";
 	}
+	
+	// 마이페이지 정보 얻어오기
+	@RequestMapping(value = "/board/my_health_list.do")
+	public String my_health(HttpServletRequest request, HttpServletResponse response) {
+		
+		//파라메터 받아오기
+		int user_idx = Integer.parseInt(request.getParameter("user_idx"));
+		
+		BoardVo vo_my_health = BoardDao.getInstance().selectOne(user_idx);
+		
+		request.setAttribute("vo_my_health", vo_my_health);
+		
+		
+		return "../mypage/mypage.jsp";
+	}
 }
 
 

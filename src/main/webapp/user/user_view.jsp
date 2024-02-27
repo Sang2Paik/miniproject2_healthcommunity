@@ -83,8 +83,8 @@
 		              
 		              <tr>
 		                  <td colspan="2" align="center">
-		                           <input  class="btn  btn-success" type="button"  value="목록보기"
-		                                onclick="location.href='list.do'">  
+		                           <input  class="btn btn-success" type="button"  value="목록보기"
+		                                onclick="location.href='${ pageContext.request.contextPath }/board/admin_page.do'">  
 		                  </td>
 		              </tr>
 		              

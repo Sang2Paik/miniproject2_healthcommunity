@@ -119,10 +119,10 @@
 			      <tr>
 			          <td colspan="2" align="center">
 			              <input class="btn btn-success" type="button"  value="메인화면"
-			                     onclick="location.href='${ pageContext.request.contextPath }/user/list.do'">
+			                     onclick="location.href='${ pageContext.request.contextPath }/main.do'">
 			                     
 			              <input class="btn btn-info"    type="button"  value="회원가입"
-			                     onclick="location.href='insert_form.do'">
+			                     onclick="location.href='${ pageContext.request.contextPath }/insert_form.do'">
 			          </td>
 			      </tr>
 			      

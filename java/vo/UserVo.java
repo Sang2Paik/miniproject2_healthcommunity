@@ -93,7 +93,21 @@ public class UserVo {
 		this.user_grade = user_grade;
 	}
 
-
+	//admin이 user 수정
+	// update
+	public UserVo(int user_idx, String user_name, String user_id, String user_pwd, int user_age, String user_email, String user_gender,
+			 String user_ip,String user_grade) {
+		super();
+		this.user_idx = user_idx;
+		this.user_name = user_name;
+		this.user_id = user_id;
+		this.user_pwd = user_pwd;
+		this.user_age = user_age;
+		this.user_email = user_email;
+		this.user_gender = user_gender;
+		this.user_ip = user_ip;
+		this.user_grade = user_grade;
+		}
 
 	public int getuser_idx() {
 		return user_idx;
