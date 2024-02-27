@@ -82,7 +82,7 @@ public class UserController {
 	
 
 	
-	//로그아웃
+	//보드에서 로그아웃
 	@RequestMapping(value = "/board/logout.do")
 	public String board_logout(HttpServletRequest request, HttpServletResponse response) {
 
@@ -92,7 +92,7 @@ public class UserController {
 		return "redirect:../main.do";
 	} // end : board_user_logout
 	
-	//로그아웃
+	//메인화면에서 로그아웃
 	@RequestMapping(value = "/logout.do")
 	public String index_jsp_logout(HttpServletRequest request, HttpServletResponse response) {
 
@@ -139,6 +139,7 @@ public class UserController {
 		
 		return "user_modify_form.jsp";
 	} // end : user_modify_form
+	
 	
 	
 	//회원수정
@@ -257,7 +258,7 @@ public class UserController {
 		//4.DB insert
 		UserDao.getInstance().insert(vo);
 		
-		return "redirect:../user/list.do";
+		return "redirect:../user/login.do";
 	} // end : user_insert
 	
 	

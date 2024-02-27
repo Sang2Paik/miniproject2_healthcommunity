@@ -193,7 +193,7 @@
 		                        <input  id="btn_register" class="btn  btn-primary" type="button"  value="회원가입"  disabled="disabled"
 		                                onclick="send(this.form);">  
 		                        <input  class="btn  btn-success" type="button"  value="메인화면"
-		                                onclick="location.href='${ pageContext.request.contextPath }/user/list.do'">  
+		                                onclick="location.href='${ pageContext.request.contextPath }/main.do'">  
 		                  
 		                  </td>
 		              </tr>
