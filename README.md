@@ -1,4 +1,7 @@
 ## 2024-02-27 최시환
+- 로그인폼에서 회원가입 누를 시 메인화면으로 이동돼서 경로 수정하였습니다
+
+## 2024-02-27 최시환
 - user폴더에 user_list.jsp 삭제, UserController 경로변경, board 로그인기능 제거, admin폴더 생성+ admin.xml&Controller추가
 
 ## 2024-02-27 백상희
