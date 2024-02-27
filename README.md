@@ -1,3 +1,6 @@
+## 2024-02-27 백상희
+- 음식 칼로리 계산 기능 파일 추가 (FoodVo, MealTypeVo, FoodController, FoodSearchUtils, Mapper
+
 ## 2024-02-26 최시환
 - Board 검색기능, 카테고리기능 추가하였습니다
 
