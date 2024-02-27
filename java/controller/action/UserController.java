@@ -80,16 +80,7 @@ public class UserController {
 		}
 	} // end : user_login
 	
-	
-	//로그아웃
-	@RequestMapping(value = "/user/logout.do")
-	public String user_logout(HttpServletRequest request, HttpServletResponse response) {
 
-		//로그아웃: session에 저장된 user삭제
-		request.getSession().removeAttribute("user");
-		
-		return "redirect:../user/list.do";
-	} // end : user_logout
 	
 	//로그아웃
 	@RequestMapping(value = "/board/logout.do")

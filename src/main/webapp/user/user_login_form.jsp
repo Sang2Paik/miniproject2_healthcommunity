@@ -122,7 +122,7 @@
 			                     onclick="location.href='${ pageContext.request.contextPath }/main.do'">
 			                     
 			              <input class="btn btn-info"    type="button"  value="회원가입"
-			                     onclick="location.href='${ pageContext.request.contextPath }/insert_form.do'">
+			                     onclick="location.href='${ pageContext.request.contextPath }/user/insert_form.do'">
 			          </td>
 			      </tr>
 			      
