@@ -38,7 +38,7 @@ public class UserController {
 	
 	
 	//로그인
-	@RequestMapping(value = "/user/login.do")
+	@RequestMapping(value = "/login.do")
 	public String user_login(HttpServletRequest request, HttpServletResponse response) {
 		
 		// /user/login.do?user_id=one&user_pwd=1234&url=
@@ -90,6 +90,26 @@ public class UserController {
 		
 		return "redirect:../user/list.do";
 	} // end : user_logout
+	
+	//로그아웃
+	@RequestMapping(value = "/board/logout.do")
+	public String board_logout(HttpServletRequest request, HttpServletResponse response) {
+
+		//로그아웃: session에 저장된 user삭제
+		request.getSession().removeAttribute("user");
+		
+		return "redirect:../main.do";
+	} // end : board_user_logout
+	
+	//로그아웃
+	@RequestMapping(value = "/logout.do")
+	public String index_jsp_logout(HttpServletRequest request, HttpServletResponse response) {
+
+		//로그아웃: session에 저장된 user삭제
+		request.getSession().removeAttribute("user");
+		
+		return "redirect:../main.do";
+	} // end : index_jsp_user_logout
 	
 	
 	//멤버view
@@ -289,5 +309,11 @@ public class UserController {
 		
 		return json.toString();
 	} // end : user_check_id
+	
+	@RequestMapping(value = "/main.do")
+	public String main(HttpServletRequest request, HttpServletResponse response) {
+
+		return "index.jsp";
+	}
 	
 }
