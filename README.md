@@ -1,3 +1,6 @@
+## 2024-02-27 최시환
+- user폴더에 user_list.jsp 삭제, UserController 경로변경, board 로그인기능 제거, admin폴더 생성+ admin.xml&Controller추가
+
 ## 2024-02-27 백상희
 - 음식 칼로리 계산 기능 파일 추가 (FoodVo, MealTypeVo, FoodController, FoodSearchUtils, Mapper, jsp)
 - src/main/webapp index.jsp 파일 업로드 및 index.html 수정
