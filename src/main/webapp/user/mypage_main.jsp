@@ -87,8 +87,8 @@
 			<tr>
 				<th>일일 활동 칼로리</th>
 				<td>
-					<input type="button" value="입력">
-					<input type="button" value="보기">
+					<input type="button" value="입력" onclick="location.href='../workout/workout_insert_form.do'">
+					<input type="button" value="보기" onclick="location.href='../workout/my_workout_list.do'">
 				</td>
 			</tr>
 			<tr>
@@ -100,6 +100,9 @@
 			</tr>
 			<tr>
 				<td>오늘 먹은 칼로리<span id="today_cal">${today_food_kcal}</span>&nbsp;kcals</td>
+			</tr>
+			<tr>
+				<td>오늘 태운 칼로리<span id="today_cal">${today_workout_kal}</span>&nbsp;kcals</td>
 			</tr>
 		
 		</table>
