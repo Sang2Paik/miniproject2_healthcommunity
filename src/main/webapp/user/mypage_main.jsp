@@ -55,44 +55,19 @@
 
 </script>
 <script type="text/javascript">
-
-	//페이지 로드 시 초기 설정
-	$(document).ready(function(){
-	    // 기본 정보를 처음에 보이도록 설정
-	    $("#my_health_info").hide();
-	    $("#my_basic_info").show();
-	});
 	
 	function show_health_info(){
 		
 		$("#my_health_info").show();
 		
-		$("#my_basic_info").hide();
-			
 	}
 	
 	function show_basic_info(){
 		
 		$("#my_health_info").hide();
 		
-		$("#my_basic_info").show();
-		
 	}
 
-	
-	// 탈퇴하기
-	function user_delete_form( user_idx ){
-		
-		if(confirm('정말 삭제 하시겠습니까?') == false ) return;
-		
-		location.href='delete.do?user_idx=' + user_idx;
-	}
-	
-	// 나의 정보 수정하기
-	function user_modify_form( user_idx ){
-		location.href='modify_form.do?user_idx=' + user_idx;
-	}
-	
 </script>
 </head>
 <body>
@@ -108,8 +83,45 @@
 	</table>
 	
 	<div id="my_health_info">
+		<table>
+			<tr>
+				<th>나의 BMI 지수</th>
+				<td>${user.user_BMI}</td>
+				<td id="my_status" style="font-size: 20px;"></td>
+				<td><img id="my_status_img" alt="비만" src=""></td>
+			</tr>
+			<tr>
+				<th>키</th>
+				<td>${user.user_height}&nbsp;cm</td>
+			</tr>
+			<tr>
+				<th>몸무게</th>
+				<td>${user.user_kg}&nbsp;kgs</td>
+			</tr>
+			<tr>
+				<th>나의 목표</th>
+				<td>${user.user_target}&nbsp;kgs</td>
+			</tr>
+			<tr>
+				<th>일일 활동 칼로리</th>
+				<td>
+					<input type="button" value="입력">
+					<input type="button" value="보기">
+				</td>
+			</tr>
+			<tr>
+				<th>음식 칼로리</th>
+				<td>
+					<input type="button" value="입력" onclick="location.href='../food/insert_basic.do'">
+					<input type="button" value="보기" onclick="location.href='../food/food_cal_list.do'">
+				</td>
+			</tr>
+			<tr>
+				<td>오늘 먹은 칼로리<span id="today_cal">${today_food_kcal}</span>&nbsp;kcals</td>
+			</tr>
 		
-	</div> <!-- end : my_health_info -->
+		</table>
+	</div>
 	
 	
 	<div id="my_basic_info">
@@ -275,6 +287,8 @@
 			</table> <!-- end : table -->
 		</div> <!-- end : box -->
 	</div> <!-- end : my_basic_info -->
+
+	
 
 </body>
 </html>

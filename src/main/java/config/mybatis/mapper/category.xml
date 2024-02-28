@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="category">
+
+ 	<!-- 카테고리리스트 얻어오기 -->
+ 	<select id="category_list" resultType="vo.CategoryVo">
+ 		select * from category order by c_idx
+ 	</select>
+ 	
+ 	<!-- 카테고리 idx 얻어오기 -->
+ 	<select id="category_search_c_idx" parameterType="String" resultType="int">
+ 		select c_idx from category where c_name=#{ c_name }
+ 	</select>
+ 	
+ 	<!-- 카테고리 이름 얻어오기 -->
+ 	<select id="category_search_c_name" parameterType="int" resultType="String">
+ 		select c_name from category where c_idx=#{ c_idx }
+ 	</select>
+ 	
+ 	<!-- 카테고리추가 -->
+	<insert id="category_insert" parameterType="String">
+		insert into category values( null,#{ c_name } )
+	</insert>
+	
+	<!-- 카테고리삭제 -->
+	<delete id="category_delete" parameterType="int">
+		delete * from category where c_idx= #{ c_idx } 
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

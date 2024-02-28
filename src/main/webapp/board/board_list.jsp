@@ -104,7 +104,6 @@
 </script>
 
 <script>
-	
 	// 카테고리메뉴에 전체보기 클릭시
 	function board_list(){
 		location.href='board_home.do';
@@ -120,15 +119,10 @@
 		location.href='board_category_search.do?c_idx=' + c_idx;
 	}
 	
-	// 마이페이지(나의 건강 정보) 이동하기
-	function mypage_main(user_idx){
-		location.href='mypage_main.do?user_idx=' + user_idx;
-	}
 </script>
 
 </head>
 <body>
-
 	<div id="box">
 		<h1 id="title">제목혹은로고</h1>
 		
@@ -136,19 +130,13 @@
 			<div class="col-sm-1" style="margin-bottom: 5px; width: 5%">
 					<input class="btn btn-primary" type="button" value="글쓰기"
 						onclick="insert_form();">
-						
-				<!-- 로그인이 되어있으면서 user_grade가 'admin'인 경우 -->
-				<c:if test="${ not empty user && user.user_grade eq 'user_admin' }">
-					<input class="btn btn-info" type="button" value="관리" onclick="location.href='admin_page.do'" >
-				</c:if>
 			</div>
 			
-
 			
 			<!-- 검색 및  Page Menu  -->
 			<form class="form-inline">
 				
-				<div class="col-sm-8" id="gird" style="width: 75%; min-width: 10%;">
+				<div class="col-sm-9" id="gird" style="width: 75%; min-width: 10%;">
 					<select id="search" class="form-control">
 						<option value="all">전체보기</option>
 						<option value="name">이름</option>
@@ -162,15 +150,19 @@
 
 			</form>
 	
-			<div class="col-sm-3" id="gird" style="width: 20%;">
+			<div class="col-sm-2" id="gird" style="width: 20%;">
 				<div class="form-inline">
+					<!-- 로그인 안된경우 -->
+					<c:if test="${ empty user }">
+						<input class="btn btn-primary" type="button" value="로그인"
+								onclick="location.href='${ pageContext.request.contextPath }/user/login_form.do'">
+					</c:if>
 	
 					<!-- 로그인 된경우 -->
 					<c:if test="${ not empty user }">
 						<span class="user_name"><b>${ user.user_name }</b></span><span class="welcome_tag">님 환영합니다</span>
 	         			<input class="btn btn-primary" type="button" value="로그아웃"
 								onclick="location.href='${ pageContext.request.contextPath }/user/logout.do'">
-						<input class="btn btn-info" type="button" value="내 상태" onclick="mypage_main(${ user.user_idx })">
 					</c:if>
 				</div>
 			</div>

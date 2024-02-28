@@ -19,6 +19,60 @@
 </style>
 <script type="text/javascript">
 
+	$(document).ready(function(){
+		
+		list();
+		
+		nc_add_list();
+		
+	})
+	
+	function nc_add_list (){
+		
+		let user_idx = '${user.user_idx}';
+		
+		$.ajax({
+			url		: "add_food.do",
+			data	: {
+						"user_idx" : user_idx
+						},
+			success : function(res_data){
+				$("#disp_add").html(res_data);				
+			},
+			error	: function(){
+				alert("실패");			
+			}
+			
+		});
+		
+	}
+	
+	function list(){
+		
+		let f_eattime = '${param.f_eattime}';
+		let m_idx	= '${param.m_idx}';
+		let m_name	= '${param.m_name}';
+		let desc_kor = "김치찌개";
+		
+		$.ajax({
+			url		: "find_list.do",
+			data	: {
+						"desc_kor" : desc_kor,
+						"f_eattime" : f_eattime,
+						"m_idx"	: m_idx,
+						"m_name" : m_name
+						},
+			success : function(res_data){
+				$("#disp").html(res_data);				
+			},
+			error	: function(err){
+				alert("검색 결과가 없습니다. 다시 검색해주세요.");			
+			}
+			
+		});
+		
+	}
+
 	function find(f){
 		
 		$("#basic_list").hide();

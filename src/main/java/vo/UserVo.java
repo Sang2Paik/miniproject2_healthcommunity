@@ -16,13 +16,26 @@ public class UserVo {
 	String user_created_date;
 	String user_modified_date;
 	String user_grade;
+	String user_mask_pwd;
+	
+	
 	double user_BMI;
 	
-	String user_mask_pwd;
+
+	
+	
+	public Double getUser_BMI() {
+		return user_BMI;
+	}
+
+	public void setUser_BMI(Double user_BMI) {
+		this.user_BMI = user_BMI;
+	}
 	
 	/* ${ vo.user_mask_pwd } */
 	public String getuser_mask_pwd() {
 		
+	
 		int len = user_pwd.length();
 		StringBuffer sb = new StringBuffer();
 		sb.append(user_pwd.substring(0, len / 2));
@@ -31,6 +44,7 @@ public class UserVo {
 			sb.append("*");
 		}
 		return sb.toString();
+		
 		
 	}
 
@@ -73,6 +87,7 @@ public class UserVo {
 		this.user_grade  = user_grade;
 	}
 
+
 	//admin이 user 수정
 	// update
 	public UserVo(int user_idx, String user_name, String user_id, String user_pwd, int user_age, String user_email, String user_gender,
@@ -88,6 +103,7 @@ public class UserVo {
 		this.user_ip 	 = user_ip;
 		this.user_grade  = user_grade;
 		}
+
 
 	public int getuser_idx() {
 		return user_idx;
@@ -174,12 +190,7 @@ public class UserVo {
 	public void setuser_grade(String user_grade) {
 		this.user_grade = user_grade;
 	}
-	public double getUser_BMI() {
-		return user_BMI;
-	}
-	public void setUser_BMI(double user_BMI) {
-		this.user_BMI = user_BMI;
-	}
+
 	
 	
 		

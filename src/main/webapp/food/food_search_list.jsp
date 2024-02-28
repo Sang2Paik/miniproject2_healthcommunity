@@ -58,7 +58,7 @@
 </script>
 
 <script type="text/javascript">
-
+	
 	function modal_add(f_name, f_unit_g, f_unit_kcal, f_maker){
 		
 		/* console.log(f_name); */
@@ -83,9 +83,11 @@
 			dataType : "json",
 			success : function(res_data){
 					if(res_data.result == true){
-						alert("이미 담긴 항목입니다.");
-						$("#myModal").modal("hide");								
+						$("#myModal").modal("hide");
+						alert("이미 담긴 항목입니다.");	
 						return;
+					}else{
+						$("#myModal").modal("show");
 					}						
 
 			},
@@ -131,7 +133,7 @@
 			}
 		});
 		
-		 $('#myModal').off();
+
 		
 	}
 
@@ -145,7 +147,7 @@
 	<table style="border: 1px solid black; width: 500px; height: 80px; margin-bottom: 10px;">
 		<tr>
 			<th style="font-size: '15px'; color:purple; width: 90%;">${food.f_name} (1회제공량,${food.f_unit_g}g)</th>
-			<td rowspan="2"><input type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" value="담기" onclick="modal_add('${food.f_name}','${food.f_unit_g}', '${food.f_unit_kcal}', '${food.f_maker}');"></td>
+			<td rowspan="2"><input type="button" class="btn btn-info btn-lg" data-target="#myModal" data-dismiss="modal" value="담기" onclick="modal_add('${food.f_name}','${food.f_unit_g}', '${food.f_unit_kcal}', '${food.f_maker}');"></td>
 		</tr>
 		<tr>
 			<td style="width: 90%;">

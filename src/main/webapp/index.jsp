@@ -112,7 +112,7 @@
 			return;
 		}
 		
-		location.href="workout/my_workout_list.do";
+		location.href="user/mypage_main.do";
 	}
 </script>
 

@@ -31,6 +31,8 @@ create table user
 	 user_ip			 varchar(100) default null
 )
 
+select * from user
+
 insert into user values(null, 'c_test', 'a', 'a', 23, 'a@a.com', 'man', 25.5, 155.7, 68.8,'user_admin', now(), now()+10000, '1.1.1.1' )
 
 drop table category
@@ -44,7 +46,6 @@ create table category
 	c_idx			int primary key auto_increment,
 	c_name			varchar(200)
 )
-
 
 insert into category values (null, "workout");
 insert into category values (null, "food");
@@ -72,11 +73,17 @@ create table board
 	user_name		varchar(100)
 )
 
+select * from board where c_name = 'workout' order by b_idx
+
 drop table board
 
 drop table comment
 
 select * from board
+
+select * from board where user_idx = 1
+
+select * from board where user_name like concat('%','te','%') order by b_idx desc
 
 INSERT INTO board (b_subject, c_idx, c_name, b_content, b_photo, b_ip, b_readhit, b_like, user_idx, user_id, user_name)
 VALUES ('제목 예시', 1, '카테고리명', '내용 예시', '이미지파일명.jpg', '127.0.0.1', 0, 0, 1, '사용자ID', '사용자이름');
@@ -148,6 +155,7 @@ insert into meal_type values(null, 'morning_snack');
 insert into meal_type values(null, 'afternoon_snack');																																																																																														
 insert into meal_type values(null, 'night_snack');																																																																																														
 
+
 create table food_kcal
 (
 	f_idx		int primary key auto_increment,
@@ -173,6 +181,7 @@ alter table food_kcal
 		add constraint fk_food_kcal_user_idx foreign key(user_idx)
 											references user(user_idx);
 
+drop table food_kcal
 
 create or replace view user_view 
 	as
@@ -184,6 +193,8 @@ from user
 select * from user_view
 
 
+
+
 create or replace view food_kcal_view
 as
 select 
@@ -191,5 +202,7 @@ select
 (f_unit_kcal/f_unit_g)*f_csum_g as f_csum_kcal 
 from food_kcal
 
+
+select * from food_kcal_view
 
 */
