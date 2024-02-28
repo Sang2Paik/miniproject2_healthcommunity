@@ -38,6 +38,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select ifnull(max(b_idx),0)+1 from board
 	</select>
 
+	<!-- user_idx에 해당하는 board리스트 얻어오기 -->
+	<select id="board_user_idx_list" parameterType="int" resultType="vo.BoardVo">
+		select * from board where user_idx=#{ user_idx }
+	</select>
 
 	<!-- 전체게시물 수 얻어오기 -->
 	<select id="board_row_total" resultType="int">
