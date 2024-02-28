@@ -74,9 +74,6 @@
 	
 	$(document).ready(function(){	//상세보기로 모달처리??
 
-		if()
-			
-			
 		let search_text = $("#myDatePicker").val().trim();
 		
 		$("#cal_sum").hide();
