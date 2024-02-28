@@ -86,7 +86,7 @@
         <c:if test="${ not empty sessionScope.user }">
              <b>${ sessionScope.user.user_name }</b>님 환영합니다
              <input class="btn btn-primary" type="button"  value="로그아웃"
-                   onclick="location.href='logout.do'">
+                   onclick="location.href='${ pageContext.request.contextPath }/user/logout.do'">
         </c:if>
    
    </div>
