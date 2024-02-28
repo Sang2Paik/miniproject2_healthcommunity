@@ -1,4 +1,4 @@
-<p style="color: #16bcd7">## 2024-02-28 최병훈</p>
+### 2024-02-28 최병훈</p>
 index.jsp, header.jsp, footer.jsp
 ./css/style.css
 Update
