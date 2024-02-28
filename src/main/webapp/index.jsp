@@ -116,18 +116,26 @@
 	}
 </script>
 
+<script type="text/javascript">
+	
+</script>
 
 </head>
 <body>
 	<div id="box">
 	
 		<div id="reg_login">
-			<c:if test="${empty user}">
-				<input type="button" id="register" value="회원가입" onclick="location.href='user/insert_form.do'">
-				<input type="button" id="login" value="로그인" onclick="location.href='user/login_form.do'">
+			<c:if test="${ empty user }">
+				<input type="button" id="register" class="btn btn-info" value="회원가입" onclick="location.href='user/insert_form.do'">
+				<input type="button" id="login" class="btn btn-primary" value="로그인" onclick="location.href='user/login_form.do'">
 			</c:if>
-			<c:if test="${not empty user}">
-				<input type="button" id="logout" value="로그아웃" onclick="location.href='user/logout.do'">
+			
+			<c:if test="${ not empty user }">
+				<c:if test="${ user.user_grade eq 'user_admin' }">
+					<input type="button" class="btn btn-info" value="시스템 관리" 
+							onclick="location.href='admin/admin_page.do'">
+				</c:if>
+				<input type="button" class="btn btn-warning" id="logout" value="로그아웃" onclick="location.href='user/logout.do'">
 			</c:if>
 		</div>
 		
@@ -148,8 +156,9 @@
 		</div>
 		<div id="goto">
 
-			<input type="button" value="운동 게시판" onclick="location.href='board/list.do'">
-			<input type="button" value="나의 건강정보" onclick="move_health_page();">
+			<input type="button" class="btn btn-info" value="운동 게시판" 
+					onclick="location.href='board/list.do'">
+			<input type="button" class="btn btn-success" value="나의 건강정보" onclick="move_health_page();">
 
 		</div>
 		

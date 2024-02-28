@@ -178,13 +178,14 @@
 		                 <th><label>목표몸무게</label></th>
 		                 <td><input class="form-control"  name="user_target"></td>
 		              </tr>
+		              
 		              <tr>
 		                 <th><label>등급</label></th>
 		                 <td>
 		                 	<input type="radio" class="form-control"  name="user_grade" 
-		                 				value="user_user" checked="checked">일반&nbsp;&nbsp;&nbsp;
+		                 				value="user_user" checked="checked" onclick="return false;">일반&nbsp;&nbsp;&nbsp;
 		                 	<input type="radio" class="form-control"  name="user_grade" 
-		                 								value="user_admin">관리자
+		                 								value="user_admin" onclick="return false;">관리자
 		                 </td>
 		              </tr>	
 		              <tr>

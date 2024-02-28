@@ -13,7 +13,8 @@
          		controller.action.UserController,
 				controller.action.BoardController,
 				controller.action.WeatherController,
-				controller.action.CommentController
+				controller.action.CommentController,
+				controller.action.AdminController
 		</param-value>
      </init-param>
   </servlet>

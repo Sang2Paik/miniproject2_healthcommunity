@@ -152,11 +152,6 @@
 	
 			<div class="col-sm-2" id="gird" style="width: 20%;">
 				<div class="form-inline">
-					<!-- 로그인 안된경우 -->
-					<c:if test="${ empty user }">
-						<input class="btn btn-primary" type="button" value="로그인"
-								onclick="location.href='${ pageContext.request.contextPath }/user/login_form.do'">
-					</c:if>
 	
 					<!-- 로그인 된경우 -->
 					<c:if test="${ not empty user }">
