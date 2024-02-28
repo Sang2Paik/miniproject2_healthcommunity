@@ -319,8 +319,11 @@ public class UserController {
 		UserVo mypage_user = UserDao.getInstance().selectOne(user_idx);
 		
         double today_food_kcal = FoodDao.getInstance().today_f_cal(user_idx);
+
+	double today_workout_kal = WorkoutDao.getInstance().today_w_cal(user_idx);
         
         request.setAttribute("today_food_kcal", today_food_kcal);
+	request.setAttribute("today_workout_kal", today_workout_kal);
 		request.setAttribute("mypage_user", mypage_user);
         
         return "mypage_main.jsp";
