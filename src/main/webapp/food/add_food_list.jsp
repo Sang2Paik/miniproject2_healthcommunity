@@ -22,7 +22,7 @@
 			
 		});
 		
-		total_kcal.toFixed(2);
+		total_kcal = total_kcal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});		
 		$("#total_kcal").text(total_kcal);		
 		
 		
@@ -51,7 +51,7 @@
 		
 		const total_count = $(".f_idx").length;		
 		
-		f.action = "food_confirm.do";
+		f.action = "food_cal_list.do";
 		f.submit();
 	
 	}
@@ -78,7 +78,7 @@
 				</tr>
 				<tr>
 					<td class="result_td" style="width: 45%;"><span
-						class="result_kcal"><fmt:formatNumber type="number" value="${food.f_csum_kcal}" maxFractionDigits="2"/></span><span>kcal</span></td>
+						class="result_kcal">${food.f_csum_kcal}</span><span>kcal</span></td>
 					<td style="width: 45%;">${food.f_csum_g}<span>g</span></td>
 				</tr>
 			</table>

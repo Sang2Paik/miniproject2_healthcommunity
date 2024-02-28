@@ -16,11 +16,40 @@ public class UserVo {
 	String user_created_date;
 	String user_modified_date;
 	String user_grade;
-	
 	String user_mask_pwd;
+	
+	Double user_BMI;
+	
+	public Double getUser_BMI() {
+		return user_BMI;
+	}
+
+	public void setUser_BMI(Double user_BMI) {
+		this.user_BMI = user_BMI;
+	}
 	
 	/* ${ vo.user_mask_pwd } */
 	public String getuser_mask_pwd() {
+		
+		//                h
+		//            01234567     len:8  half:4
+		// user_pwd = "password";
+		
+		//비밀번호 반만 노출 + 나머지 *** 처리
+		
+//		int len = user_pwd.length();
+//		int half = len / 2;
+//
+//		StringBuffer sb = new StringBuffer();
+//		for (int i = 0; i < len; i++) {
+//			if (i < half)
+//				sb.append(user_pwd.charAt(i));
+//			else
+//				sb.append("*");
+//		}
+//		 
+//	    return sb.toString();
+		
 		
 		int len = user_pwd.length();
 		StringBuffer sb = new StringBuffer();
@@ -30,6 +59,7 @@ public class UserVo {
 			sb.append("*");
 		}
 		return sb.toString();
+		
 		
 	}
 
@@ -72,21 +102,7 @@ public class UserVo {
 		this.user_grade = user_grade;
 	}
 
-	//admin이 user 수정
-	// update
-	public UserVo(int user_idx, String user_name, String user_id, String user_pwd, int user_age, String user_email, String user_gender,
-			 String user_ip,String user_grade) {
-		super();
-		this.user_idx = user_idx;
-		this.user_name = user_name;
-		this.user_id = user_id;
-		this.user_pwd = user_pwd;
-		this.user_age = user_age;
-		this.user_email = user_email;
-		this.user_gender = user_gender;
-		this.user_ip = user_ip;
-		this.user_grade = user_grade;
-		}
+
 
 	public int getuser_idx() {
 		return user_idx;

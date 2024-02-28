@@ -9,15 +9,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<style type="text/css">
-	
-	#box{
-		width:800px;
-		margin: auto;
-		margin-top: 20px;
-	}
-</style>
-
 <!-- Bootstrap 3.x -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -47,44 +38,19 @@
 
 </script>
 <script type="text/javascript">
-
-	//페이지 로드 시 초기 설정
-	$(document).ready(function(){
-	    // 기본 정보를 처음에 보이도록 설정
-	    $("#my_health_info").hide();
-	    $("#my_basic_info").show();
-	});
 	
 	function show_health_info(){
 		
 		$("#my_health_info").show();
 		
-		$("#my_basic_info").hide();
-			
 	}
 	
 	function show_basic_info(){
 		
 		$("#my_health_info").hide();
 		
-		$("#my_basic_info").show();
-		
 	}
 
-	
-	// 탈퇴하기
-	function user_delete_form( user_idx ){
-		
-		if(confirm('정말 삭제 하시겠습니까?') == false ) return;
-		
-		location.href='delete.do?user_idx=' + user_idx;
-	}
-	
-	// 나의 정보 수정하기
-	function user_modify_form( user_idx ){
-		location.href='modify_form.do?user_idx=' + user_idx;
-	}
-	
 </script>
 </head>
 <body>
@@ -99,137 +65,48 @@
 	</table>
 	
 	<div id="my_health_info">
+		<table>
+			<tr>
+				<th>나의 BMI 지수</th>
+				<td>${user.user_BMI}</td>
+				<td id="my_status" style="font-size: 20px;"></td>
+				<td><img id="my_status_img" alt="비만" src=""></td>
+			</tr>
+			<tr>
+				<th>키</th>
+				<td>${user.user_height}&nbsp;cm</td>
+			</tr>
+			<tr>
+				<th>몸무게</th>
+				<td>${user.user_kg}&nbsp;kgs</td>
+			</tr>
+			<tr>
+				<th>나의 목표</th>
+				<td>${user.user_target}&nbsp;kgs</td>
+			</tr>
+			<tr>
+				<th>일일 활동 칼로리</th>
+				<td>
+					<input type="button" value="입력">
+					<input type="button" value="보기">
+				</td>
+			</tr>
+			<tr>
+				<th>음식 칼로리</th>
+				<td>
+					<input type="button" value="입력" onclick="location.href='../food/insert_basic.do'">
+					<input type="button" value="보기" onclick="location.href='../food/food_cal_list.do'">
+				</td>
+			</tr>
+			<tr>
+				<td>오늘 먹은 칼로리<span id="today_cal">${today_food_kcal}</span>&nbsp;kcals</td>
+			</tr>
 		
-	</div> <!-- end : my_health_info -->
+		</table>
+	</div>
 	
 	
-	<div id="my_basic_info">
-		<div id="box">
-			<div class="panel panel-primary">
-				<table class="table">
-				
-					<tr>
-						<th><label>이름</label></th>
-						<td>
-							<input class="form-control" name="user_name" 
-								value="${ mypage_user.user_name }" readonly="readonly">
-						</td>
-					</tr>		   
-					<tr>
-					   <th><label>아이디</label></th>
-					   <td>
-					   		<input class="form-control" name="user_id" 
-					   			value="${ mypage_user.user_id }" readonly="readonly"></td>
-					</tr>		
-					<tr>
-					   <th><label>비밀번호</label></th>
-					   <td>
-					   		<input class="form-control" type="password" name="user_pwd" 
-					   			value="${ mypage_user.user_pwd }" readonly="readonly">
-					   	</td>
-					</tr>		   
-					<tr>
-					   <th><label>이메일</label></th>
-					   <td>
-					   		<input class="form-control" name="user_age"  
-					   			value="${ mypage_user.user_age }" readonly="readonly">
-					   	</td>
-					</tr>		   
-					<tr>
-					   <th><label>나이</label></th>
-					   <td>
-					   		<input class="form-control" name="user_age"  
-					   			value="${ mypage_user.user_age }" readonly="readonly">
-					   </td>
-					</tr>
-					<tr>
-						<th><label>이메일</label></th>
-						<td>
-							<input class="form-control"  name="user_email" 
-								value="${ mypage_user.user_email }" readonly="readonly">
-						</td>
-					</tr>
-					
-					<tr>
-						<th><label>성별</label></th>
-						<td>
-						 	<c:if test="${ mypage_user.user_gender eq 'man'}">
-								<input type="radio" class="form-control"  name="user_gender" 
-									value="man" checked="checked" onclick="return false;">남자&nbsp;&nbsp;&nbsp;
-								<input type="radio" class="form-control"  name="user_gender" 
-									value="woman" onclick="return false;">여자
-							</c:if>
-						
-							<c:if test="${ mypage_user.user_gender eq 'woman'}">
-								<input type="radio" class="form-control"  name="user_gender" 
-									value="man" onclick="return false;">남자&nbsp;&nbsp;&nbsp;
-								<input type="radio" class="form-control"  name="user_gender" 
-									value="woman" checked="checked" onclick="return false;">여자
-							</c:if>
-						</td>
-			         </tr>
-			         
-			         <tr>
-						<th><label>가입일자</label></th>
-						<td>
-							<input class="form-control" name="user_created_date" 
-								value="${ fn:substring(mypage_user.user_created_date,0,16) }" readonly="readonly">
-						</td>
-					</tr>		
-					<tr>
-						<th><label>마지막수정일자</label></th>
-						<td>
-							<input class="form-control" name="user_modifified_date" 
-								value="${ fn:substring(mypage_user.user_modified_date,0,16)}" readonly="readonly">
-						</td>
-					</tr>		
-					<tr>
-						<th><label>키</label></th>
-						<td>
-							<input class="form-control" name="user_height" 
-								value="${ mypage_user.user_height }" readonly="readonly">
-						</td>
-					</tr>
-					<tr>
-						<th><label>몸무게</label></th>
-						<td>
-							<input class="form-control" name="user_kg" 
-								value="${ mypage_user.user_kg }" readonly="readonly">
-						</td>
-					</tr>
-					<tr>
-						<th><label>목표몸무게</label></th>
-						<td>
-							<input class="form-control" name="user_target" 
-								value="${ mypage_user.user_target }" readonly="readonly">
-						</td>
-					</tr>
-					<tr>
-						<th><label>회원등급</label></th>
-						<td>
-							<input class="form-control" name="user_target" 
-								value="${ fn:substring(mypage_user.user_grade, 5, fn:length(mypage_user.user_grade)) }" readonly="readonly">
-						</td>
-					</tr>
-						
-					<tr>
-						<td colspan="2" align="center">
-							<input class="btn btn-danger" type="button" value="탈퇴하기" 
-								onclick="user_delete_form(${ mypage_user.user_idx });">
-								
-							<input class="btn btn-info" type="button" value="수정하기" 
-								onclick="user_modify_form(${ mypage_user.user_idx });">
-								
-							<input class="btn btn-success" type="button"  value="게시판보기"
-								onclick="location.href='${ pageContext.request.contextPath }/board/list.do'">  
-						</td>
-					</tr>
-					         
-					         
-				</table>
-			</div> <!-- end : panel panel-primary -->
-		</div> <!-- end : box -->
-	</div> <!-- end : my_basic_info -->
+	<div id="my_basic_info"></div>
 
 </body>
 </html>
