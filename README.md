@@ -1,3 +1,6 @@
+##2024-0228 이영준 
+- 운동 정보 파일 추가 (vo, dao, util, controller(mapper추가, web.xml에 controller 추가, jsp)
+
 ## 2024-02-27 최시환
 - admin폴더 경로 변경하였습니다
 
