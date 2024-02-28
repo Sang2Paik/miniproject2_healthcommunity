@@ -56,14 +56,14 @@ public class FoodDao {
 	}
 	
 	// 음식 담기의 리스트 보여주기
-	public List<FoodVo> add_selectList() {
+	public List<FoodVo> add_selectList(int user_idx) {
 		// TODO Auto-generated method stub
 		
 		List<FoodVo> add_food_list = null;
 		
 		SqlSession sqlSession = factory.openSession();
 		
-		add_food_list = sqlSession.selectList("food.add_selectList");
+		add_food_list = sqlSession.selectList("food.add_selectList", user_idx);
 		
 		sqlSession.close();
 		
@@ -182,6 +182,32 @@ public class FoodDao {
 		sqlSession.close();
 		
 		return food_chart_list;
+	}
+
+	public int cf_delete(int f_no) {
+		// TODO Auto-generated method stub
+		int res = 0;
+		
+		SqlSession sqlSession = factory.openSession(true);
+		
+		res = sqlSession.delete("food.confirm_food_delete", f_no);
+		
+		sqlSession.close();
+		
+		return res;
+	}
+
+	public int updateConfirmFood(int f_no) {
+		// TODO Auto-generated method stub
+		int res = 0;
+		
+		SqlSession sqlSession = factory.openSession(true);
+		
+		res = sqlSession.update("food.confirm_food_modify", f_no);
+		
+		sqlSession.close();
+		
+		return res;
 	}
 
 
