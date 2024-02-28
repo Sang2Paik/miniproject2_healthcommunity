@@ -168,6 +168,23 @@ alter table food_kcal
 
 alter table food_kcal
 		add constraint fk_food_kcal_user_idx foreign key(user_idx)
+
+create or replace view user_view 
+as
+select 
+*, format(user_kg/((user_height/100)*(user_height/100)),2) as user_BMI				
+from user
+
+select * from user_view
+
+
+create or replace view food_kcal_view
+as
+select 
+*,
+(f_unit_kcal/f_unit_g)*f_csum_g as f_csum_kcal 
+from food_kcal
+
 											references user(user_idx);
 
 */
