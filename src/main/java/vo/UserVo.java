@@ -18,10 +18,7 @@ public class UserVo {
 	String user_grade;
 	String user_mask_pwd;
 	
-	
 	double user_BMI;
-	
-
 	
 	
 	public Double getUser_BMI() {
