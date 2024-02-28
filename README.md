@@ -1,4 +1,4 @@
-# 2024-02-28 최병훈
+## 2024-02-28 최병훈
 index.jsp, header.jsp, footer.jsp
 ./css/style.css
 Update
