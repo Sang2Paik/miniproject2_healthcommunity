@@ -17,6 +17,9 @@ public class FoodVo {
 	String f_maker;			//제조사
 	double f_csum_kcal;
 	
+	double f_total_kcal;
+	String f_eat_date;
+	
 	
 	//API에서가져와 보여주기만 할 값
 	double carbo;   // 탄수화물
@@ -288,6 +291,29 @@ public class FoodVo {
 	public void setF_csum_kcal(double f_csum_kcal) {
 		this.f_csum_kcal = f_csum_kcal;
 	}
+	
+	
+
+
+	public double getF_total_kcal() {
+		return f_total_kcal;
+	}
+
+
+	public void setF_total_kcal(double f_total_kcal) {
+		this.f_total_kcal = f_total_kcal;
+	}
+
+
+	public String getF_eat_date() {
+		return f_eat_date;
+	}
+
+
+	public void setF_eat_date(String f_eat_date) {
+		this.f_eat_date = f_eat_date;
+	}
+
 	
 	
 

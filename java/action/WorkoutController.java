@@ -205,24 +205,6 @@ public class WorkoutController {
 		int user_idx = user.getuser_idx();
 		String user_name = user.getuser_name();
 		
-		//세션정보 얻어오기->로그인 유저정보 저장(X)
-		//HttpSession session = request.getSession();
-		//session.setAttribute("user", user);
-		//int user_idx	     = user.user_idx;
-		
-		//4.등록회원정보
-		//int    user_idx	= user.getUser_idx();
-		//String mem_name = user.getUser_name();
-		
-//		int user_idx	     = 2;
-//		String user_name     = "홍길동";
-	
-		//System.out.println(w_name);
-		//System.out.println(w_time);
-		//System.out.println(w_unit_kcal);
-		//System.out.println(user_idx);
-		//System.out.println(user_name);
-		
 		//5. DB 포장
 		WorkoutVo vo  =new WorkoutVo(w_name, w_time, w_unit_kcal, user_idx, user_name);	
 		
