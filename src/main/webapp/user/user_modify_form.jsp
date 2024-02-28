@@ -34,7 +34,7 @@
   
   function send(f){
 	  
-	  if(confirm('수정하시겠습니까?') == false) return;
+	  if(confirm('위 항목으로 수정하시겠습니까?') == false) return;
 	  
 	  //폼에서 입력된값 체크...
 	  let user_name 		= f.user_name.value.trim();
