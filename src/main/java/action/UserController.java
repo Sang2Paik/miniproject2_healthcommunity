@@ -14,6 +14,7 @@ import dao.BoardDao;
 import dao.CategoryDao;
 import dao.FoodDao;
 import dao.UserDao;
+import dao.WorkoutDao;
 import vo.BoardVo;
 import vo.CategoryVo;
 import vo.UserVo;
@@ -360,7 +361,7 @@ public class UserController {
         
         request.setAttribute("today_food_kcal", today_food_kcal);
         request.setAttribute("today_workout_kal", today_workout_kal);
-        request.setAttribute("category_list"  , category_list);
+        request.setAttribute("category_list"  , category_list();
 		request.setAttribute("mypage_board"	  , mypage_board);
 		request.setAttribute("mypage_user"	  , mypage_user);
 		
