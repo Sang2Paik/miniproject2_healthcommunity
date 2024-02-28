@@ -1,5 +1,6 @@
 ## 2024-02-28 이영준 
 - 운동 정보 파일 추가 (vo, dao, util, controller(mapper추가, web.xml에 controller 추가, jsp)
+- workout_kcal table에 user_name (String) 추가해야 합니다.
 
 ## 2024-02-27 최시환
 - admin폴더 경로 변경하였습니다
