@@ -10,8 +10,12 @@ import org.json.JSONObject;
 
 import annotation.RequestMapping;
 import annotation.ResponseBody;
+import dao.BoardDao;
+import dao.CategoryDao;
 import dao.FoodDao;
 import dao.UserDao;
+import vo.BoardVo;
+import vo.CategoryVo;
 import vo.UserVo;
 
 public class UserController {
@@ -96,6 +100,16 @@ public class UserController {
 	//메인화면에서 로그아웃
 	@RequestMapping(value = "/logout.do")
 	public String index_jsp_logout(HttpServletRequest request, HttpServletResponse response) {
+
+		//로그아웃: session에 저장된 user삭제
+		request.getSession().removeAttribute("user");
+		
+		return "redirect:main.do";
+	} // end : index_jsp_user_logout
+	
+	//마이페이지에서 로그아웃
+	@RequestMapping(value = "/user/logout.do")
+	public String mypage_logout(HttpServletRequest request, HttpServletResponse response) {
 
 		//로그아웃: session에 저장된 user삭제
 		request.getSession().removeAttribute("user");
@@ -309,21 +323,55 @@ public class UserController {
 		return "index.jsp";
 	}
 	
+	//유저페이지에서 main.do호출했을 시
+	@RequestMapping(value = "/user/main.do")
+	public String user_main(HttpServletRequest request, HttpServletResponse response) {
+
+		return "index.jsp";
+	}
+	
+	//마이페이지 메뉴로 이동
 	@RequestMapping("/user/mypage_main.do")
     public String mypage(HttpServletRequest request, HttpServletResponse response) {
+		
+		// parameter값을 검색해서 들어온 경우 필터링을 하기위한 param_user_idx
+        int param_user_idx = 0;
+		try {
+			param_user_idx = Integer.parseInt(request.getParameter("user_idx"));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		}
         
-        UserVo user = (UserVo) request.getSession().getAttribute("user");
+		UserVo user = null;
+        // 세션이 비어있거나 파라메터의 int 값과 session의 int 값이 맞지 않다면(로그인 상태로 idx를 검색해서 들어온 경우)
+		user = (UserVo) request.getSession().getAttribute("user");
+		if( user == null || !(user.getuser_idx() == param_user_idx) ){
+			return "redirect:../login.do";
+		}
         
         int user_idx = user.getuser_idx();
 		
-		UserVo mypage_user = UserDao.getInstance().selectOne(user_idx);
+        UserVo	mypage_user			   = UserDao.getInstance().selectOne(user_idx);
+        double  today_food_kcal 	   = FoodDao.getInstance().today_f_cal(user_idx);
+        List<BoardVo> mypage_board	   = BoardDao.getInstance().selectListUserBoard(user_idx);
+        List<CategoryVo> category_list = CategoryDao.getInstance().selectList();
 		
-        double today_food_kcal = FoodDao.getInstance().today_f_cal(user_idx);
-        
         request.setAttribute("today_food_kcal", today_food_kcal);
-		request.setAttribute("mypage_user", mypage_user);
-        
+        request.setAttribute("category_list"  , category_list);
+		request.setAttribute("mypage_board"	  , mypage_board);
+		request.setAttribute("mypage_user"	  , mypage_user);
+		
+		
         return "mypage_main.jsp";
+        
 	}
 
+	@RequestMapping(value = "/board/mypage_main.do")
+	public String mypage_home(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		return "../user/mypage_main.do"; // user_idx값 forward
+	}
+	
 }
