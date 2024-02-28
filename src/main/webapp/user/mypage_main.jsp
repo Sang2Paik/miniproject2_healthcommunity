@@ -16,6 +16,14 @@
 		margin: auto;
 		margin-top: 20px;
 	}
+	
+	.myphoto{
+		width: 200px;
+		margin-left: 20px;
+	}
+	
+	
+	
 </style>
 
 <!-- Bootstrap 3.x -->
@@ -94,6 +102,7 @@
 			<td>
 				<input type="button" value="나의 건강정보" onclick="show_health_info();">
 				<input type="button" value="나의 기본정보" onclick="show_basic_info();">
+				<input type="button" value="나의 갤러리" onclick="my_board_info();">
 			</td>
 		</tr>
 	</table>
@@ -228,6 +237,42 @@
 					         
 				</table>
 			</div> <!-- end : panel panel-primary -->
+		</div> <!-- end : box -->
+	</div> <!-- end : my_basic_info -->
+
+	<div id="my_board_info">
+		<div id="box">
+			<table class="table">
+				
+				
+				<!-- 올린게시물이 있을경우 -->
+				<c:if test="${ not empty mypage_board }">
+					<!-- 카테고리 리스트만큼 수행 -->
+					<c:forEach var="category" items="${ category_list }">
+					
+						<!-- 카테고리 별로 div태그로 묶기 -->
+					    <div>
+				        	<h2>${ category.c_name }</h2>
+					        
+					        <!-- board의 갯수만큼 수행 -->
+					        <c:forEach var="board" items="${ mypage_board }">
+					        	<!-- c_idx가 같은 항목을 출력 -->
+					            <c:if test="${ board.c_idx eq category.c_idx }">
+					                <!-- 해당 카테고리에 속하는 게시물 출력 -->
+					                <div style="display: inline;">
+					                    <div>${ board.b_subject }</div>
+					                    <div>${ board.b_content }</div>
+					                </div>
+					            </c:if>
+					        </c:forEach>
+					        
+					    </div>
+					    
+					</c:forEach>
+				</c:if>
+				
+				
+			</table> <!-- end : table -->
 		</div> <!-- end : box -->
 	</div> <!-- end : my_basic_info -->
 

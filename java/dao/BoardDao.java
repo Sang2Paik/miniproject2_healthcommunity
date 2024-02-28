@@ -275,6 +275,20 @@ public class BoardDao {
 		return res;
 	}
 
+	public List<BoardVo> selectListUserBoard(int user_idx) {
+		// TODO Auto-generated method stub
+		
+		List<BoardVo> list = null;
+		
+		SqlSession sqlSession = factory.openSession();
+		
+		list = sqlSession.selectList("board.board_user_idx_list",user_idx);
+		
+		sqlSession.close();
+		
+		return list;
+	}
+
 	
 	
 	

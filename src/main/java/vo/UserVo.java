@@ -16,6 +16,7 @@ public class UserVo {
 	String user_created_date;
 	String user_modified_date;
 	String user_grade;
+	double user_BMI;
 	
 	String user_mask_pwd;
 	
@@ -41,35 +42,35 @@ public class UserVo {
 	public UserVo(String user_name, String user_id, String user_pwd, int user_age, String user_email, String user_gender,
 			Double user_height,Double user_kg, Double user_target, String user_grade,String user_ip) {
 		super();
-		this.user_name = user_name;
-		this.user_id = user_id;
-		this.user_pwd = user_pwd;
-		this.user_age = user_age;
-		this.user_email = user_email;
+		this.user_name 	 = user_name;
+		this.user_id 	 = user_id;
+		this.user_pwd 	 = user_pwd;
+		this.user_age 	 = user_age;
+		this.user_email  = user_email;
 		this.user_gender = user_gender;
 		this.user_height = user_height;
-		this.user_kg = user_kg;
+		this.user_kg 	 = user_kg;
 		this.user_target = user_target;
-		this.user_grade = user_grade;
-		this.user_ip = user_ip;
+		this.user_grade  = user_grade;
+		this.user_ip 	 = user_ip;
 	}
 	
 	// update
 	public UserVo(int user_idx, String user_name, String user_id, String user_pwd, int user_age, String user_email, String user_gender,
 			Double user_height, Double user_kg, Double user_target, String user_ip,String user_grade) {
 		super();
-		this.user_idx = user_idx;
-		this.user_name = user_name;
-		this.user_id = user_id;
-		this.user_pwd = user_pwd;
-		this.user_age = user_age;
-		this.user_email = user_email;
+		this.user_idx 	 = user_idx;
+		this.user_name 	 = user_name;
+		this.user_id 	 = user_id;
+		this.user_pwd 	 = user_pwd;
+		this.user_age 	 = user_age;
+		this.user_email  = user_email;
 		this.user_gender = user_gender;
 		this.user_height = user_height;
-		this.user_kg = user_kg;
+		this.user_kg 	 = user_kg;
 		this.user_target = user_target;
-		this.user_ip = user_ip;
-		this.user_grade = user_grade;
+		this.user_ip 	 = user_ip;
+		this.user_grade  = user_grade;
 	}
 
 	//admin이 user 수정
@@ -77,15 +78,15 @@ public class UserVo {
 	public UserVo(int user_idx, String user_name, String user_id, String user_pwd, int user_age, String user_email, String user_gender,
 			 String user_ip,String user_grade) {
 		super();
-		this.user_idx = user_idx;
-		this.user_name = user_name;
-		this.user_id = user_id;
-		this.user_pwd = user_pwd;
-		this.user_age = user_age;
-		this.user_email = user_email;
+		this.user_idx 	 = user_idx;
+		this.user_name   = user_name;
+		this.user_id 	 = user_id;
+		this.user_pwd 	 = user_pwd;
+		this.user_age 	 = user_age;
+		this.user_email  = user_email;
 		this.user_gender = user_gender;
-		this.user_ip = user_ip;
-		this.user_grade = user_grade;
+		this.user_ip 	 = user_ip;
+		this.user_grade  = user_grade;
 		}
 
 	public int getuser_idx() {
@@ -172,6 +173,12 @@ public class UserVo {
 	}
 	public void setuser_grade(String user_grade) {
 		this.user_grade = user_grade;
+	}
+	public double getUser_BMI() {
+		return user_BMI;
+	}
+	public void setUser_BMI(double user_BMI) {
+		this.user_BMI = user_BMI;
 	}
 	
 	

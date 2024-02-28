@@ -151,15 +151,18 @@ insert into meal_type values(null, 'night_snack');
 create table food_kcal
 (
 	f_idx		int primary key auto_increment,
+	f_no		int,
 	f_name		varchar(200) not null,
 	f_type		varchar(200),
+	f_eattime	datetime default now(),
 	m_idx		int,
 	m_name		varchar(200),
 	f_regdate	datetime default now(),
 	f_unit_g	int,
 	f_unit_kcal	double,
-	f_csum_g	double not null,
-	user_idx	int
+	f_csum_g	double,
+	user_idx	int,
+	f_maker		varchar(500)
 )
 
 alter table food_kcal
@@ -169,5 +172,24 @@ alter table food_kcal
 alter table food_kcal
 		add constraint fk_food_kcal_user_idx foreign key(user_idx)
 											references user(user_idx);
+
+
+create or replace view user_view 
+	as
+select 
+*, format(user_kg/((user_height/100)*(user_height/100)),2) as user_BMI				
+from user
+
+
+select * from user_view
+
+
+create or replace view food_kcal_view
+as
+select 
+*,
+(f_unit_kcal/f_unit_g)*f_csum_g as f_csum_kcal 
+from food_kcal
+
 
 */
