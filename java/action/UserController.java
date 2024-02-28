@@ -197,7 +197,7 @@ public class UserController {
 		//              where user_idx=?
 		UserDao.getInstance().update(vo);
 		
-		return "redirect:list.do";
+		return "redirect:mypage_main.do?user_idx=" + user_idx;
 	} // end : user_modify
 	
 	
@@ -224,6 +224,7 @@ public class UserController {
 		String user_email		=	request.getParameter("user_email");
 		String user_gender		=	request.getParameter("user_gender");
 		Double user_height;
+		
 		try {
 			user_height = Double.parseDouble(request.getParameter("user_height"));
 		} catch (NumberFormatException e) {
@@ -262,7 +263,7 @@ public class UserController {
 	} // end : user_insert
 	
 	
-	//멤버delete
+	//유저delete
 	@RequestMapping(value = "/user/delete.do")
 	public String user_delete(HttpServletRequest request, HttpServletResponse response) {
 
@@ -312,13 +313,17 @@ public class UserController {
     public String mypage(HttpServletRequest request, HttpServletResponse response) {
         
         UserVo user = (UserVo) request.getSession().getAttribute("user");
+        
         int user_idx = user.getuser_idx();
-                        
+		
+		UserVo mypage_user = UserDao.getInstance().selectOne(user_idx);
+		
         double today_food_kcal = FoodDao.getInstance().today_f_cal(user_idx);
         
         request.setAttribute("today_food_kcal", today_food_kcal);
+		request.setAttribute("mypage_user", mypage_user);
         
         return "mypage_main.jsp";
-}
-//
+	}
+
 }

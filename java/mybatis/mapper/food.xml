@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="food">
+
+<!-- 음식 검색 -->
+<select id="food_select_list" parameterType="String" resultType="vo.FoodVo">
+	select * from food_kcal_view where f_name like concat('%','#{f_name}','%')
+</select>
+
+<!-- 식사 타입 리스트  -->
+<select id="meal_type_list"  resultType="vo.MealTypeVo">
+	select * from meal_type
+</select>
+
+<!-- 담기한 음식 리스트 출력 -->
+<select id="add_selectList" resultType="vo.FoodVo">
+	select * from food_kcal_view where f_no is null
+</select>
+
+<!-- 음식 담기에서 중복값 찾기 -->
+<select id="find_check_vo" parameterType="vo.FoodVo" resultType="vo.FoodVo">
+	select * from food_kcal where f_name=#{f_name} and f_unit_kcal=#{f_unit_kcal} and f_maker=#{f_maker} and user_idx=#{user_idx} and f_no is null
+</select>
+
+<select id="f_no_select" resultType="int">
+	select ifnull(max(f_no),0)+1 from food_kcal
+</select>
+
+<select id="confirm_food_list" parameterType="int" resultType="vo.FoodVo">
+	select * from food_kcal_view where user_idx=#{user_idx}
+</select>
+
+<!-- 오늘 먹은 총 칼로리 -->
+<select id="today_cal" parameterType="int" resultType="double">
+	select ifnull(sum(f_csum_kcal),0) from food_kcal_view 
+									where user_idx=#{user_idx} and date_format(f_eattime, '%Y-%m-%d')=curdate();
+</select>
+
+
+
+<!-- 선택한 음식 담기 -->
+<insert id="add_food" parameterType="vo.FoodVo">
+	insert into food_kcal(f_name, f_unit_g, f_unit_kcal, f_maker, m_idx, m_name, f_eattime, f_csum_g, user_idx) 
+						values(#{f_name}, 
+								#{f_unit_g}, 
+								#{f_unit_kcal}, 
+								#{f_maker}, 
+								#{m_idx}, 
+								#{m_name}, 
+								#{f_eattime}, 
+								#{f_csum_g}, 
+								#{user_idx})
+</insert>
+
+<!-- 음식 담기에서 삭제 -->
+<delete id="delete_food" parameterType="int">
+	delete from food_kcal where f_idx=#{f_idx}
+</delete>
+
+<!-- 컴펌된 리스트 수정  -->
+<update id="food_confirm_update" parameterType="vo.FoodVo">
+	update food_kcal set f_no=#{f_no} where f_idx=#{f_idx}
+</update>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

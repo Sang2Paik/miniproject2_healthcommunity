@@ -121,8 +121,8 @@
 	}
 	
 	// 마이페이지(나의 건강 정보) 이동하기
-	function my_health_list(user_idx){
-		location.href='my_health_list.do?user_idx=' + user_idx;
+	function mypage_main(user_idx){
+		location.href='mypage_main.do?user_idx=' + user_idx;
 	}
 </script>
 
@@ -170,7 +170,7 @@
 						<span class="user_name"><b>${ user.user_name }</b></span><span class="welcome_tag">님 환영합니다</span>
 	         			<input class="btn btn-primary" type="button" value="로그아웃"
 								onclick="location.href='${ pageContext.request.contextPath }/user/logout.do'">
-						<input class="btn btn-info" type="button" value="내 상태" onclick="my_health_list(${ user.user_idx })">
+						<input class="btn btn-info" type="button" value="내 상태" onclick="mypage_main(${ user.user_idx })">
 					</c:if>
 				</div>
 			</div>

@@ -143,18 +143,45 @@ public class FoodDao {
 		return res;
 	}
 
-	public List<FoodVo> confirm_selectList() {
+	public List<FoodVo> confirm_selectList(int user_idx) {
 		// TODO Auto-generated method stub
 		
 		List<FoodVo> food_record_list= null;
 		
 		SqlSession sqlSession = factory.openSession();
 		
-		food_record_list = sqlSession.selectList("food.confirm_food_list");
+		food_record_list = sqlSession.selectList("food.confirm_food_list", user_idx);
 		
 		sqlSession.close();
 		
 		return food_record_list;
+	}
+
+	public double today_f_cal(int user_idx) {
+		// TODO Auto-generated method stub
+		double today_cal = 0;
+		
+		SqlSession sqlSession = factory.openSession();
+		
+		today_cal = sqlSession.selectOne("food.today_cal", user_idx);
+		
+		sqlSession.close();
+		
+		return today_cal;
+	}
+
+	public List<FoodVo> foodChartList(int user_idx) {
+		// TODO Auto-generated method stub
+		
+		List<FoodVo> food_chart_list= null;
+		
+		SqlSession sqlSession = factory.openSession();
+		
+		food_chart_list = sqlSession.selectList("food.food_chart_list", user_idx);
+		
+		sqlSession.close();
+		
+		return food_chart_list;
 	}
 
 
