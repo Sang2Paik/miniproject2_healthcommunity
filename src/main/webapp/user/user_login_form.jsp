@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>핼커 로그인</title>
 
 
 	<%@ include file="/header.jsp" %>
@@ -128,34 +128,5 @@
 
 
 
-
-
-
-
-<div id="box" class="w960 tt c">
- 		<div id="reg_login" class="row w960 nav tt">
-		    <div class="col-12 col-md-8"></div>
-		    <div class="col-12 col-md-4"></div>
-		</div>
-
-		<form class="w960 tt c">
-			
-			<div class="w960 c"><h4 class="c">로그인</h4></div>
-			<div class="w960 c">아이디</div>
-			<div class="c"><input class="form-control"  name="user_id" value="${ param.user_id }"></div>
-			<div class="w960 c">비밀번호</div>
-			<div class="c"><input class="form-control"  type="password" name="user_pwd"></div>
-			<div class="w960 c"><input class="nav_btn" type="button"  value="로그인" onclick="send(this.form);"></div>
-			<div class="w960 c">
-			<input class="nav_btn" type="button"  value="메인화면" 
-			                     onclick="location.href='${ pageContext.request.contextPath }/main.do'">
-			<input  class="nav_btn"    type="button"  value="회원가입"
-			                     onclick="location.href='insert_form.do'"></div>
-
-		</form>
-
-        <!-- Footer -->
-    <%@ include file="/footer.jsp" %>
-</div>	
 </body>
 </html>
