@@ -197,7 +197,7 @@
 				$("#btn_modal").click();
 				//console.log(res_data.list[2].w_time);
 				//console.log(res_data.list.length);
-				let html_title = "일일 소모 칼로리 상세정보(" + res_data.list[0].regdate + ")"
+				let html_title = "<h4>일일 소모 칼로리 상세정보 (" + res_data.list[0].regdate + ")<h4>"
 				
 				$("#my_workout_info_title").html(html_title);
 				
@@ -269,7 +269,7 @@
 		
 		<br>
 		<div>
-			<b>상세정보</b>
+			<b>전체 운동 상세정보</b>
 		</div>
 		<div id="my_workout_list">
 			
