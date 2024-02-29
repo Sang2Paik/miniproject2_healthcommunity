@@ -73,7 +73,7 @@
 	let kcal_sum_list = [];
 	
 	$(document).ready(function(){	//상세보기로 모달처리??
-
+			
 		let search_text = $("#myDatePicker").val().trim();
 		
 		$("#cal_sum").hide();
@@ -260,15 +260,15 @@
 <%@include file="my_workout_list_search_popup.jsp" %>
 
 	<div id="box">
-	
 
 		<div>
-			<h3>나의 운동 내역</h3>
+			<h3><span id="myself">${ user.user_name }</span>님의 운동 내역</h3>
 		</div>
 		<form>
 			<input id="myDatePicker" name="search_text" value="${ param.search_text }">
 			<input type="button" value="날짜검색" onclick="search();">
 			<input type="button" value="전체보기" onclick="show_list();">
+			<input id="" type="button" value="MyPage" onclick="location.href='../user/mypage_main.do'">
 		</form>
 
 		<div id="my_workout_stat">
