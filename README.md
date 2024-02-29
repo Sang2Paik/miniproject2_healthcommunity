@@ -1,3 +1,11 @@
+### 2024-02-20 최시환 PM 07:30
+자바파일 : BoardController, UserController BoardDao board.xml 수정하였습니다
+webapp 파일 : 어드민폴더 admin_page.jsp, 보드폴더 board_list.jsp, user폴더 mypage_main.jsp 변경하였으며 user폴더에 my_page_board_view.jsp 추가 하였습니다
+
+그리고 index.jsp 로그인쪽 if문 변경되었습니다 
+디자인쪽 현재까지 올리신 index.jsp파일이랑 비교해가면서 수정하였는데 잘못 수정한 부분이 있을수도 있어서 확인 부탁드립니다
+
+
 ### 2024-02-29 최병훈 PM 06:00 
 index.jsp, header.jsp, footer.jsp<br>
 ./css/style.css<br>
