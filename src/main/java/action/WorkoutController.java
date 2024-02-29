@@ -199,12 +199,17 @@ public class WorkoutController {
 	@RequestMapping("/workout/workout_insert.do")
 	public String my_workout(HttpServletRequest request, HttpServletResponse response) {
 
-		// /workout/workout_insert.do?w_name=다트&w_unit_kcal=210&w_time=60
+		// /workout/workout_insert.do?w_name=다트&w_unit_kcal=210&w_time=60&w_regdate=2024-02-29
 		
 		//parameter 받기
 		String	w_name	     = request.getParameter("w_name");
-		double	w_unit_kcal  = Double.parseDouble(request.getParameter("w_unit_kcal"));
+		double w_unit_kcal = 0.0;
+
+		w_unit_kcal = Double.parseDouble(request.getParameter("w_unit_kcal"));
+	
 		int	    w_time	   	 = Integer.parseInt(request.getParameter("w_time"));
+		
+		String  w_regdate    = request.getParameter("w_regdate");
 		
 		//user정보
 		UserVo user = (UserVo) request.getSession().getAttribute("user");
@@ -231,7 +236,7 @@ public class WorkoutController {
 		//System.out.println(user_name);
 		
 		//5. DB 포장
-		WorkoutVo vo  =new WorkoutVo(w_name, w_time, w_unit_kcal, user_idx, user_name);	
+		WorkoutVo vo  =new WorkoutVo(w_name, w_regdate, w_time, w_unit_kcal, user_idx, user_name);	
 		
 		//6.DB insert
 		int res = WorkoutDao.getInstance().insert(vo);
