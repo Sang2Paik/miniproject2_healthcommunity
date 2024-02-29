@@ -240,4 +240,18 @@ public class WorkoutController {
 		return "redirect: my_workout_list.do?";
 	}
 	
+	//운동 삭제
+	@RequestMapping("/my_workout_delete.do")
+	public String my_workout_delete(HttpServletRequest request, HttpServletResponse response) {
+
+		// /workout/my_workout_delete.do?w_idx=13
+		
+		String regdate = request.getParameter("regdate");
+		int w_idx = Integer.parseInt(request.getParameter("w_idx"));
+		
+		int res = WorkoutDao.getInstance().my_workout_delete(w_idx);
+		
+		return "redirect:my_workout_list.do?regdate=" + regdate;
+	}
+	
 }
