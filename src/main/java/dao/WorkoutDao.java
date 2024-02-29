@@ -1,188 +1,217 @@
-package dao;
+package controller.action;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import service.MyBatisConnector;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.mysql.cj.Session;
+
+import annotation.RequestMapping;
+import annotation.ResponseBody;
+import dao.WorkoutDao;
+import util.WorkoutUtils;
+import vo.UserVo;
+import vo.WorkoutCaloryVo;
 import vo.WorkoutVo;
 
-public class WorkoutDao {
-
-	//MyBatis 사용 위한 인터페이스 불러오기
-	SqlSessionFactory factory;
+public class WorkoutController {
 	
-	static WorkoutDao single = null; //자기자신의 값을 담는 변수
+	//내 운동 리스트
+	@RequestMapping("/workout/my_workout_list.do")
+	public String my_workout_list(HttpServletRequest request, HttpServletResponse response) {
 
-	public static WorkoutDao getInstance() { //DBService의 객체 요청
-
-		if (single == null)
-			single = new WorkoutDao(); //처음 요청시에는 만들어서 줌, static이므로 하나만 만들어짐, 두번째 요청시에는 single null아니므로 이전에 만들어진 정보 반환 (결국 같은 객체)
-
-		return single; //만들어진 객체를 리턴
-
-	} //singleton! (요청이 몇번 들어올지 모르기 때문에 싱글톤으로)
-	
-	private WorkoutDao() { //private생성자 -> singleton으로만 생성해라
-		// TODO Auto-generated constructor stub
-		//getInstance() : 자바에서 싱글톤 쓰는 방법(그냥 문법)
-		factory = MyBatisConnector.getInstance().getSqlSessionFactory();
-	}
-
-	public int insert(WorkoutVo vo) {
-		// TODO Auto-generated method stub
-		int res = 0;
-
-		//1. SqlSession얻어오기                      true -> auto commit
-		SqlSession sqlSession = factory.openSession(true);
+		// /workout/list.do
+		// /workout/list.do?search_text=24-02-24
 		
-		//2.수행
-		res = sqlSession.insert("workout.workout_insert", vo);
+		UserVo user = (UserVo) request.getSession().getAttribute("user");
 		
-		//3.닫기
-		sqlSession.close();
+		int user_idx = user.getuser_idx();
+		String user_name = user.getuser_name();
 		
-		return res;
-
-	}
-
-//	public List<WorkoutVo> selectList() {
-//		// TODO Auto-generated method stub
-//		List<WorkoutVo> list = null;
-//		
-//		//1. SqlSession얻어오기
-//		SqlSession sqlSession = factory.openSession();
-//		
-//		//2.수행
-//		list = sqlSession.selectList("workout.my_workout_list");
-//		
-//		//3.닫기
-//		sqlSession.close();
-//		
-//		return list;
-//	}
-	
-	public List<WorkoutVo> selectList(WorkoutVo vo) {
-		// TODO Auto-generated method stub
-		List<WorkoutVo> list = null; //MyBatis가 만들어줌
+		WorkoutVo vo = new WorkoutVo(user_idx, user_name);
 		
-		//String sql = "select * from workout_kcal where w_regdate=24-02-24 order by idx desc";
+		List<WorkoutVo> list = WorkoutDao.getInstance().selectList(vo);
 		
-		//1.sqlSession 얻어오기 (MyBatis 실제 작업객체)
-		SqlSession sqlSession= factory.openSession();
+		request.setAttribute("list", list);
 		
-		//2.작업수행                 namespace.mapper_id
-		list = sqlSession.selectList("workout.my_workout_list", vo);
-		//System.out.println(list);
-		//3.닫기
-		sqlSession.close();
-		
-		return list; //list 내에는 vo에서 가져온 레코드 값이 담겨있음
-	}
-
-	public List<WorkoutVo> selectListSearch(WorkoutVo vo) {
-		// TODO Auto-generated method stub
-		List<WorkoutVo> list = null; //MyBatis가 만들어줌
-		
-		//String sql = "select * from workout_kcal where w_regdate=24-02-24 order by idx desc";
-		
-		//1.sqlSession 얻어오기 (MyBatis 실제 작업객체)
-		SqlSession sqlSession= factory.openSession();
-		
-		//2.작업수행                 namespace.mapper_id
-		list = sqlSession.selectList("workout.my_workout_list_date", vo);
-		//System.out.println(list);
-		//3.닫기
-		sqlSession.close();
-		
-		return list; //list 내에는 vo에서 가져온 레코드 값이 담겨있음
-	}
-
-	public List<WorkoutVo> selectListCalulate(WorkoutVo vo) {
-		// TODO Auto-generated method stub
-		List<WorkoutVo> list = null; //MyBatis가 만들어줌
-		
-		//String sql = "select * from workout_kcal where w_regdate=24-02-24 order by idx desc";
-		
-		//1.sqlSession 얻어오기 (MyBatis 실제 작업객체)
-		SqlSession sqlSession= factory.openSession();
-		
-		//2.작업수행                 namespace.mapper_id
-		list = sqlSession.selectList("workout.my_workout_list_date_cal", vo);
-
 		//System.out.println(list);
 		
-		//3.닫기
-		sqlSession.close();
-		
-		return list; //list 내에는 vo에서 가져온 레코드 값이 담겨있음
+		return "my_workout_list.jsp";  //forward
 	}
+	
+	//내 운동 리스트 검색
+	@RequestMapping("/workout/my_workout_list_search.do")
+	@ResponseBody
+	public String my_workout_list_search(HttpServletRequest request, HttpServletResponse response) {
 
-	public List<WorkoutVo> selectListCalulate(int user_idx) {
-		// TODO Auto-generated method stub
-		List<WorkoutVo> list = null; //MyBatis가 만들어줌
+		// /workout/list.do
+		// /workout/list.do?search_text=24-02-24
 		
-		//String sql = "select * from workout_kcal where w_regdate=24-02-24 order by idx desc";
+		UserVo user = (UserVo) request.getSession().getAttribute("user");
 		
-		//1.sqlSession 얻어오기 (MyBatis 실제 작업객체)
-		SqlSession sqlSession= factory.openSession();
+		int user_idx = user.getuser_idx();
+		String user_name = user.getuser_name();
 		
-		//2.작업수행                 namespace.mapper_id
-		list = sqlSession.selectList("workout.my_workout_list_cal", user_idx);
+		String w_regdate = request.getParameter("w_regdate");
+		
+		//System.out.println(search_text);
+		
+		//검색에 필요한 정보를 vo에 넣는다
+		WorkoutVo vo = new WorkoutVo(w_regdate, user_idx, user_name);
+		
+		List<WorkoutVo> list = WorkoutDao.getInstance().selectListSearch(vo);
+		
+//		request.setAttribute("list", list);
+		
+//		System.out.println(list);
+		
+//		return "my_workout_list.jsp";  //forward
+		
+		
+		JSONObject json = new JSONObject();
+		json.put("list", list);
+		
+		//System.out.println(json);
+		
+		return json.toString();
+	}
+	
+	//내 운동 리스트 계산
+	@RequestMapping("/workout/my_workout_calculate.do")
+	@ResponseBody
+	public String my_workout_calculate(HttpServletRequest request, HttpServletResponse response) {		
 
+		UserVo user = (UserVo) request.getSession().getAttribute("user");
+		
+		int user_idx = user.getuser_idx();
+		
+		List<WorkoutVo> list = WorkoutDao.getInstance().selectListCalulate(user_idx);
+		
+		JSONObject json = new JSONObject();
+		json.put("list", list);
+
+		return json.toString();
 		//System.out.println(list);
 		
-		//3.닫기
-		sqlSession.close();
-		
-		return list; //list 내에는 vo에서 가져온 레코드 값이 담겨있음
+		//return "my_workout_list.jsp";
 	}
+	
+	//내 운동 리스트 검색 계산
+	@RequestMapping("/workout/my_workout_calculate_search.do")
+	@ResponseBody
+	public String my_workout_calculate_search(HttpServletRequest request, HttpServletResponse response) {
+		
+		UserVo user = (UserVo) request.getSession().getAttribute("user");
+		
+		int user_idx = user.getuser_idx();
+		String user_name = user.getuser_name();
+		
+		String w_regdate = request.getParameter("w_regdate");
+//		String w_unit_kcal = request.getParameter("w_unit_kcal");
+		
+		//System.out.println(w_regdate);
+		
+		WorkoutVo vo = new WorkoutVo(w_regdate, user_idx, user_name);
 
-	public Double today_w_cal(int user_idx) {
-		// TODO Auto-generated method stub
 		
-		double today_w_cal = 0;
+		List<WorkoutVo> list = WorkoutDao.getInstance().selectListCalulate(vo);
 		
-		//String sql = "select * from workout_kcal where w_regdate=24-02-24 order by idx desc";
-		
-		//1.sqlSession 얻어오기 (MyBatis 실제 작업객체)
-		SqlSession sqlSession= factory.openSession();
-		
-		//2.작업수행                 namespace.mapper_id
-		today_w_cal = sqlSession.selectOne("workout.my_workout_list_cal_today", user_idx);
+		JSONObject json = new JSONObject();
+		json.put("list", list);
 
-		//System.out.println(today_w_cal);
+		return json.toString();
+		//System.out.println(list);
 		
-		//3.닫기
-		sqlSession.close();
-		
-		return today_w_cal; //list 내에는 vo에서 가져온 레코드 값이 담겨있음
+		//return "my_workout_list.jsp";
 	}
+	
+	
+	//운동 입력 메인
+	@RequestMapping("/workout/workout_insert_form.do")
+	public String main(HttpServletRequest request, HttpServletResponse response) {
 
 
+		
+		return "workout_insert_form.jsp";
+	}
+	
+	//운동선택 리스트
+	@RequestMapping("/workout/workout_cal_list.do")
+	public String workout_cal_list(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		int page = Integer.parseInt(request.getParameter("page"));
+		int perPage = Integer.parseInt(request.getParameter("perPage"));
+		
+		List<WorkoutCaloryVo> list = WorkoutUtils.workout_cal_list(page, perPage);
+		
+		
+		
+		//request binding
+		request.setAttribute("list", list);
+		//System.out.println(list);
 
-//	public List<WorkoutVo> selectList(String w_regdate) {
-//		// TODO Auto-generated method stub
-//		List<WorkoutVo> list = null; //MyBatis가 만들어줌
-//		
-//		//String sql = "select * from workout_kcal where w_regdate=24-02-24 order by idx desc";
-//		
-//		//1.sqlSession 얻어오기 (MyBatis 실제 작업객체)
-//		SqlSession sqlSession= factory.openSession();
-//		
-//		//2.작업수행                 namespace.mapper_id
-//		list = sqlSession.selectList("workout.my_workout_list_date", w_regdate);
-//		
-//		//3.닫기
-//		sqlSession.close();
-//		
-//		return list; //list 내에는 vo에서 가져온 레코드 값이 담겨있음
-//	}
+		return "workout_list.jsp";
+	}
 	
 	
+
 	
+	//운동 찾기
+	@RequestMapping("/workout/search.do")
+	public String search(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+		int page = Integer.parseInt(request.getParameter("page"));
+		int perPage = Integer.parseInt(request.getParameter("perPage"));
+		
+		String search_text = null;
+		
+		search_text = request.getParameter("search_text");
+		
+		List<WorkoutCaloryVo> workout_list = null;
+		
+		WorkoutCaloryVo vo = new WorkoutCaloryVo(search_text, page, perPage);
+		
+		workout_list = WorkoutUtils.workout_search(vo);
+		
+		//request binding
+		request.setAttribute("workout_list", workout_list);
+		//System.out.println(list);
+		
+		
+		return "workout_list.jsp";
+	}
 	
+	//운동 입력
+	@RequestMapping("/workout/workout_insert.do")
+	public String my_workout(HttpServletRequest request, HttpServletResponse response) {
+
+		// /workout/workout_insert.do?w_name=다트&w_unit_kcal=210&w_time=60
+		
+		//parameter 받기
+		String	w_name	     = request.getParameter("w_name");
+		double	w_unit_kcal  = Double.parseDouble(request.getParameter("w_unit_kcal"));
+		int	    w_time	   	 = Integer.parseInt(request.getParameter("w_time"));
+		
+		//user정보
+		UserVo user = (UserVo) request.getSession().getAttribute("user");
+		
+		int user_idx = user.getuser_idx();
+		String user_name = user.getuser_name();
+		
+		//5. DB 포장
+		WorkoutVo vo  =new WorkoutVo(w_name, w_time, w_unit_kcal, user_idx, user_name);	
+		
+		//6.DB insert
+		int res = WorkoutDao.getInstance().insert(vo);
+		
+		return "redirect: my_workout_list.do?";
+	}
 	
 }
