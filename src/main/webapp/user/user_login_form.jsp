@@ -4,21 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>핼커 로그인</title>
 
-<!-- Bootstrap 3.x -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+	<%@ include file="/header.jsp" %>
 
 
 <style type="text/css">
-  #box{
-     width: 500px;
-     margin: auto;
-     margin-top: 100px;
-  }
-  
+ 
   input[value='로그인']{
      width: 220px;
   }
@@ -90,47 +83,50 @@
 
 </head>
 <body>
-<form class="form-inline">
-	<input type="hidden" name="url" value="${ param.url }">
-	<div id="box">
-		<div class="panel panel-primary">
-			<div class="panel-heading"><h4>로그인</h4></div>
-			<div class="panel-body">
-			   <table class="table">
-			      <tr>
-			          <th>아이디</th>
-			          <td>
-			               <input style="width:65%;" class="form-control"  name="user_id" 
-			                      value="${ param.user_id }">
-			          </td>
-			      </tr>
-			      <tr>
-			          <th>비밀번호</th>
-			          <td><input style="width:65%;" class="form-control"  type="password" name="user_pwd"></td>
-			      </tr>
-			      
-			      <tr>
-			          <td colspan="2" align="center">
-			              <input class="btn btn-primary" type="button"  value="로그인"
-			                     onclick="send(this.form);">
-			          </td>
-			      </tr>
-			      
-			      <tr>
-			          <td colspan="2" align="center">
-			              <input class="btn btn-success" type="button"  value="메인화면"
-			                     onclick="location.href='${ pageContext.request.contextPath }/main.do'">
-			                     
-			              <input class="btn btn-info"    type="button"  value="회원가입"
-			                     onclick="location.href='insert_form.do'">
-			          </td>
-			      </tr>
-			      
-			   </table>
-			</div>
-		</div>
-	</div>
-</form>
-	
+
+
+<section class="vh-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card main_bg text-white" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+
+            <div class="mb-md-5 mt-md-4 pb-5">
+			<input type="hidden" name="url" value="${ param.url }">
+              <h2 class="fw-bold mb-2 text-uppercase"><img src="${ pageContext.request.contextPath }/img/login_title.png"><br></h2>
+
+              <div class="form-outline form-white mb-4">
+                <input class="form-control form-control-lg" name="user_id" value="${ param.user_id }" placeholder="ID 입력하세요"/>
+              </div>
+
+              <div class="form-outline form-white mb-4">
+                <input class="form-control form-control-lg"  type="password" name="user_pwd" placeholder="PASSWORD 입력하세요"/>
+              </div>
+
+				<input class="btn btn-outline-light btn-lg px-5" type="button"  value="로그인" onclick="send(this.form);">
+              
+
+
+            </div>
+
+            <div>
+              <p class="mb-0">
+              <a href="#!" class="text-white-50 fw-bold"  onclick="location.href='insert_form.do'">회원가입</a> |  
+              <a href="#!" class="text-white-50 fw-bold" onclick="location.href='${ pageContext.request.contextPath }/main.do'">메인화면</a></p>
+              
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
 </body>
 </html>

@@ -8,6 +8,11 @@ public class WorkoutCaloryVo {
 	
 	
 	
+	public WorkoutCaloryVo(int page, int perPage) {
+		super();
+		this.page = page;
+		this.perPage = perPage;
+	}
 	public WorkoutCaloryVo(String workout_name, int page, int perPage) {
 		super();
 		this.workout_name = workout_name;
