@@ -14,6 +14,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+<!-- date picker -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
 
 <style type="text/css">
 
@@ -21,7 +26,7 @@
 		float: left;
 		border: solid gray 1px;
 		max-height: 440px;
-		width: 400px;
+		width: 410px;
 		resize: none; 
 		margin: 10px;
 		margin-left: 0px;
@@ -64,10 +69,23 @@
 		
 		$("#kcal").hide();
 		
+
+		
+		//날짜 DatePicker
+ 		$("#myDatePicker").datepicker({
+		  showButtonPanel: true,
+		  currentText: '오늘날짜',
+		  closeText:'닫기',
+		  dateFormat:'yy-mm-dd',
+		}).datepicker("setDate",'now');;
+		
+ 		//$("#datepicker").datepicker("setDate", new Date());
+
+		
 	});
 	
 	function workout_search(){
-		
+			
 		let search_text = $("#search_text").val().trim();
 		let page = 1;
 		let perPage = 360;
@@ -95,15 +113,24 @@
 	function workout_cal_calulate() {
 
 		$("#kcal").show();
-		
+		let workout_selected_name ;
 		let user_kg       ;
 		let workout_time  ;
 		let cal_per_unit  ;
 		let burned_calory ;
 		
+		workout_selected_name = $( "#workout_selected_name" ).val();
 		cal_per_unit = $( "#workout_selected_met" ).val();
+		
 		user_kg	     = $( "#weight" ).val();
 		workout_time = $( "#workout_time" ).val();
+		
+		if(workout_selected_name==''){
+			alert('운동을 선택하세요!');
+			$( "#workout_selected_name" ).val('');
+			$( "#workout_selected_name" ).focus();
+			return;
+	  	}
 		
 		if(workout_time==''){
 			alert('운동시간을 입력하세요!');
@@ -119,23 +146,37 @@
 			return;
 	  	}
 
-		//console.log(cal_per_unit);
 		burned_calory = Math.round(3.5* cal_per_unit * user_kg * workout_time /1000 * 5);
 		
-		//console.log(burned_calory);
+		console.log(burned_calory);
 		
 		//결과값을 결과창에 출력
 		$("#burned_calory").html(burned_calory);
+		$("#kcal").show();
 	}
 	
 	function workout_insert() {
+		
+		//날짜가 선택되지 않으면 오늘로 
+		let w_regdate = $("#myDatePicker").val().trim();
+		
+		if(w_regdate==''){
+			alert('날짜를 선택하세요!');
+			$( "#myDatePicker" ).val('');
+			$( "#myDatePicker" ).focus();
+			return;
+	  	}
 		
 		let w_name		= $("#workout_selected_name").val();
 		let w_unit_kcal = $("#burned_calory").html();
 		let w_time		= $("#workout_time").val();
 		
-		//console.log(w_name);
-		location.href="workout_insert.do?w_name=" + encodeURIComponent(w_name,"utf-8") + "&w_unit_kcal=" + w_unit_kcal + "&w_time=" + w_time;
+		if(w_unit_kcal == ''){
+			alert('칼로리를 계산하세요!');
+			return;
+		}
+
+		location.href="workout_insert.do?w_name=" + encodeURIComponent(w_name,"utf-8") + "&w_unit_kcal=" + w_unit_kcal + "&w_time=" + w_time + "&w_regdate=" + w_regdate;
 //		location.href = String.format("my_workout_list.do?w_name=%s&w_unit_kcal=%s&w_time=%d", w_name, w_unit_kcal, w_time);
 		
 	}
@@ -149,10 +190,15 @@
  	<div id="box">
  		<div id="workout_select">
  		<h3>나의 운동 입력</h3>
+ 		<div>
+			날짜<br>
+			<input id="myDatePicker" name="w_regdate" value="${ param.search_text }">
+		</div>
+		<div>
+			
+		</div>
 		<form>
-			<div>
 				운동 검색
-			</div>
 			<div>
 				<input id="search_text" type="text">
 				<input id="" type="button" value="검색" onclick="workout_search();">
@@ -169,7 +215,7 @@
 							운동명
 						</th>
 						<th>
-							MET계수
+							MET
 						</th>
 						<th>
 							선택
@@ -199,12 +245,13 @@
 		<div id="workout_calculate">
 			
 			<div id="workout_selected">
+				
 			 	<div>
 			 		<b>선택된 운동</b>
 			 	</div>
-			    <input id="workout_selected_name" type="text" placeholder="운동명 출력" disabled="disabled">
+			    <input id="workout_selected_name" type="text" placeholder="운동명을 선택하세요">
 			    <br>
-			    <input id="workout_selected_met" type="text" placeholder="MET 출력" disabled="disabled">(MET) 
+			    <input id="workout_selected_met" type="text" placeholder="MET">(MET) 
 			</div>
 			<br>
 			<div>
@@ -234,6 +281,8 @@
 				칼로리소모량(kcal)	 = 산소소비량 * 5
 			</div>
 			<br>
+			
+			
 			<div>
 				<input class="" type="button" value="내 운동으로 등록하기" onclick="workout_insert();">
 			</div>
