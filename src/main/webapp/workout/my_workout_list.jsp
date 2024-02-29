@@ -22,8 +22,11 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
+<!-- chart.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 
+<!-- sweet alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style type="text/css">
 
@@ -187,43 +190,60 @@
 		
 		let search_text = $("#myDatePicker").val().trim();
 		
-		$.ajax({
-			url : "my_workout_list_search.do",
-			data  : {"w_regdate" : search_text},
-  		 	dataType : "json",   
-			success : function(res_data){
-				  //팝업창(Modal)
-				  //console.log(1);
-				$("#btn_modal").click();
-				//console.log(res_data.list[2].w_time);
-				//console.log(res_data.list.length);
-				let html_title = "<h4>일일 소모 칼로리 상세정보 (" + res_data.list[0].regdate + ")<h4>"
-				
-				$("#my_workout_info_title").html(html_title);
-				
-				let html_tr="<tr><th>날짜</th><th>운동명</th><th>운동시간(분)</th><th>소모칼로리(Kcal)</th>";
-  	 			for(let i = 0; i<res_data.list.length; i++){
+		if($("#kcal_sum_list").val() == 0){
+			
+			Swal.fire({
+			  title: "운동을 하지 않으셨군요!",
+			  text: "게을러지면 안돼요",
+			  imageUrl: "../img/tongtong.jpeg",
+			  imageWidth: 400,
+			  imageHeight: 200,
+			  imageAlt: "Custom image"
+			  
+			});//swal
+			
+			return;
+			
+		}else{
+
+			$.ajax({
+				url : "my_workout_list_search.do",
+				data  : {"w_regdate" : search_text},
+	  		 	dataType : "json",   
+				success : function(res_data){
+					  //팝업창(Modal)
+					  //console.log(1);
+					$("#btn_modal").click();
+					//console.log(res_data.list[2].w_time);
+					//console.log(res_data.list.length);
+					let html_title = "<h4>일일 소모 칼로리 상세정보 (" + res_data.list[0].regdate + ")<h4>"
 					
-  	 				html_tr += "<tr>";
-  	 				html_tr += "<td>" + res_data.list[i].regdate   + "</td>";
-  	 				html_tr += "<td>" + res_data.list[i].w_name   + "</td>";
-  	 				html_tr += "<td>" + res_data.list[i].w_time   + "</td>";
-  	 				html_tr += "<td>" + res_data.list[i].w_unit_kcal_dot2  + "</td>";
-  	 				html_tr += "</tr>";
-
- 	 			} 
-  	 			
-  	 			//console.log(html_tr);
-  	 			
-  	 			$("#disp1").html(html_tr);
- 	 			
-			},
-			error   : function(error){
-				alert(error.responseText);
-			}
-
-		});
-		
+					$("#my_workout_info_title").html(html_title);
+					
+					let html_tr="<tr><th>날짜</th><th>운동명</th><th>운동시간(분)</th><th>소모칼로리(Kcal)</th>";
+	  	 			for(let i = 0; i<res_data.list.length; i++){
+						
+	  	 				html_tr += "<tr>";
+	  	 				html_tr += "<td>" + res_data.list[i].regdate   + "</td>";
+	  	 				html_tr += "<td>" + res_data.list[i].w_name   + "</td>";
+	  	 				html_tr += "<td>" + res_data.list[i].w_time   + "</td>";
+	  	 				html_tr += "<td>" + res_data.list[i].w_unit_kcal_dot2  + "</td>";
+	  	 				html_tr += "<td><input id='my_w_delete' type='button' value='삭제' onclick='del(" + res_data.list[i].w_idx + "," + res_data.list[i].regdate + ");'></td>";
+	  	 				html_tr += "</tr>";
+	
+	 	 			} //for
+	  	 			
+	  	 			//console.log(html_tr);
+	  	 			
+	  	 			$("#disp1").html(html_tr);
+	 	 			
+				},
+				error   : function(error){
+					alert(error.responseText);
+				}
+	
+			}); //ajax
+		} //if-else
 	}
 
 </script>
