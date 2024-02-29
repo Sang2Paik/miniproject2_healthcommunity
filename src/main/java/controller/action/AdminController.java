@@ -119,6 +119,26 @@ public class AdminController {
 	} // end : user_modify
 		
 	
+	@RequestMapping(value = "/admin/category_insert.do")
+	public String category_insert(HttpServletRequest request, HttpServletResponse response) {
+		
+		String c_name = request.getParameter("c_name");
+		
+		System.out.println(c_name);
+		
+		CategoryDao.getInstance().selectInsert(c_name);
+		
+		return "redirect:admin_page.do";
+	}
 	
+	@RequestMapping(value = "/admin/category_delete.do")
+	public String category_delete(HttpServletRequest request, HttpServletResponse response) {
+		
+		int c_idx = Integer.parseInt(request.getParameter("c_idx"));
+		
+		CategoryDao.getInstance().selectDelete(c_idx);
+		
+		return "redirect:admin_page.do";
+	}
 	
 }
