@@ -113,7 +113,7 @@
 							{
 							label : '일일 소모 kcal',
 							data  : kcal_sum_list, //값
-							backgroundColor: '#00C7E2'
+							backgroundColor: '#dd3355'
 							}
 							
 						]
@@ -190,7 +190,7 @@
 		
 		let search_text = $("#myDatePicker").val().trim();
 		
-		if($("#kcal_sum_list").val() == 0){
+		if($("#kcal_sum_list").html() == 0){
 			
 			Swal.fire({
 			  title: "운동을 하지 않으셨군요!",
