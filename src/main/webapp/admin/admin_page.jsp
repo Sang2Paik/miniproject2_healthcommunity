@@ -132,6 +132,7 @@
 	   <table class="table">
 	      <!-- head -->
 	      <tr class="info">
+		 <th>순번</th>
 	         <th>회원번호</th>
 	         <th>회원명</th>
 	         <th>아이디</th>
@@ -142,8 +143,9 @@
 	      </tr>
 	      <!-- Data출력 -->
 	      <!-- for( Uservo user_vo : admin_user_list )   -->
-	      <c:forEach var="user_vo"  items="${ admin_user_list }">
+	      <c:forEach var="user_vo"  items="${ admin_user_list }" varStatus="i">
 	         <tr>
+		    <td>${ admin_user_list.size() - i.index }</td>
 	            <td>${ user_vo.user_idx }</td>
 	            <td>${ user_vo['user_name'] }</td>
 	            <td><span id="user_id">${ user_vo.user_id }</span></td>
@@ -182,7 +184,7 @@
 	      <!-- head -->
 	      <tr class="info">
 	      	 <th>순번</th>
-	         <th>고유 번호</th>
+	         <th>고유번호</th>
 	         <th>카테고리 명</th>
 	         <th>편집</th>
 	      </tr>
