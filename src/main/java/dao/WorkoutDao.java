@@ -35,7 +35,7 @@ public class WorkoutDao {
 	public int insert(WorkoutVo vo) {
 		// TODO Auto-generated method stub
 		int res = 0;
-
+		
 		//1. SqlSession얻어오기                      true -> auto commit
 		SqlSession sqlSession = factory.openSession(true);
 		
@@ -204,8 +204,5 @@ public class WorkoutDao {
 //		return list; //list 내에는 vo에서 가져온 레코드 값이 담겨있음
 //	}
 	
-	
-	
-	
-	
+
 }
