@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
  	<!-- 카테고리리스트 얻어오기 -->
  	<select id="category_list" resultType="vo.CategoryVo">
- 		select * from category order by c_idx
+ 		select * from category order by c_idx desc
  	</select>
  	
  	<!-- 카테고리 idx 얻어오기 -->
