@@ -68,46 +68,17 @@
 	$(document).ready(function(){
 		
 		$("#kcal").hide();
-		
 
-		
-		//날짜 DatePicker
- 		$("#myDatePicker").datepicker({
-		  showButtonPanel: true,
-		  currentText: '오늘날짜',
-		  closeText:'닫기',
-		  dateFormat:'yy-mm-dd',
-		}).datepicker("setDate",'now');;
-		
- 		//$("#datepicker").datepicker("setDate", new Date());
-
-		
 	});
 	
-	function workout_search(){
-			
-		let search_text = $("#search_text").val().trim();
-		let page = 1;
-		let perPage = 360;
-		
-		//검색어가 비어있으면
-		if(search_text==''){
-			alert('검색어를 입력하세요!');
-			$("#search_text").val("");
-			$("#search_text").focus();
-			return;
-		}
-		
-		location.href="search.do?page="+page+"&perPage="+perPage+"&search_text="+encodeURIComponent(search_text,"utf-8");   //한글넘길때는 인코딩 필요
-		
-	}
 	
-	function workout_select(workout_name,cal_per_unit) {
+ 	function workout_select(workout_name,cal_per_unit) {
 		
 		$("#workout_selected_name").val(workout_name);
 		$("#workout_selected_met").val(cal_per_unit);
+		//$("#w_regdate").val(w_regdate);
 		
-	}
+	} 
 
 
 	function workout_cal_calulate() {
@@ -157,9 +128,8 @@
 	
 	function workout_insert() {
 		
-		//날짜가 선택되지 않으면 오늘로 
 		let w_regdate = $("#myDatePicker").val().trim();
-		
+		console.log(w_regdate);
 		if(w_regdate==''){
 			alert('날짜를 선택하세요!');
 			$( "#myDatePicker" ).val('');
@@ -188,23 +158,9 @@
 <body>
 	
  	<div id="box">
- 		<div id="workout_select">
- 		<h3>나의 운동 입력</h3>
- 		<div>
-			날짜<br>
-			<input id="myDatePicker" name="w_regdate" value="${ param.search_text }">
-		</div>
-		<div>
-			
-		</div>
+
 		<form>
-				운동 검색
-			<div>
-				<input id="search_text" type="text">
-				<input id="" type="button" value="검색" onclick="workout_search();">
-				<input id="" type="button" value="전체보기" onclick="location.href='workout_insert_form.do'">
-				<input id="" type="button" value="MyPage" onclick="location.href='../user/mypage_main.do'">
-			</div>
+	
 			<div id="workout_select_list">
 				<table>
 					<tr>
@@ -240,12 +196,16 @@
 				</table>
 			</div> 
 		</form>
-		</div>
+
 		
 		<div id="workout_calculate">
 			
 			<div id="workout_selected">
-				
+				<div>
+			 		<b>날짜</b> 
+			 	</div>
+			 		<span id=""></span>
+			 	
 			 	<div>
 			 		<b>선택된 운동</b>
 			 	</div>
@@ -288,7 +248,7 @@
 			</div>
 			
 		</div> 
-		
 	</div>
+		
 </body>
 </html>
