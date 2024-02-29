@@ -1,3 +1,6 @@
+### 2024-02-29 이영준 PM 02:20
+- 운동정보 모든 파일(vo, dao, util, controller, jsp) 업데이트
+
 ### 2024-02-29 최병훈 AM 10:30 
 index.jsp, header.jsp, footer.jsp<br>
 ./user/user_login_form.jsp<br>
