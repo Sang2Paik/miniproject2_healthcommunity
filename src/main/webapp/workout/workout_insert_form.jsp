@@ -46,30 +46,20 @@
 		  dateFormat:'yy-mm-dd',
 		}).datepicker("setDate",'now')
 	}); 
-		
-/* 		let page = 1;
-		let perPage = 360;
-		
-		$.ajax({
-			
-			url       : "workout_cal_list.do",        //WorkoutController
-			data      : {"page" : page, "perPage" : perPage},
-			success   : function(res_data){
-				$("#workout_info").html(res_data);
-			},
-			error     : function(err){
-				alert(err.responseText);
-			}
-			
-		}); */
-		
-
-	
 	
 	
 	function workout_search(){
 		
 		let search_text = $("#search_text").val().trim();
+		
+		//검색어가 비어있으면
+		if(search_text==''){
+			alert('검색어를 입력하세요!');
+			$("#search_text").val("");
+			$("#search_text").focus();
+			return;
+		}
+		
 		let page = 1;
 		let perPage = 360;
 		
@@ -110,25 +100,7 @@
 			
 		});
 	}
-		
-/* //s----		
-		let search_text = $("#search_text").val().trim();
-		let page = 1;
-		let perPage = 360;
-		
-		//검색어가 비어있으면
-		if(search_text==''){
-			alert('검색어를 입력하세요!');
-			$("#search_text").val("");
-			$("#search_text").focus();
-			return;
-		}
-		
-		location.href="search.do?page="+page+"&perPage="+perPage+"&search_text="+encodeURIComponent(search_text,"utf-8");   //한글넘길때는 인코딩 필요
-//e-----		 */
-		
-	
-	
+			
 	
 </script>
 
