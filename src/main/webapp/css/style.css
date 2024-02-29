@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+.tt{
+	border: 1px solid red;
+}
+
+.f12{
+	font-family: 'Pretendard-Regular';
+	font-size: 12px;
+	color: #16bcd7;
+	font-weight: 700;
+}
+
+.nav{
+	height: 50px;
+	background: #16bcd7;
+	border: 1px solid #aaa;
+	margin-top: 20px;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+	padding-top: 15px; 
+	padding-right: 35px;
+}
+
+.nav_btn{
+	font-family: 'Pretendard-Regular';
+	font-size: 12px;
+	color: #16bcd7;
+	font-weight: 700;
+	background-color: white;
+	border-radius: 5px;
+	border: 1px solid #f8f8f8;
+	box-shadow: 0px 3px 2px 1px #7ef49c;
+}
+
+.footer {
+	height: 50px;
+	background: #7ef49c;
+	border: 1px solid #aaa;
+	margin-bottom: 20px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	padding-top: 5px; 
+}	
+
+w100 {
+	width: 100%;
+	margin: 0 auto;
+	max-width: 960px
+}
+
+.img {
+	width: 100%;
+	border: 0px;
+}
+
+.btn_img {
+	width: 40%;
+	border: 1px solid #7ef49c;
+	margin: 10px;
+	box-shadow: 0px 4px 2px #333; 
+}
+
+
+#goto {
+	padding-top: 50px;
+}
+
+#weather_forecast{
+	margin-bottom: 20px;
+	padding: 10px;
+}
