@@ -4,22 +4,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>헬커 회원가입</title>
 
-<!-- Bootstrap 3.x -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+	<%@ include file="/header.jsp" %>
 
 <!-- Daum 주소검색 API  -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <style type="text/css">
-  #box{
-     width:600px;
-     margin: auto;
-     margin-top: 20px;
-  }
+
   
 </style>
 
@@ -128,6 +122,110 @@
 
 </head>
 <body>
+
+
+
+<form class="form-inline">
+
+<section class="vh-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card main_bg text-white" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+
+            <div class="mb-md-5 mt-md-4 pb-5">
+			
+              <h2 class="fw-bold mb-2 text-uppercase"><img src="${ pageContext.request.contextPath }/img/login_title.png"><br>회원가입</h2>
+
+              <div class="form-outline form-white mb-4">
+                <input class="form-control form-control-lg" name="user_name" value="${ param.user_name }" placeholder="이름"/>
+              </div>
+              
+              <div class="form-outline form-white mb-4">
+                <input class="form-control form-control-lg" name="user_id" value="${ param.user_id }" placeholder="ID"/><span id="id_msg"></span>
+              </div>
+
+              <div class="form-outline form-white mb-4">
+                <input class="form-control form-control-lg"  type="password" name="user_pwd" placeholder="PASSWORD"/>
+              </div>
+              
+              <div class="form-outline form-white mb-4">
+                <input class="form-control form-control-lg"  name="user_age" placeholder="현재나이"/>
+              </div>
+              
+              
+              <div class="form-outline form-white mb-4">
+                <input class="form-control form-control-lg"  name="user_email" placeholder="이메일"/>
+              </div>
+              
+              
+              <div class="form-outline form-white mb-4">
+                <!-- <input type="radio" class="form-control form-control-lg"  name="user_gender" placeholder="성별"/> -->
+                성별 : 
+                <input type="radio" class="form-check-input"  name="user_gender" 
+		                 				value="man" checked="checked">남자 | 
+		                 	<input type="radio" class="form-check-input"  name="user_gender" 
+		                 				value="woman">여자
+              </div>
+              
+              
+              <div class="form-outline form-white mb-4">
+                <input class="form-control form-control-lg"  name="user_height" placeholder="키"/>
+              </div>
+              
+              
+              <div class="form-outline form-white mb-4">
+                <input class="form-control form-control-lg"  name="user_kg" placeholder="체중"/>
+              </div>
+              
+              
+              <div class="form-outline form-white mb-4">
+                <input class="form-control form-control-lg"  name="user_target" placeholder="목표체중"/>
+              </div>
+              
+              
+              <div class="form-outline form-white mb-4">
+                등급 : 
+                <input type="radio" class="form-check-input"  name="user_gender" 
+		                 				value="man" checked="checked">일반 | 
+		                 	<input type="radio" class="form-check-input"  name="user_gender" 
+		                 				value="woman">관리자
+              </div>
+              
+              
+
+				<input class="btn btn-outline-light btn-lg px-5" type="button"  value="화원가입" onclick="send(this.form);">
+              
+
+
+            </div>
+
+            <div>
+              <p class="mb-0">
+              <!-- <a href="#!" class="text-white-50 fw-bold" onclick="send(this.form);">회원가입</a> | -->  
+              <a href="#!" class="text-white-50 fw-bold" onclick="location.href='${ pageContext.request.contextPath }/main.do'">메인화면</a></p>
+              
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+</form>
+
+
+
+
+
+
+
+<%-- 
+
 	<form class="form-inline">
 		<div id="box">
 			<div class="panel panel-primary">
@@ -178,14 +276,13 @@
 		                 <th><label>목표몸무게</label></th>
 		                 <td><input class="form-control"  name="user_target"></td>
 		              </tr>
-		              
 		              <tr>
 		                 <th><label>등급</label></th>
 		                 <td>
 		                 	<input type="radio" class="form-control"  name="user_grade" 
-		                 				value="user_user" checked="checked" onclick="return false;">일반&nbsp;&nbsp;&nbsp;
+		                 				value="user_user" checked="checked">일반&nbsp;&nbsp;&nbsp;
 		                 	<input type="radio" class="form-control"  name="user_grade" 
-		                 								value="user_admin" onclick="return false;">관리자
+		                 								value="user_admin">관리자
 		                 </td>
 		              </tr>	
 		              <tr>
@@ -204,6 +301,6 @@
 				</div>
 			</div>
 		</div>
-	</form>	
+	</form>	 --%>
 </body>
 </html>
