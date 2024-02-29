@@ -85,12 +85,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="workout_insert" parameterType="vo.WorkoutVo">
 		insert into workout_kcal values(null, #{w_name}, #{w_regdate}, #{w_time}, #{w_unit_kcal}, #{user_idx}, #{user_name})
 	</insert>
-
 	
-	<!-- API 운동 정보 모두 입력 -->
-	<insert id="workoutcalory_insert" parameterType="vo.WorkoutCaloryVo">
-		insert into workout_api values(null, #{cal_per_unit}, #{workout_name})
-	</insert>
+	<!-- 내 운동 삭제 -->
+	<delete id="my_workout_delete" parameterType="int">
+		delete from workout_kcal where w_idx = #{ w_idx }
+	</delete>
 
 	
 </mapper>
