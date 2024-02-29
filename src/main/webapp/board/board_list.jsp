@@ -183,14 +183,14 @@
 		<br>
 		
 		<div>
-			<!-- board_list가 존재할 떄만 실행해라 -->
+			<!-- board_list가 존재할 때만 실행해라 -->
 			<c:if test="${ not empty list }">
 			<!-- 이미지 출력 -->
 				<!-- for(BoardVo board_vo : list)  -->
 				<c:forEach var="board_vo" items="${ list }">
 					<c:if test="${ board_vo.b_open eq 'Y' }">
 					
-					   <img src="../upload/${ board_vo.b_photo }" onclick="image_view('${board_vo.b_idx}');" 
+					   <img src="${ pageContext.request.contextPath }/upload/${ board_vo.b_photo }" onclick="image_view('${board_vo.b_idx}');" 
 					   		class="image-hover" id="board_image">
 					   		  
 					</c:if>
@@ -198,13 +198,13 @@
 				
 			</c:if>
 			
-			<!-- board_c_name_list가 존재할 떄만 실행해라 -->
+			<!-- board_c_name_list가 존재할 때만 실행해라(카테고리 검색했을 시 실행) -->
 			<c:if test="${ not empty board_c_name_list }">
 				<!-- for(BoardVo board_vo : board_c_name_list)  -->
 				<c:forEach var="board_vo" items="${ board_c_name_list }">
 					<c:if test="${ board_vo.b_open eq 'Y' }">
 					
-						<img src="../upload/${ board_vo.b_photo }" onclick="image_view('${board_vo.b_idx}');" 
+						<img src="${ pageContext.request.contextPath }/upload/${ board_vo.b_photo }" onclick="image_view('${board_vo.b_idx}');" 
 					   		class="image-hover" id="board_image">
 						
 					</c:if>
