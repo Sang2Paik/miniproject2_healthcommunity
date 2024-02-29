@@ -224,7 +224,6 @@
 				<b>나의 몸무게 입력</b>
 				<br>
 				<input id="weight" type="text" placeholder="kg단위로 입력하세요">(kg)
-				user.user_kg 기본값 설정 예정
 			</div>
 			<br>
 			<input type="button" id="workout_cal_calulate" value="태운 칼로리 계산" onclick="workout_cal_calulate();">
