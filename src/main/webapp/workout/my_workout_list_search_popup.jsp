@@ -13,44 +13,69 @@
 <title>Insert title here</title>
 
 
-	<style type="text/css">
+<style type="text/css">
+
+	#box{
+
+		/* border: solid green 1px; */
+		margin: auto;
+		margin-top: 30px;
+		padding: 10px;
+	}
 	
-		#box{
+	th, td {
+		text-align: center;
+	}
 	
-			/* border: solid green 1px; */
-			margin: auto;
-			margin-top: 30px;
-			padding: 10px;
-		}
-		
-		th, td {
-			text-align: center;
-		}
-		
-		#my_workout_list {
-			border: solid gray 1px;
-			width:500px;
-			max-height: 450px;
-			overflow-y: scroll;
-		}
-		
-		#my_workout_stat {
-			
-			width: 500px;
-			
-			
-			font-size: 20px; 
-			font-weight: bold;
-			
-		}
-		
-		#kcal_sum_list{
-			font-size: 20px; 
-			color: black
-		
-		}
+	#my_workout_list {
+		border: solid gray 1px;
+		width:500px;
+		max-height: 450px;
+		overflow-y: scroll;
+	}
 	
-	</style>
+	#my_workout_stat {
+		
+		width: 500px;
+		
+		
+		font-size: 20px; 
+		font-weight: bold;
+		
+	}
+	
+	#kcal_sum_list{
+		font-size: 20px; 
+		color: black
+	
+	}
+
+</style>
+	
+	
+<script type="text/javascript">
+	
+	
+	function del(w_idx, regdate){
+
+		
+		if(confirm('정말 삭제하시겠습니까?')==false){
+			return;
+		}
+		location.href="my_workout_delete.do?w_idx=" + w_idx + "&regdate=" + regdate;
+		
+		 //setTimeout(function(){
+	            // 2초 후에 삭제되었습니다 메시지를 표시
+	            //alert("운동 항목이 삭제되었습니다.");
+	            // 삭제를 진행하는 요청
+	            //location.href="my_workout_delete.do?w_idx=" + w_idx + "&regdate=" + regdate;
+	       // }, 2000);
+		
+	}
+
+</script>
+
+
 </head>
 <body>
 <!-- Button to Open the Modal -->
