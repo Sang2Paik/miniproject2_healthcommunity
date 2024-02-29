@@ -80,6 +80,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 	
+	<!-- API 운동 정보 모두 입력 -->
+	<insert id="workoutcalory_insert" parameterType="vo.WorkoutCaloryVo">
+		insert into workout_api values(null, #{cal_per_unit}, #{workout_name})
+	</insert>
 
 	
 </mapper>
