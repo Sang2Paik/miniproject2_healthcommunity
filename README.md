@@ -1,9 +1,9 @@
-### 2024-02-29 최병훈
-index.jsp, header.jsp, footer.jsp
-./user/user_login_form.jsp
-
-./css/style.css
-./img/intro.png, login_title.png
+### 2024-02-29 최병훈 AM 10:30 
+index.jsp, header.jsp, footer.jsp<br>
+./user/user_login_form.jsp<br>
+./user/user_insert_form.jsp<br>
+./css/style.css<br>
+./img/intro.png, login_title.png<br>
 Update
 
 ### 2024-02-28 최병훈
