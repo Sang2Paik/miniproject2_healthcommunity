@@ -108,7 +108,7 @@
 					<input class="nav_btn" type="button" id="login" value="로그인" onclick="location.href='user/login_form.do'">
 				</c:if>
 				<c:if test="${not empty user}">
-					<input class="btn btn-primary" type="button" id="logout" value="로그아웃" onclick="location.href='user/logout.do'">
+					<input class="btn btn-primary" type="button" id="logout" value="로그아웃" onclick="location.href='logout.do'">
 				</c:if>
 			</div>
 		</div>
