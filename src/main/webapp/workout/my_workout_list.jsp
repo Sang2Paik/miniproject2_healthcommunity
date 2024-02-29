@@ -2,9 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +10,6 @@
 <title>Insert title here</title>
 
 <!-- Bootstrap 3.x -->
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -22,326 +19,235 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
-
 
 <style type="text/css">
 
-	#box{
-		/* border: solid green 1px; */
-		margin: auto;
-		margin-top: 10px;
+	#workout_select_list{
+		float: left;
+		border: solid gray 1px;
+		max-height: 440px;
+		width: 410px;
+		resize: none; 
+		margin: 10px;
+		margin-left: 0px;
+		padding: 10px;
+		overflow-y: scroll;
+	}
+	#workout_calculate{
+		float: left;
+		border: solid gray 1px;
+		margin: 10px;
 		padding: 10px;
 	}
 	
-	th, td {
+	#box{
+
+		/* border: solid green 1px; */
+		margin: auto;
+		margin-top: 30px;
+		padding: 10px;
+	}
+
+	#met_info{
+		font-size: 10px;
+	}
+	td, th{
 		text-align: center;
-	}
-	
-	#my_workout_list {
-		border: solid gray 1px;
-		width:500px;
-		max-height: 300px;
-		overflow-y: scroll;
-	}
-	
-	#my_workout_stat {
-		width: 500px;
-	}
-	#search_date{
-		font-size: 17px;
-	}
-	
-	#kcal_sum_list{
-		width: 100px;
-		font-size: 20px; 
-		color: black
-	
-	}
-	
-	.workout_btn{
-		font-size: 15px;
 	}
 
 </style>
 
 <script type="text/javascript">
-	let regdate_list  = [];
-	let w_name_list	  = [];
-	let w_time_list   = [];
-	let cal_list	  = [];
-	let kcal_sum_list = [];
-	
-	$(document).ready(function(){	//상세보기로 모달처리??
-			
-		let search_text = $("#myDatePicker").val().trim();
-		
-		$("#cal_sum").hide();
-		
-		//날짜 DatePicker
- 		$("#myDatePicker").datepicker({
-		  showButtonPanel: true,
-		  currentText: '오늘날짜',
-		  closeText:'닫기',
-		  dateFormat:'yy-mm-dd'
-		});
 
-/* 		if(search_text == null) { */
 
-	 		$.ajax({
-				url : "my_workout_calculate.do",
-				dataType : "json",
-				success : function(res_data){
-					//console.log(res_data.list[0].total_sum);
-	 				
-					//console.log(res_data.list.length);
-					//console.log(res_data.list);
-					
-	 	 			for(let i = 0; i<res_data.list.length; i++){
-						regdate_list.push(res_data.list[i].regdate);
-						kcal_sum_list.push(res_data.list[i].total_sum);
-						//console.log(res_data.list[i].regdate);
-					}  
-					
-					/* 	let myCt = $("#myChart").val(); */
-	  				let myCt = document.getElementById("myChart");
-				
-					let myChart = new Chart(myCt, {
-						
-						type : 'bar',
-						data : {
-							labels : regdate_list, //x축
-							datasets : [
-								{
-								label : '일일 소모 kcal',
-								data  : kcal_sum_list, //값
-								backgroundColor: '#00C7E2'
-								}
-								
-							]
-						},
-				
-					}); //chart   
-								
-					
-				},
-				error : function(error){
-					alert(error.responseText);
-				}
-			}); //ajax
-	
-/* 		} else {
-			return;
- 		}  */
+</script>
+
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
 		
+		$("#kcal").hide();
+
 	});
 	
 	
+ 	function workout_select(workout_name,cal_per_unit) {
+		
+		$("#workout_selected_name").val(workout_name);
+		$("#workout_selected_met").val(cal_per_unit);
+		//$("#w_regdate").val(w_regdate);
+		
+	} 
 
-	function search(){  
-		
-		$("#cal_sum").show();
-		let search_text = $("#myDatePicker").val().trim();
-		
-		$("#search_date").html(search_text)
-		
-        if(search_text=="") {
-        	alert('날짜를 선택하세요');
-        	
-        	$("#myDatePicker").val("");
-    		$("#kcal_sum_list").val("");
-    		
-    		location.href="my_workout_list.do";
-        	
-    		return;
-        }
-        
- 		$.ajax({
-			url : "my_workout_calculate_search.do",
-			data  : {
-				"w_regdate" : search_text,
-			},
-			dataType : "json",
-			success : function(res_data){
-				//console.log(res_data.list);
- 				
-				try {
-					$("#kcal_sum_list").html(res_data.list[0].total_sum);
-				} catch (e) {
-					// TODO: handle exception
-					//e.printStackTrace(); //예외정보 출력
-					$("#kcal_sum_list").html(0);
-				}
 
-			},
-			error : function(error){
-				alert(error.responseText);
-			}
-		}); //ajax
-		
+	function workout_cal_calulate() {
 
-/* 		$.ajax({  //해당 창에서 검색 구현 안됨
-			url : "my_workout_list_search.do",
-			data  : {
-				"w_regdate" : search_text,
-			},
-			dataType : "json",
-			success : function(res_data){
-				$("#disp_res_data").val(res_data);
-				
-			},
-			error   : function(error){
-				alert(error.responseText);
-			}
+		$("#kcal").show();
+		let workout_selected_name ;
+		let user_kg       ;
+		let workout_time  ;
+		let cal_per_unit  ;
+		let burned_calory ;
+		
+		workout_selected_name = $( "#workout_selected_name" ).val();
+		cal_per_unit = $( "#workout_selected_met" ).val();
+		
+		user_kg	     = $( "#weight" ).val();
+		workout_time = $( "#workout_time" ).val();
+		
+		if(workout_selected_name==''){
+			alert('운동을 선택하세요!');
+			$( "#workout_selected_name" ).val('');
+			$( "#workout_selected_name" ).focus();
+			return;
+	  	}
+		
+		if(workout_time==''){
+			alert('운동시간을 입력하세요!');
+			$( "#workout_time" ).val('');
+			$( "#workout_time" ).focus();
+			return;
+	  	}
+		
+		if(user_kg==''){
+			alert('몸무게를 입력하세요!');
+			$( "#weight" ).val('');
+			$( "#weight" ).focus();
+			return;
+	  	}
 
-		});
-		 */
+		burned_calory = Math.round(3.5* cal_per_unit * user_kg * workout_time /1000 * 5);
 		
-       
-	} // end:search
-	
-	function show_list(){  //전체 보기  (모달로 구현 필요??)
+		console.log(burned_calory);
 		
-		$("#myDatePicker").val("");
-		$("#kcal_sum_list").val("");
-		
-		location.href="my_workout_list.do";
-		
+		//결과값을 결과창에 출력
+		$("#burned_calory").html(burned_calory);
+		$("#kcal").show();
 	}
+	
+	function workout_insert() {
 		
-	function workout_detail() {  //세부 정보 모달로 보기
+		let w_regdate = $("#myDatePicker").val().trim();
+		console.log(w_regdate);
+		if(w_regdate==''){
+			alert('날짜를 선택하세요!');
+			$( "#myDatePicker" ).val('');
+			$( "#myDatePicker" ).focus();
+			return;
+	  	}
 		
-		let search_text = $("#myDatePicker").val().trim();
+		let w_name		= $("#workout_selected_name").val();
+		let w_unit_kcal = $("#burned_calory").html();
+		let w_time		= $("#workout_time").val();
 		
-		$.ajax({
-			url : "my_workout_list_search.do",
-			data  : {"w_regdate" : search_text},
-  		 	dataType : "json",   
-			success : function(res_data){
-				  //팝업창(Modal)
-				  //console.log(1);
-				$("#btn_modal").click();
-				//console.log(res_data.list[2].w_time);
-				//console.log(res_data.list.length);
-				let html_title = "일일 소모 칼로리 상세정보(" + res_data.list[0].regdate + ")"
-				
-				$("#my_workout_info_title").html(html_title);
-				
-				let html_tr="<tr><th>날짜</th><th>운동명</th><th>운동시간(분)</th><th>소모칼로리(Kcal)</th>";
-  	 			for(let i = 0; i<res_data.list.length; i++){
-					
-  	 				html_tr += "<tr>";
-  	 				html_tr += "<td>" + res_data.list[i].regdate   + "</td>";
-  	 				html_tr += "<td>" + res_data.list[i].w_name   + "</td>";
-  	 				html_tr += "<td>" + res_data.list[i].w_time   + "</td>";
-  	 				html_tr += "<td>" + res_data.list[i].w_unit_kcal_dot2  + "</td>";
-  	 				html_tr += "</tr>";
+		if(w_unit_kcal == ''){
+			alert('칼로리를 계산하세요!');
+			return;
+		}
 
- 	 			} 
-  	 			
-  	 			//console.log(html_tr);
-  	 			
-  	 			$("#disp1").html(html_tr);
- 	 			
-			},
-			error   : function(error){
-				alert(error.responseText);
-			}
-
-		});
+		location.href="workout_insert.do?w_name=" + encodeURIComponent(w_name,"utf-8") + "&w_unit_kcal=" + w_unit_kcal + "&w_time=" + w_time + "&w_regdate=" + w_regdate;
+//		location.href = String.format("my_workout_list.do?w_name=%s&w_unit_kcal=%s&w_time=%d", w_name, w_unit_kcal, w_time);
 		
 	}
 
 </script>
 
+
 </head>
 <body>
+	
+ 	<div id="box">
 
-<!-- Modal창(팝업창)  -->
-<%@include file="my_workout_list_search_popup.jsp" %>
-
-	<div id="box">
-
-		<div>
-			<h3><span id="myself">${ user.user_name }</span>님의 운동 내역</h3>
-		</div>
 		<form>
-			<input id="myDatePicker" name="search_text" value="${ param.search_text }">
-			<input type="button" value="날짜검색" onclick="search();">
-			<input type="button" value="전체보기" onclick="show_list();">
-			<input id="" type="button" value="MyPage" onclick="location.href='../user/mypage_main.do'">
+	
+			<div id="workout_select_list">
+				<table>
+					<tr>
+						<th>
+							번호
+						</th>
+						<th>
+							운동명
+						</th>
+						<th>
+							MET
+						</th>
+						<th>
+							선택
+						</th>
+					</tr>
+					<c:forEach var="vo" items="${ list }" varStatus="i">
+						<tr>
+							<td>
+								${ i.count }
+							</td>
+							<td id="workout_name">
+								${ vo.workout_name }
+							</td>
+							<td id="workout_met">
+								${ vo.cal_per_unit }
+							</td>
+							<td>
+								<input class="" type="button" value="선택" onclick="workout_select('${ vo.workout_name }', '${ vo.cal_per_unit }');">
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div> 
 		</form>
 
-		<div id="my_workout_stat">
-			<br>
-			일일 소모 칼로리
-			<br>
-			<canvas id="myChart"></canvas>
+		
+		<div id="workout_calculate">
 			
-			<div id="cal_sum">
-				<span id="search_date"></span>
-				<span> 소모 칼로리는 </span>
-				<span id="kcal_sum_list"></span>
-<!-- 				<input type="text" id="kcal_sum_list" disabled="disabled"> -->
-				<span style="font-size: 15px; color: red">kcal</span>
-				
-				<!-- 모달로 상세보기 -->
-				
-				<input type="button" class="workout_btn" value="상세보기" onclick="workout_detail();">
-				<input type="button" class="workout_btn" value="운동추가" onclick="location.href='workout_insert_form.do'">
+			<div id="workout_selected">
+				<div>
+			 		<b>날짜</b> 
+			 	</div>
+			 		<span id=""></span>
+			 	
+			 	<div>
+			 		<b>선택된 운동</b>
+			 	</div>
+			    <input id="workout_selected_name" type="text" placeholder="운동명을 선택하세요">
+			    <br>
+			    <input id="workout_selected_met" type="text" placeholder="MET">(MET) 
 			</div>
-		</div>
-		
-		
-		<br>
-		<div>
-			<b>상세정보 (지울지 말지 고민)</b>
-		</div>
-		<div id="my_workout_list">
+			<br>
+			<div>
+				<b>운동 시간 입력</b>
+				<br>
+				<input id="workout_time" type="text" placeholder="분 단위로 입력하세요">(분)
+			</div>
+			<br>
+			<div>
+				<b>나의 몸무게 입력</b>
+				<br>
+				<input id="weight" type="text" placeholder="kg단위로 입력하세요">(kg)
+			</div>
+			<br>
+			<input type="button" id="workout_cal_calulate" value="태운 칼로리 계산" onclick="workout_cal_calulate();">
+			<br>	
+			<div>
+				<span id="burned_calory" style="font-size: 30px; font-weight: bold;"></span>
+				<span id="kcal"style="font-size: 25px; color: red">Kcal</span>
+			</div>
+			<br>
+			<div id="met_info" style="font-size: 10px;">
+				<b>[칼로리 계산 방법]</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+				1MET	         = 1 * 3.5ml / kg /min<br>
+				산소소비량(L)	     = MET * (3.5 * weight * min) / 1000<br>
+				칼로리소모량(kcal)	 = 산소소비량 * 5
+			</div>
+			<br>
 			
-			<table>
-				<tr>
-					<th>
-						날짜
-					</th>
-					<th>
-						운동명
-					</th>
-					<th>
-						운동시간(분)
-					</th>
-					<th>
-						소모칼로리 (Kcal)
-					</th>
-				<c:forEach var="vo" items="${ list }" varStatus="i">
-					<tr>
-						<td>
-							<span id="regdate">${ fn:substring(vo.w_regdate, 0, 10) }</span>
-						</td>
-						<td>
-							${ vo.w_name }
-						</td>
-						<td>
-							${ vo.w_time }
-						</td>
-						<td>
-							<span id="kcal">${ vo.w_unit_kcal_dot2 }</span>
-						</td>
-					</tr>
-				</c:forEach>
-			</table>
-		</div>
-		
-		
-
-	
-	
+			
+			<div>
+				<input class="" type="button" value="내 운동으로 등록하기" onclick="workout_insert();">
+			</div>
+			
+		</div> 
 	</div>
-	
-	<div id="disp_res_data">
-	
-	</div>
-	
-	
+		
 </body>
 </html>
