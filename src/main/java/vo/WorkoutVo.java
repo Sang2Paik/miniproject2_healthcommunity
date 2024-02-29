@@ -18,6 +18,17 @@ public class WorkoutVo {
 	
 	
 	
+	public WorkoutVo(String w_name, String w_regdate, int w_time, double w_unit_kcal, int user_idx, String user_name) {
+		super();
+		this.w_name = w_name;
+		this.w_regdate = w_regdate;
+		this.w_time = w_time;
+		this.w_unit_kcal = w_unit_kcal;
+		this.user_idx = user_idx;
+		this.user_name = user_name;
+	}
+
+
 	public WorkoutVo(String w_regdate, int user_idx, String user_name) {
 		super();
 		this.w_regdate = w_regdate;
