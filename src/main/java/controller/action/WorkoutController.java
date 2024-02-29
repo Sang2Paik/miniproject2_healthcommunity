@@ -1,12 +1,17 @@
 package controller.action;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.mysql.cj.Session;
 
 import annotation.RequestMapping;
 import annotation.ResponseBody;
@@ -133,6 +138,7 @@ public class WorkoutController {
 	public String main(HttpServletRequest request, HttpServletResponse response) {
 
 
+		
 		return "workout_insert_form.jsp";
 	}
 	
@@ -175,6 +181,8 @@ public class WorkoutController {
 				
 		
 		String search_text = request.getParameter("search_text");
+		
+		search_text = request.getParameter("search_text");
 		
 		List<WorkoutCaloryVo> workout_list = null;
 		

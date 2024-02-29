@@ -87,8 +87,29 @@ public class UserController {
 		}
 	} // end : user_login
 	
+
 	
-	//로그아웃
+	//보드에서 로그아웃
+	@RequestMapping(value = "/board/logout.do")
+	public String board_logout(HttpServletRequest request, HttpServletResponse response) {
+
+		//로그아웃: session에 저장된 user삭제
+		request.getSession().removeAttribute("user");
+		
+		return "redirect:../main.do";
+	} // end : board_user_logout
+	
+	//메인화면에서 로그아웃
+	@RequestMapping(value = "/logout.do")
+	public String index_jsp_logout(HttpServletRequest request, HttpServletResponse response) {
+
+		//로그아웃: session에 저장된 user삭제
+		request.getSession().removeAttribute("user");
+		
+		return "redirect:main.do";
+	} // end : index_jsp_user_logout
+	
+	//마이페이지에서 로그아웃
 	@RequestMapping(value = "/user/logout.do")
 	public String user_logout(HttpServletRequest request, HttpServletResponse response) {
 
@@ -137,7 +158,8 @@ public class UserController {
 	} // end : user_modify_form
 	
 	
-	//회원가입
+	
+	//회원수정
 	@RequestMapping(value = "/user/modify.do")
 	public String user_modify(HttpServletRequest request, HttpServletResponse response) {
 
@@ -191,7 +213,7 @@ public class UserController {
 		//              where user_idx=?
 		UserDao.getInstance().update(vo);
 		
-		return "redirect:list.do";
+		return "redirect:mypage_main.do?user_idx=" + user_idx;
 	} // end : user_modify
 	
 	
@@ -218,6 +240,7 @@ public class UserController {
 		String user_email		=	request.getParameter("user_email");
 		String user_gender		=	request.getParameter("user_gender");
 		Double user_height;
+		
 		try {
 			user_height = Double.parseDouble(request.getParameter("user_height"));
 		} catch (NumberFormatException e) {
@@ -253,7 +276,7 @@ public class UserController {
 		//4.DB insert
 		UserDao.getInstance().insert(vo);
 		
-		return "redirect:../user/list.do";
+		return "redirect:../user/login_form.do";
 	} // end : user_insert
 	
 	
@@ -274,7 +297,7 @@ public class UserController {
 			//실패
 		}
 		
-		return "redirect:../user/list.do";
+		return "redirect:../main.do";
 	} // end : user_delete
 	
 	//멤버 id 여부 확인
@@ -297,45 +320,69 @@ public class UserController {
 		return json.toString();
 	} // end : user_check_id
 	
-	//마이페이지 메뉴로 이동
-		@RequestMapping("/user/mypage_main.do")
-	    public String mypage(HttpServletRequest request, HttpServletResponse response) {
-			
-			       
-			UserVo user  = (UserVo) request.getSession().getAttribute("user");      
-	        int user_idx = user.getuser_idx();
-	        
-	        double 	today_workout_kal 	     = WorkoutDao.getInstance().today_w_cal(user_idx);
-	        double  today_food_kcal			 = FoodDao.getInstance().today_f_cal(user_idx);	       
-	        List<BoardVo> mypage_board		 = BoardDao.getInstance().selectListUserBoard(user_idx);
-	        List<CategoryVo> category_list 	 = CategoryDao.getInstance().selectList();	      	
-	        	        	        
-	        request.setAttribute("today_food_kcal"  , today_food_kcal);
-	        request.setAttribute("today_workout_kal", today_workout_kal);
-	        request.setAttribute("category_list"    , category_list);
-			request.setAttribute("mypage_board"	    , mypage_board);
-			request.setAttribute("user"	    , user);	
-	        	
-			
-	        return "mypage_main.jsp";
-	        
-		}
-
-		@RequestMapping(value = "/board/mypage_main.do")
-		public String mypage_home(HttpServletRequest request, HttpServletResponse response) {
-			
-			
-			return "../user/mypage_main.do"; // user_idx값 forward
-		}
-	
-
-	
-	// 메인 페이지로 이동
-	@RequestMapping("/main.do")
+	@RequestMapping(value = "/main.do")
 	public String main(HttpServletRequest request, HttpServletResponse response) {
-		
-				
+
 		return "index.jsp";
 	}
+	
+	//유저페이지에서 main.do호출했을 시
+	@RequestMapping(value = "/user/main.do")
+	public String user_main(HttpServletRequest request, HttpServletResponse response) {
+
+		return "index.jsp";
+	}
+	
+	//마이페이지 메뉴로 이동
+	@RequestMapping("/user/mypage_main.do")
+    public String mypage(HttpServletRequest request, HttpServletResponse response) {
+        
+		UserVo user  = (UserVo) request.getSession().getAttribute("user");
+        
+        int user_idx = user.getuser_idx();
+		
+        
+        double today_workout_kal 	   = WorkoutDao.getInstance().today_w_cal(user_idx);
+        double  today_food_kcal 	   = FoodDao.getInstance().today_f_cal(user_idx);
+        List<BoardVo> mypage_board	   = BoardDao.getInstance().selectListUserBoard(user_idx);
+        List<CategoryVo> category_list = CategoryDao.getInstance().selectList();
+        
+        request.setAttribute("today_food_kcal"  , today_food_kcal);
+        request.setAttribute("today_workout_kal", today_workout_kal);
+        request.setAttribute("category_list"    , category_list);
+		request.setAttribute("mypage_board"	    , mypage_board);
+		request.setAttribute("user"	  			, user);
+		
+		
+        return "mypage_main.jsp";
+        
+	}
+
+	@RequestMapping(value = "/board/mypage_main.do")
+	public String mypage_home(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		return "../user/mypage_main.do"; // user_idx값 forward
+	}
+	
+	//마이 페이지에서 보드 이미지 클릭 시 이미지 뷰로 이동
+	@RequestMapping(value = "/user/mypage_board_view.do")
+	public String mypage_board_view(HttpServletRequest request, HttpServletResponse response) {
+		
+		int b_idx 	= Integer.parseInt(request.getParameter("b_idx"));
+		
+		BoardVo vo	= BoardDao.getInstance().selectOne(b_idx); 
+
+		
+		request.setAttribute("vo", vo);
+		
+		return "mypage_board_view.jsp";
+	}
+	
+	
+	
+	
+	
+	
 	
 }

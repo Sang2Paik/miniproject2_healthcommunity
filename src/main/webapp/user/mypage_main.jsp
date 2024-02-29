@@ -68,6 +68,14 @@
 		
 	}
 
+	
+	// 이미지 URL을 클릭한 경우, 해당 URL로 이동합니다.
+	function mypage_image_view(b_idx) {
+		
+		location.href='mypage_board_view.do?b_idx=' + b_idx;
+	}
+	
+	
 </script>
 </head>
 <body>
@@ -136,55 +144,55 @@
 						<th><label>이름</label></th>
 						<td>
 							<input class="form-control" name="user_name" 
-								value="${ mypage_user.user_name }" readonly="readonly">
+								value="${ user.user_name }" readonly="readonly">
 						</td>
 					</tr>		   
 					<tr>
 					   <th><label>아이디</label></th>
 					   <td>
 					   		<input class="form-control" name="user_id" 
-					   			value="${ mypage_user.user_id }" readonly="readonly"></td>
+					   			value="${ user.user_id }" readonly="readonly"></td>
 					</tr>		
 					<tr>
 					   <th><label>비밀번호</label></th>
 					   <td>
 					   		<input class="form-control" type="password" name="user_pwd" 
-					   			value="${ mypage_user.user_pwd }" readonly="readonly">
+					   			value="${ user.user_pwd }" readonly="readonly">
 					   	</td>
 					</tr>		   
 					<tr>
 					   <th><label>이메일</label></th>
 					   <td>
 					   		<input class="form-control" name="user_age"  
-					   			value="${ mypage_user.user_age }" readonly="readonly">
+					   			value="${ user.user_age }" readonly="readonly">
 					   	</td>
 					</tr>		   
 					<tr>
 					   <th><label>나이</label></th>
 					   <td>
 					   		<input class="form-control" name="user_age"  
-					   			value="${ mypage_user.user_age }" readonly="readonly">
+					   			value="${ user.user_age }" readonly="readonly">
 					   </td>
 					</tr>
 					<tr>
 						<th><label>이메일</label></th>
 						<td>
 							<input class="form-control"  name="user_email" 
-								value="${ mypage_user.user_email }" readonly="readonly">
+								value="${ user.user_email }" readonly="readonly">
 						</td>
 					</tr>
 					
 					<tr>
 						<th><label>성별</label></th>
 						<td>
-						 	<c:if test="${ mypage_user.user_gender eq 'man'}">
+						 	<c:if test="${ user.user_gender eq 'man'}">
 								<input type="radio" class="form-control"  name="user_gender" 
 									value="man" checked="checked" onclick="return false;">남자&nbsp;&nbsp;&nbsp;
 								<input type="radio" class="form-control"  name="user_gender" 
 									value="woman" onclick="return false;">여자
 							</c:if>
 						
-							<c:if test="${ mypage_user.user_gender eq 'woman'}">
+							<c:if test="${ user.user_gender eq 'woman'}">
 								<input type="radio" class="form-control"  name="user_gender" 
 									value="man" onclick="return false;">남자&nbsp;&nbsp;&nbsp;
 								<input type="radio" class="form-control"  name="user_gender" 
@@ -197,52 +205,52 @@
 						<th><label>가입일자</label></th>
 						<td>
 							<input class="form-control" name="user_created_date" 
-								value="${ fn:substring(mypage_user.user_created_date,0,16) }" readonly="readonly">
+								value="${ fn:substring(user.user_created_date,0,16) }" readonly="readonly">
 						</td>
 					</tr>		
 					<tr>
 						<th><label>마지막수정일자</label></th>
 						<td>
 							<input class="form-control" name="user_modifified_date" 
-								value="${ fn:substring(mypage_user.user_modified_date,0,16)}" readonly="readonly">
+								value="${ fn:substring(user.user_modified_date,0,16)}" readonly="readonly">
 						</td>
 					</tr>		
 					<tr>
 						<th><label>키</label></th>
 						<td>
 							<input class="form-control" name="user_height" 
-								value="${ mypage_user.user_height }" readonly="readonly">
+								value="${ user.user_height }" readonly="readonly">
 						</td>
 					</tr>
 					<tr>
 						<th><label>몸무게</label></th>
 						<td>
 							<input class="form-control" name="user_kg" 
-								value="${ mypage_user.user_kg }" readonly="readonly">
+								value="${ user.user_kg }" readonly="readonly">
 						</td>
 					</tr>
 					<tr>
 						<th><label>목표몸무게</label></th>
 						<td>
 							<input class="form-control" name="user_target" 
-								value="${ mypage_user.user_target }" readonly="readonly">
+								value="${ user.user_target }" readonly="readonly">
 						</td>
 					</tr>
 					<tr>
 						<th><label>회원등급</label></th>
 						<td>
 							<input class="form-control" name="user_target" 
-								value="${ fn:substring(mypage_user.user_grade, 5, fn:length(mypage_user.user_grade)) }" readonly="readonly">
+								value="${ fn:substring(user.user_grade, 5, fn:length(user.user_grade)) }" readonly="readonly">
 						</td>
 					</tr>
 						
 					<tr>
 						<td colspan="2" align="center">
 							<input class="btn btn-danger" type="button" value="탈퇴하기" 
-								onclick="user_delete_form(${ mypage_user.user_idx });">
+								onclick="user_delete_form(${ user.user_idx });">
 								
 							<input class="btn btn-info" type="button" value="수정하기" 
-								onclick="user_modify_form(${ mypage_user.user_idx });">
+								onclick="user_modify_form(${ user.user_idx });">
 								
 							<input class="btn btn-success" type="button"  value="게시판보기"
 								onclick="location.href='${ pageContext.request.contextPath }/board/list.do'">  
@@ -274,6 +282,8 @@
 					        	<!-- c_idx가 같은 항목을 출력 -->
 					            <c:if test="${ board.c_idx eq category.c_idx }">
 					                <!-- 해당 카테고리에 속하는 게시물 출력 -->
+					                <img src="${ pageContext.request.contextPath }/upload/${ board_vo.b_photo }" onclick="mypage_image_view('${ board.b_idx }');"
+					   						class="image-hover" id="board_image">
 					                <div style="display: inline;">
 					                    <div>${ board.b_subject }</div>
 					                    <div>${ board.b_content }</div>

@@ -97,17 +97,22 @@
 
 	
 <body>
-<div id="reg_login" class="nav">
-		    <div class="btn_box">
-				<c:if test="${empty user}">
-					<input class="nav_btn" type="button" id="register" value="회원가입" onclick="location.href='user/insert_form.do'">
-					<input class="nav_btn" type="button" id="login" value="로그인" onclick="location.href='user/login_form.do'">
+	<div id="reg_login" class="nav">
+		<div class="btn_box">
+			<c:if test="${empty user}">
+				<input class="nav_btn" type="button" id="register" value="회원가입" onclick="location.href='user/insert_form.do'">
+				<input class="nav_btn" type="button" id="login" value="로그인" onclick="location.href='user/login_form.do'">
+			</c:if>
+				
+			<c:if test="${ not empty user }">
+				<c:if test="${ user.user_grade eq 'user_admin' }">
+					<input type="button" class="nav_btn" value="시스템 관리" 
+						onclick="location.href='admin/admin_page.do'">
 				</c:if>
-				<c:if test="${not empty user}">
-					<input class="btn btn-primary" type="button" id="logout" value="로그아웃" onclick="location.href='user/logout.do'">
-				</c:if>
-			</div>			
-</div>
+				<input type="button" class="nav_btn" id="logout" value="로그아웃" onclick="location.href='logout.do'">
+			</c:if>
+		</div>			
+	</div>
 		
 <div class="w960 intro_bg">
     
@@ -125,12 +130,10 @@
 			</div>
 		</div>
 		
-	
 		
-		
-		
-	
-	
+
+
+			
         <!-- Footer -->
     <%@ include file="footer.jsp" %>
 

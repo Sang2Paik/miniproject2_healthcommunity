@@ -111,7 +111,7 @@
 
 	// 이미지 URL을 클릭한 경우, 해당 URL로 이동합니다.
 	function image_view(b_idx) {
-		window.location.href='board_view.do?b_idx=' + b_idx;
+		location.href='board_view.do?b_idx=' + b_idx;
 	}
 	
 	// 카테고리 클릭시 해당 카테고리만 포함한 리스트 가져오기

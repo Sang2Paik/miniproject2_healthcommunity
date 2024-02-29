@@ -82,6 +82,15 @@ public class BoardVo {
 		this.b_ip 		= b_ip;
 	}
 	
+	public BoardVo(int b_idx, String b_subject, String b_content, String b_ip, String b_open) {
+		super();
+		this.b_idx 		= b_idx;
+		this.b_subject 	= b_subject;
+		this.b_content 	= b_content;
+		this.b_ip 		= b_ip;
+		this.b_open		= b_open;
+	}
+	
 	
 	public int getCmt_count() {
 		return cmt_count;

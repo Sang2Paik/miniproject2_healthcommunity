@@ -145,7 +145,7 @@
 	      <!-- for( Uservo user_vo : admin_user_list )   -->
 	      <c:forEach var="user_vo"  items="${ admin_user_list }" varStatus="i">
 	         <tr>
-		    <td>${ admin_user_list.size() - i.index }</td>
+	         	<td>${ admin_user_list.size() - i.index }</td>
 	            <td>${ user_vo.user_idx }</td>
 	            <td>${ user_vo['user_name'] }</td>
 	            <td><span id="user_id">${ user_vo.user_id }</span></td>

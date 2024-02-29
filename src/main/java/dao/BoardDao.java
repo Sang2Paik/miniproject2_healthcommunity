@@ -213,6 +213,23 @@ public class BoardDao {
 		
 		return res;
 	}
+	
+	public int mypage_update(BoardVo vo) {
+		// TODO Auto-generated method stub
+		int res = 0;
+		
+		//1.SqlSession 얻어오기                    true <- auto commit
+		SqlSession sqlSession = factory.openSession(true);
+		
+		//2.수행
+		res = sqlSession.update("board.mypage_modify_update", vo);
+		
+		//3.닫기
+		sqlSession.close();
+		
+		
+		return res;
+	}
 
 	public int selectRowTotal() {
 		// TODO Auto-generated method stub

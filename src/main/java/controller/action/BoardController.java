@@ -120,6 +120,44 @@ public class BoardController {
 	//상세보기
 	@RequestMapping("/board/board_view.do")
 	public String view(HttpServletRequest request, HttpServletResponse response) {
+		
+		String myPage = null;
+		
+		myPage = request.getParameter("myPage");
+		if(myPage == null || myPage.isEmpty()) {
+			myPage = "board";
+		}
+		
+		if(myPage.equals("mypage")) {
+			
+			int b_idx = Integer.parseInt(request.getParameter("b_idx"));
+			
+			String	page		= request.getParameter("page");
+			String	search		= request.getParameter("search");
+			String	search_text	= request.getParameter("search_text");
+			
+			UserVo user = (UserVo) request.getSession().getAttribute("user");
+			if(user==null) {
+				
+				//세션만료시(로그아웃)
+				return "redirect:../user/login_form.do?reason=session_timeout";
+			}
+			
+			if(search==null || search.isEmpty())
+				search = "all";
+			
+			BoardVo vo = BoardDao.getInstance().selectOne(b_idx);
+			
+			request.setAttribute("vo", vo);
+			request.setAttribute("page", page);
+			request.setAttribute("search", search);
+			request.setAttribute("myPage", myPage);
+			request.setAttribute("search_text", search_text);
+			
+			return "board_view.jsp";
+		};
+
+		
 		// /board/view.do?b_idx=1
 		int 	b_idx = Integer.parseInt(request.getParameter("b_idx"));
 		String	page		= request.getParameter("page");
@@ -148,6 +186,7 @@ public class BoardController {
 		
 		return "board_view.jsp";
 	}
+	
 	
 	//글쓰기폼
 	@RequestMapping("/board/insert_form.do")
@@ -331,10 +370,58 @@ public class BoardController {
 		return "board_modify_form.jsp";
 	}
 	
+	
 	//보드 이미지 업로드 수정폼
 	@RequestMapping(value = "/board/photo_upload.do", produces = "application/json; charset=utf-8;")
 	@ResponseBody
 	public String photo_upload(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+		ServletContext application = request.getServletContext();
+		
+			String webPath = "/upload/";         //웹경로(상대적경로) 
+			//                                   저장위치(절대경로)
+			String saveDir = application.getRealPath(webPath);
+			
+			int    maxSize    = 1024*1024*100;   //업로드(최대)크기(byte)
+					
+			MultipartRequest  mr = new MultipartRequest(request,//처리위임 
+					                                    saveDir,//저장위치(절대경로) 
+					                                    maxSize,//업로드크기
+					                                    "utf-8",//수신인코딩 
+					                                    //동일화일인경우 이름을 변경해서 저장
+					                                    new DefaultFileRenamePolicy()
+					                                    );
+			//업로드된 화일명 얻어온다
+			String p_filename="no_file";
+			//업로드된 화일정보 얻어온다
+			File f = mr.getFile("b_photo");
+			if(f != null) {
+				p_filename = f.getName();
+			}
+			
+			
+			//삭제할 기존 업로드 이미지 가져오기
+			int b_idx = Integer.parseInt(mr.getParameter("b_idx"));
+			BoardVo vo = BoardDao.getInstance().selectOne(b_idx);
+			//기존화일을 삭제
+			File oldFile = new File(saveDir,vo.getB_photo());
+			oldFile.delete();
+			
+		vo.setB_photo(p_filename);
+		
+		BoardDao.getInstance().update_b_photo(vo);
+		
+		JSONObject json = new JSONObject();
+		json.put("p_filename", p_filename);
+		
+		return json.toString();
+	}
+	
+	
+	//보드 이미지 업로드 수정폼
+	@RequestMapping(value = "/user/photo_upload.do", produces = "application/json; charset=utf-8;")
+	@ResponseBody
+	public String mypage_photo_upload(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 		ServletContext application = request.getServletContext();
 		
@@ -420,6 +507,45 @@ public class BoardController {
 		return String.format("redirect:board_view.do?b_idx=%d&page=%s&search=%s&search_text=%s", b_idx, page, search, search_text);
 	}
 	
+	//마이페이지에서 보드수정하기
+	@RequestMapping("/user/mypage_modify.do")
+	public String mypage_modify(HttpServletRequest request, HttpServletResponse response) {
+		
+		// /board/insert.do?b_idx=13&b_subject=제목&b_content=내용&page=4
+		
+		UserVo user = (UserVo) request.getSession().getAttribute("user");
+		
+		if(user==null) {
+		
+			//세션만료시(로그아웃)
+			return "redirect:../user/login_form.do?reason=session_timeout";
+		}
+		
+		
+		
+		//1.parameter받기
+		int    b_idx     	= Integer.parseInt(request.getParameter("b_idx"));
+		String b_subject 	= request.getParameter("b_subject");
+		String b_content 	= request.getParameter("b_content").replaceAll("\n", "<br>");
+		String b_open		= request.getParameter("b_open");
+		
+		
+		//2.ip구하기
+		String b_ip			= request.getRemoteAddr();
+				
+		//3.BoardVo 포장
+		BoardVo vo = new BoardVo(b_idx, b_subject, b_content, b_ip, b_open);
+		
+		
+		//4.DB insert
+		BoardDao.getInstance().mypage_update(vo);		
+		
+		//수정된 게시물 보기
+		//return "redirect:view.do?b_idx=" + b_idx + "&page=" + page ;
+		return String.format("redirect:mypage_main.do");
+	}
+	
+	
 	//카테고리 클릭시 카테고리출력
 	@RequestMapping(value = "/board/board_category_search.do")
 	public String board_category_search(HttpServletRequest request, HttpServletResponse response) {
@@ -444,6 +570,24 @@ public class BoardController {
 		
 		return "board_list.jsp";
 	}
+	
+	// 마이페이지 정보 얻어오기
+	@RequestMapping(value = "/board/my_health_list.do")
+	public String my_health(HttpServletRequest request, HttpServletResponse response) {
+		
+		//파라메터 받아오기
+		int user_idx = Integer.parseInt(request.getParameter("user_idx"));
+		
+		BoardVo vo_my_health = BoardDao.getInstance().selectOne(user_idx);
+		
+		request.setAttribute("vo_my_health", vo_my_health);
+		
+		
+		return "../mypage/mypage.jsp";
+	}
+	
+	
+	
 }
 
 

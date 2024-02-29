@@ -78,6 +78,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where b_idx=#{ b_idx }
 	</update>
 	
+	<!-- 마이페이지에서 내용변경( b_open 추가 ) -->
+	<update id="mypage_modify_update" parameterType="vo.BoardVo">
+		update board set b_subject=#{ b_subject }, b_content=#{ b_content }, 
+							b_open=#{ b_open } 
+			where b_idx=#{ b_idx }
+	</update>
+	
 	<!-- 좋아요 증가 -->
 	<update id="board_like_update" parameterType="vo.BoardVo">
 		update board set b_like=ifnull(#{ b_like },0)+1 where b_idx=#{ b_idx }
