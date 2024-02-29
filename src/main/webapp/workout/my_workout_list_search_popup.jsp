@@ -67,7 +67,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title" id="search_list">나의 운동내역 상세</h4>
+        <h4 class="modal-title" id="search_list">${ user.user_name }님의 운동 내역 상세</h4>
       </div>
 	  <div class="modal-body">
 
