@@ -111,7 +111,7 @@
 <body>
 	<div id="box">
 		<div id="workout_select">
-			<h3>나의 운동 입력</h3>
+			<h3>${ user.user_name }님의 운동 입력</h3>
 	 		<div>
 				날짜<br>
 				<input id="myDatePicker" name="w_regdate" value="${ param.search_text }">
