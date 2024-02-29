@@ -165,16 +165,14 @@ public class WorkoutDao {
 		return today_w_cal; //list 내에는 vo에서 가져온 레코드 값이 담겨있음
 	}
 
-	//X
-	public int insert_api(WorkoutCaloryVo vo) {
+	public int my_workout_delete(int w_idx) {
 		// TODO Auto-generated method stub
 		int res = 0;
-
-		//1. SqlSession얻어오기                      true -> auto commit
+		//1.SqlSession 얻어오기					    true -> auto commit
 		SqlSession sqlSession = factory.openSession(true);
-		
+				
 		//2.수행
-		res = sqlSession.insert("workout.workout_insert", vo);
+		res = sqlSession.delete("workout.my_workout_delete", w_idx);
 		
 		//3.닫기
 		sqlSession.close();
@@ -184,25 +182,8 @@ public class WorkoutDao {
 	
 	
 
-
-
-//	public List<WorkoutVo> selectList(String w_regdate) {
-//		// TODO Auto-generated method stub
-//		List<WorkoutVo> list = null; //MyBatis가 만들어줌
-//		
-//		//String sql = "select * from workout_kcal where w_regdate=24-02-24 order by idx desc";
-//		
-//		//1.sqlSession 얻어오기 (MyBatis 실제 작업객체)
-//		SqlSession sqlSession= factory.openSession();
-//		
-//		//2.작업수행                 namespace.mapper_id
-//		list = sqlSession.selectList("workout.my_workout_list_date", w_regdate);
-//		
-//		//3.닫기
-//		sqlSession.close();
-//		
-//		return list; //list 내에는 vo에서 가져온 레코드 값이 담겨있음
-//	}
 	
-
+	
+	
+	
 }
