@@ -10,23 +10,6 @@
 <html>
 
 	<%@ include file="header.jsp" %>
-	
-
-<style type="text/css">
-	
-
-	
-	#reg_login{
-		text-align: right;
-	}
-
-	
-	#goto{
-		clear: both;
-		text-align: center;
-	}
-
-</style>
 
 
 <script type="text/javascript">
@@ -114,10 +97,10 @@
 
 	
 <body>
-<div id="box" class="container w100">
+<div id="box" class="container w960">
     
     
-	    <div id="reg_login" class="row w100 nav tt">
+	    <div id="reg_login" class="row nav tt">
 		    <div class="col-12 col-md-8"></div>
 		    <div class="col-12 col-md-4">
 				<c:if test="${empty user}">
@@ -131,9 +114,9 @@
 		</div>
 		
 		
-		<div class="row w100">
+		<div class="row w960 tt">
 			
-			<div id="project_intro" class="col-8 bg-light border"><img src="./img/intro.png" class="img"></div>
+			<div id="project_intro" class="col-8"><img src="./img/intro.png" class="img"></div>
 			<div id="goto" class="col-4">
 			
 			<div id="weather">
@@ -145,11 +128,11 @@
 				<input type="image" src="./img/main_icon02.png" class="btn_img" value="나의 건강정보" onclick="move_health_page();">
 			</div>
 		</div>
-	</div>
 	
 	
         <!-- Footer -->
     <%@ include file="footer.jsp" %>
 
+	</div>
 </body>
 </html>
