@@ -18,5 +18,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="config/mybatis/mapper/board.xml" />
 		<mapper resource="config/mybatis/mapper/comment.xml" />
 		<mapper resource="config/mybatis/mapper/category.xml" />
+		<mapper resource="config/mybatis/mapper/workout.xml" />
 	</mappers>
 </configuration>
