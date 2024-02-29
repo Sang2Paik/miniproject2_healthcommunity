@@ -53,7 +53,6 @@
 	</style>
 </head>
 <body>
-<div id="box">
 <!-- Button to Open the Modal -->
 <button  style="display:none;" id="btn_modal" type="button"  data-toggle="modal" data-target="#myModal">
   Open modal
@@ -79,40 +78,8 @@
 		<div id="my_workout_list">
 			
 			<table>
-<!-- 				<tr>
-					<th>
-						날짜
-					</th>
-					<th>
-						운동명
-					</th>
-					<th>
-						운동시간(분)
-					</th>
-					<th>
-						소모칼로리(Kcal)
-					</th>
-				</tr> -->
+
 				<div id="disp1"></div>
-				<%-- <c:forEach var="vo" items="${ res_data.list }" varStatus="i">
-					<tr>
-					
-						<td>
-							<span id="regdate">${ vo.regdate }</span>
-						
-						</td>
-				
-						<td>
-						 	${ vo.w_name } 
-						</td>
-						<td>
-						 	${ vo.w_time } 
-						</td>
-						<td>
-							<span id="kcal">${ vo.w_unit_kcal_dot2 }</span> 
-						</td>
-					</tr>
-				</c:forEach> --%>
 
 			</table>
 		</div>
@@ -122,7 +89,6 @@
       </div>
 	 
 	</div>
-</div>
 </div>
 </div>
 
