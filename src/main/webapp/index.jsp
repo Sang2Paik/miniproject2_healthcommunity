@@ -97,42 +97,46 @@
 
 	
 <body>
-<div id="box" class="container w960">
-    
-    
-	    <div id="reg_login" class="row nav tt">
-		    <div class="col-12 col-md-8"></div>
-		    <div class="col-12 col-md-4">
+<div id="reg_login" class="nav">
+		    <div class="btn_box">
 				<c:if test="${empty user}">
 					<input class="nav_btn" type="button" id="register" value="회원가입" onclick="location.href='user/insert_form.do'">
 					<input class="nav_btn" type="button" id="login" value="로그인" onclick="location.href='user/login_form.do'">
 				</c:if>
 				<c:if test="${not empty user}">
-					<input class="btn btn-primary" type="button" id="logout" value="로그아웃" onclick="location.href='logout.do'">
+					<input class="btn btn-primary" type="button" id="logout" value="로그아웃" onclick="location.href='user/logout.do'">
 				</c:if>
-			</div>
-		</div>
+			</div>			
+</div>
 		
-		
-		<div class="row w960 tt">
+<div class="w960 intro_bg">
+    
+    
+	    
 			
-			<div id="project_intro" class="col-8"><img src="./img/intro.png" class="img"></div>
-			<div id="goto" class="col-4">
-			
-			<div id="weather">
-				<p class="f12 m_title">Weather</p>
-				<div id="weather_forecast"></div>
-			</div>
-				<p class="f12 m_title">Seviece Menu</p>
+		<div class="news_box">
+			<div id="goto">
+				<div id="weather"><p class="f12 m_title">Weather</p>
+					<div id="weather_forecast"></div>
+				</div>
+				<p class="f12 m_title">Service Menu</p>
 				<input type="image" src="./img/main_icon01.png" class="btn_img" value="운동 게시판" onclick="location.href='board/list.do'">
 				<input type="image" src="./img/main_icon02.png" class="btn_img" value="나의 건강정보" onclick="move_health_page();">
 			</div>
 		</div>
+		
+	
+		
+		
+		
 	
 	
         <!-- Footer -->
     <%@ include file="footer.jsp" %>
 
-	</div>
+</div>
+
+
+
 </body>
 </html>

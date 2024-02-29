@@ -4,7 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-    <!-- footer -->
+    <!-- footer 
     <footer>
         <div class="footer tt c">
                 <p class="mb-0" style="float: left">Copyright © 2024 헬커</p>
@@ -19,7 +19,5 @@
 
             
         </div>
-    </footer>
+    </footer>-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/bs-init.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/bold-and-bright.js"></script>  
