@@ -21,6 +21,7 @@
 		float: left;
 		border: solid gray 1px;
 		max-height: 440px;
+		width: 400px;
 		resize: none; 
 		margin: 10px;
 		margin-left: 0px;
@@ -59,6 +60,12 @@
 
 <script type="text/javascript">
 
+	$(document).ready(function(){
+		
+		$("#kcal").hide();
+		
+	});
+	
 	function workout_search(){
 		
 		let search_text = $("#search_text").val().trim();
@@ -87,6 +94,8 @@
 
 	function workout_cal_calulate() {
 
+		$("#kcal").show();
+		
 		let user_kg       ;
 		let workout_time  ;
 		let cal_per_unit  ;
@@ -111,9 +120,7 @@
 	  	}
 
 		//console.log(cal_per_unit);
-		//console.log(user_kg);
-		//console.log(workout_time);
-		burned_calory = 3.5* cal_per_unit * user_kg * workout_time /1000 * 5;
+		burned_calory = Math.round(3.5* cal_per_unit * user_kg * workout_time /1000 * 5);
 		
 		//console.log(burned_calory);
 		
@@ -128,9 +135,6 @@
 		let w_time		= $("#workout_time").val();
 		
 		//console.log(w_name);
-		//console.log(w_unit_kcal);
-		//console.log(w_time);
-		
 		location.href="workout_insert.do?w_name=" + encodeURIComponent(w_name,"utf-8") + "&w_unit_kcal=" + w_unit_kcal + "&w_time=" + w_time;
 //		location.href = String.format("my_workout_list.do?w_name=%s&w_unit_kcal=%s&w_time=%d", w_name, w_unit_kcal, w_time);
 		
@@ -153,6 +157,7 @@
 				<input id="search_text" type="text">
 				<input id="" type="button" value="검색" onclick="workout_search();">
 				<input id="" type="button" value="전체보기" onclick="location.href='workout_insert_form.do'">
+				<input id="" type="button" value="MyPage" onclick="location.href='../user/mypage_main.do'">
 			</div>
 			<div id="workout_select_list">
 				<table>
@@ -219,7 +224,7 @@
 			<br>	
 			<div>
 				<span id="burned_calory" style="font-size: 30px; font-weight: bold;"></span>
-				<span style="font-size: 25px; color: red">Kcal</span>
+				<span id="kcal"style="font-size: 25px; color: red">Kcal</span>
 			</div>
 			<br>
 			<div id="met_info" style="font-size: 10px;">
