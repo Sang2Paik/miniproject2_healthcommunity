@@ -163,13 +163,14 @@
 			},
 			dataType : "json",
 			success : function(res_data){
-				//console.log(res_data.list[0].total_sum);
+				//console.log(res_data.list);
  				
 				try {
 					$("#kcal_sum_list").html(res_data.list[0].total_sum);
 				} catch (e) {
 					// TODO: handle exception
-					e.printStackTrace(); //예외정보 출력
+					//e.printStackTrace(); //예외정보 출력
+					$("#kcal_sum_list").html(0);
 				}
 
 			},
