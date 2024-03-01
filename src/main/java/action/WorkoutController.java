@@ -1,12 +1,19 @@
 package controller.action;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.mysql.cj.Session;
 
 import annotation.RequestMapping;
 import annotation.ResponseBody;
@@ -130,15 +137,19 @@ public class WorkoutController {
 	
 	//운동 입력 메인
 	@RequestMapping("/workout/workout_insert_form.do")
-	public String main(HttpServletRequest request, HttpServletResponse response) {
+	public String workout_insert_form(HttpServletRequest request, HttpServletResponse response) {
 
-
-		return "workout_insert_form.jsp";
+		String w_regdate = request.getParameter("w_regdate");
+		
+		return "workout_insert_form.jsp?w_redgate=" + w_regdate;
 	}
 	
 	//운동선택 리스트
 	@RequestMapping("/workout/workout_cal_list.do")
 	public String workout_cal_list(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		//날짜 받기 추가
+		String w_regdate = request.getParameter("w_regdate");
 		
 		int page = Integer.parseInt(request.getParameter("page"));
 		int perPage = Integer.parseInt(request.getParameter("perPage"));
@@ -149,9 +160,7 @@ public class WorkoutController {
 		double cal_per_unit = 0.0;
 		
 		WorkoutCaloryVo vo = new WorkoutCaloryVo(cal_per_unit, workout_name);
-		
-		//-----DB 삽입
-		//int res = WorkoutDao.getInstance().insert_api(vo);
+
 		
 		//request binding
 		request.setAttribute("list", list);
@@ -167,11 +176,15 @@ public class WorkoutController {
 	@RequestMapping("/workout/search.do")
 	public String search(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+		//날짜받기 추기
+		
 		int page = Integer.parseInt(request.getParameter("page"));
 		int perPage = Integer.parseInt(request.getParameter("perPage"));
 				
 		
 		String search_text = request.getParameter("search_text");
+		
+		search_text = request.getParameter("search_text");
 		
 		List<WorkoutCaloryVo> workout_list = null;
 		
@@ -179,13 +192,6 @@ public class WorkoutController {
 		WorkoutCaloryVo vo = new WorkoutCaloryVo(page, perPage);
 		
 		workout_list = WorkoutUtils.workout_cal_list(search_text, page, perPage);
-		
-		//-----DB 삽입
-		//int res = WorkoutDao.getInstance().insert(workout_list);
-		
-		//---- 검색리스트 출력
-		
-		
 		
 		//request binding
 		request.setAttribute("list", workout_list);
@@ -241,7 +247,41 @@ public class WorkoutController {
 		//6.DB insert
 		int res = WorkoutDao.getInstance().insert(vo);
 		
-		return "redirect: my_workout_list.do?";
+		return "redirect: my_workout_list.do?w_regdate=" + w_regdate;
+	}
+	
+	//수정하기 폼 띄우기
+//	@RequestMapping("/workout/my_workout_modify_form.do")
+//	public String my_workout_modify(HttpServletRequest request, HttpServletResponse response) {
+//
+//		// /workout/my_workout_modify_form.do?w_idx=3&regdate=2024-03-01
+//	
+//		//1.parameter받기
+//		int w_idx = Integer.parseInt(request.getParameter("w_idx"));
+//		
+//		//2.수정할 b_idx해당되는 게시물 1건 얻어오기
+//		WorkoutVo vo = WorkoutDao.getInstance().selectOne(w_idx);
+//		
+//		//request binding
+//		request.setAttribute("vo", vo);
+//		
+//		
+//		return "my_workout_modify_form.jsp";
+//		
+//	}//end:modify_form
+	
+	//운동 삭제
+	@RequestMapping("/my_workout_delete.do")
+	public String my_workout_delete(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+
+		// /workout/my_workout_delete.do?w_idx=13
+		
+		String w_regdate = request.getParameter("w_regdate");
+		int w_idx = Integer.parseInt(request.getParameter("w_idx"));
+		
+		int res = WorkoutDao.getInstance().my_workout_delete(w_idx);
+		
+		return "redirect:my_workout_list.do?w_regdate=" + w_regdate;
 	}
 	
 }
