@@ -91,17 +91,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from workout_kcal where w_idx = #{ w_idx }
 	</delete>
 
+	<select id="my_workout_select_one" parameterType="int" resultType="vo.WorkoutVo">
+		select * from workout_kcal where w_idx = #{ w_idx } 
+	</select>
 	
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
