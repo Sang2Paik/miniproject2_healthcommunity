@@ -172,12 +172,29 @@ public class WorkoutDao {
 		SqlSession sqlSession = factory.openSession(true);
 				
 		//2.수행
+		//delete-update로 해야되나?
 		res = sqlSession.delete("workout.my_workout_delete", w_idx);
 		
 		//3.닫기
 		sqlSession.close();
 		
 		return res;
+	}
+
+	public WorkoutVo selectOne(int w_idx) {
+		// TODO Auto-generated method stub
+		WorkoutVo vo = null;
+		
+		//1.SqlSession 얻어오기					    true -> auto commit
+		SqlSession sqlSession = factory.openSession(true);
+						
+		//2.수행
+		vo = sqlSession.selectOne("workout.my_workout_select_one", w_idx);
+		
+		//3.닫기
+		sqlSession.close();
+		
+		return vo;
 	}
 	
 	
