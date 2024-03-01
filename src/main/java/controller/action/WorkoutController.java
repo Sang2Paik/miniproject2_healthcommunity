@@ -1,6 +1,8 @@
 package controller.action;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -135,11 +137,11 @@ public class WorkoutController {
 	
 	//운동 입력 메인
 	@RequestMapping("/workout/workout_insert_form.do")
-	public String main(HttpServletRequest request, HttpServletResponse response) {
+	public String workout_insert_form(HttpServletRequest request, HttpServletResponse response) {
 
-
+		String w_regdate = request.getParameter("w_regdate");
 		
-		return "workout_insert_form.jsp";
+		return "workout_insert_form.jsp?w_redgate=" + w_regdate;
 	}
 	
 	//운동선택 리스트
@@ -245,21 +247,41 @@ public class WorkoutController {
 		//6.DB insert
 		int res = WorkoutDao.getInstance().insert(vo);
 		
-		return "redirect: my_workout_list.do?";
+		return "redirect: my_workout_list.do?w_regdate=" + w_regdate;
 	}
+	
+	//수정하기 폼 띄우기
+//	@RequestMapping("/workout/my_workout_modify_form.do")
+//	public String my_workout_modify(HttpServletRequest request, HttpServletResponse response) {
+//
+//		// /workout/my_workout_modify_form.do?w_idx=3&regdate=2024-03-01
+//	
+//		//1.parameter받기
+//		int w_idx = Integer.parseInt(request.getParameter("w_idx"));
+//		
+//		//2.수정할 b_idx해당되는 게시물 1건 얻어오기
+//		WorkoutVo vo = WorkoutDao.getInstance().selectOne(w_idx);
+//		
+//		//request binding
+//		request.setAttribute("vo", vo);
+//		
+//		
+//		return "my_workout_modify_form.jsp";
+//		
+//	}//end:modify_form
 	
 	//운동 삭제
 	@RequestMapping("/my_workout_delete.do")
-	public String my_workout_delete(HttpServletRequest request, HttpServletResponse response) {
+	public String my_workout_delete(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 
 		// /workout/my_workout_delete.do?w_idx=13
 		
-		String regdate = request.getParameter("regdate");
+		String w_regdate = request.getParameter("w_regdate");
 		int w_idx = Integer.parseInt(request.getParameter("w_idx"));
 		
 		int res = WorkoutDao.getInstance().my_workout_delete(w_idx);
 		
-		return "redirect:my_workout_list.do?regdate=" + regdate;
+		return "redirect:my_workout_list.do?w_regdate=" + w_regdate;
 	}
 	
 }
