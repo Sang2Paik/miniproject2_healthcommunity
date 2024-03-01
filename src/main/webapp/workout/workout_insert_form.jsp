@@ -36,7 +36,12 @@
 
 <script type="text/javascript">
 
+	
+	
 	$(document).ready(function(){
+		
+		let w_regdate = encodeURIComponent("${param.w_regdate}","utf-8");
+		//console.log(w_regdate);
 		
 		//날짜 DatePicker
  		$("#myDatePicker").datepicker({
@@ -45,6 +50,12 @@
 		  closeText:'닫기',
 		  dateFormat:'yy-mm-dd',
 		}).datepicker("setDate",'now')
+		
+		if( w_regdate != null || w_regdate !=""){
+			$("#myDatePicker").val(w_regdate);
+			
+			return;
+		}
 	}); 
 	
 	
@@ -86,6 +97,8 @@
 
 		let page = 1;
 		let perPage = 360;
+		
+		$("#search-text").val('');
 		
 		$.ajax({
 			
