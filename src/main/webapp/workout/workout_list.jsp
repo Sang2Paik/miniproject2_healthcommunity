@@ -129,7 +129,7 @@
 	function workout_insert() {
 		
 		let w_regdate = $("#myDatePicker").val().trim();
-		console.log(w_regdate);
+		//console.log(w_regdate);
 		if(w_regdate==''){
 			alert('날짜를 선택하세요!');
 			$( "#myDatePicker" ).val('');
@@ -146,6 +146,8 @@
 			return;
 		}
 
+		
+		
 		location.href="workout_insert.do?w_name=" + encodeURIComponent(w_name,"utf-8") + "&w_unit_kcal=" + w_unit_kcal + "&w_time=" + w_time + "&w_regdate=" + w_regdate;
 //		location.href = String.format("my_workout_list.do?w_name=%s&w_unit_kcal=%s&w_time=%d", w_name, w_unit_kcal, w_time);
 		
@@ -226,7 +228,7 @@
 				<input id="weight" type="text" placeholder="kg단위로 입력하세요">(kg)
 			</div>
 			<br>
-			<input type="button" id="workout_cal_calulate" value="태운 칼로리 계산" onclick="workout_cal_calulate();">
+			<input type="button" id="workout_cal_calulate" value="태운 칼로리 계산 Click!" onclick="workout_cal_calulate();">
 			<br>	
 			<div>
 				<span id="burned_calory" style="font-size: 30px; font-weight: bold;"></span>
