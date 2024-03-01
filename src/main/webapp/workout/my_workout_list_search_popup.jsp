@@ -58,20 +58,20 @@
 	
 	function del(w_idx, regdate){
 
-		
-		if(confirm('정말 삭제하시겠습니까?')==false){
-			return;
-		}
-		location.href="my_workout_delete.do?w_idx=" + w_idx + "&regdate=" + regdate;
-		
-		 //setTimeout(function(){
-	            // 2초 후에 삭제되었습니다 메시지를 표시
-	            //alert("운동 항목이 삭제되었습니다.");
-	            // 삭제를 진행하는 요청
-	            //location.href="my_workout_delete.do?w_idx=" + w_idx + "&regdate=" + regdate;
-	       // }, 2000);
-		
+	
+	if(confirm('정말 삭제하시겠습니까?')==false){
+		return;
 	}
+	location.href="my_workout_delete.do?w_idx=" + w_idx + "&regdate=" + regdate;
+	
+	 //setTimeout(function(){
+            // 2초 후에 삭제되었습니다 메시지를 표시
+            //alert("운동 항목이 삭제되었습니다.");
+            // 삭제를 진행하는 요청
+            //location.href="my_workout_delete.do?w_idx=" + w_idx + "&regdate=" + regdate;
+       // }, 2000);
+	
+}
 
 </script>
 
