@@ -77,9 +77,8 @@
 	
 	$(document).ready(function(){	//상세보기로 모달처리??
 			
-		let search_text = $("#myDatePicker").val().trim();
-		
-		$("#cal_sum").hide();
+
+		//$("#cal_sum").hide();
 		
 		//날짜 DatePicker
  		$("#myDatePicker").datepicker({
@@ -87,9 +86,9 @@
 		  currentText: '오늘날짜',
 		  closeText:'닫기',
 		  dateFormat:'yy-mm-dd'
-		});
+ 		 }).datepicker("setDate",'${ param.w_regdate }')
 
-
+		let search_text = $("#myDatePicker").val().trim();
  		$.ajax({
 			url : "my_workout_calculate.do",
 			dataType : "json",
@@ -127,6 +126,29 @@
 				alert(error.responseText);
 			}
 		}); //ajax
+		
+		$.ajax({
+			url : "my_workout_calculate_search.do",
+			data  : {
+				"w_regdate" : search_text,
+			},
+			dataType : "json",
+			success : function(res_data){
+				//console.log(res_data.list);
+ 				
+				try {
+					$("#kcal_sum_list").html(res_data.list[0].total_sum);
+				} catch (e) {
+					// TODO: handle exception
+					//e.printStackTrace(); //예외정보 출력
+					$("#kcal_sum_list").html(0);
+				}
+
+			},
+			error : function(error){
+				alert(error.responseText);
+			}
+		}); //ajax
 
 		
 	});
@@ -152,7 +174,7 @@
         }
         
  		$.ajax({
-			url : "my_workout_calculate_search.do",
+			url : "my_workout_calculate_search.do?w_regdate=" + search_text,
 			data  : {
 				"w_regdate" : search_text,
 			},
@@ -182,7 +204,14 @@
 		$("#myDatePicker").val("");
 		$("#kcal_sum_list").val("");
 		
-		location.href="my_workout_list.do";
+		const today = new Date();
+		const year = today.getFullYear();
+		const month = today.getMonth() + 1;
+		const day = today.getDate();
+
+		const w_today = ${year} + "-" + ${month} + "-" ${day};
+		
+		location.href="my_workout_list.do?regdate=" + w_today;
 		
 	}
 		
@@ -228,9 +257,11 @@
 	  	 				html_tr += "<td>" + res_data.list[i].w_name   + "</td>";
 	  	 				html_tr += "<td>" + res_data.list[i].w_time   + "</td>";
 	  	 				html_tr += "<td>" + res_data.list[i].w_unit_kcal_dot2  + "</td>";
-	  	 				html_tr += "<td><input id='my_w_delete' type='button' value='삭제' onclick='del(" + res_data.list[i].w_idx + "," + res_data.list[i].regdate + ");'></td>";
+	  	 				//html_tr += "<td><input id='my_w_modify' type='button' value='수정' onclick='modify(" + res_data.list[i].w_idx + "," + res_data.list[i].regdate + ");'></td>";
+	  	 				html_tr += "<td><input id='my_w_delete' type='button' value='삭제' onclick='del(" + res_data.list[i].w_idx + "," + res_data.list[0].regdate + ");'></td>";
 	  	 				html_tr += "</tr>";
-	
+						
+	  	 				//console.log(res_data.list[i].regdate);
 	 	 			} //for
 	  	 			
 	  	 			//console.log(html_tr);
@@ -282,7 +313,7 @@
 				<!-- 모달로 상세보기 -->
 				
 				<input type="button" class="workout_btn" value="상세보기" onclick="workout_detail();">
-				<input type="button" class="workout_btn" value="운동추가" onclick="location.href='workout_insert_form.do'">
+				<input type="button" class="workout_btn" value="운동추가" onclick="location.href='workout_insert_form.do?w_regdate= ${ param.search_text}'">
 			</div>
 		</div>
 		
