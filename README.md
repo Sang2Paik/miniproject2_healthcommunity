@@ -14,6 +14,8 @@
   1. 하단에 style.css 관련 링크 수정
 - java > WeatherController.java
   1. 위치정보 가져오는 부분 수정
+- webapp > user > user_login_form.jsp
+  1. form tag 추가
 
 
 ### 2024-02-20 최시환 PM 07:30
