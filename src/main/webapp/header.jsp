@@ -21,3 +21,11 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
   
 </head>
+
+<body class="title">
+<!-- header 이미지 추가 -->
+	<div id="header_logo">
+    	<img alt="hellco_logo" src="${pageContext.request.contextPath}/img/hellco_logo.png">
+    	<img alt="hellco_logo_text" src="${pageContext.request.contextPath}/img/hellco_logo_text.png" style="width: 400px;">
+    </div>
+</body>
