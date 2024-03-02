@@ -21,11 +21,16 @@ public class WeatherController {
 		
 		String units = "metric";
 		
-		/*
-		 * try { lon = Double.parseDouble(request.getParameter("lon")); lat =
-		 * Double.parseDouble(request.getParameter("lat")); } catch (Exception e) { //
-		 * TODO: handle exception lon = 127.0249726;//경도 lat = 37.5012336;//위도 }
-		 */
+		// 20240302 백상희 수정
+		try {
+			lon = Double.parseDouble(request.getParameter("lon")); 
+			lat = Double.parseDouble(request.getParameter("lat"));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			lon = 127.0249726;
+			lat = 37.5012336;
+		}
+				
 		String appid = "611b3f8090aed6b02f7c41b9259ea748";
 	
 		List<WeatherVo> weather_list = WeatherUtils.weather_list(lon,lat,units,appid);
