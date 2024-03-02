@@ -5,6 +5,8 @@
 3. service_menu 이미지 관련 수정
 - img 폴더
 1. main_icon01.png, main_icon02.png 추가
+- css > style.css
+1. service_menu 부분 스타일 추가
 
 ### 2024-02-20 최시환 PM 07:30
 자바파일 : BoardController, UserController BoardDao board.xml 수정하였습니다
