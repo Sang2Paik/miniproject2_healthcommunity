@@ -25,11 +25,13 @@
 		
 		//geolocation
 		navigator.geolocation.getCurrentPosition((position) => {
-			//console.log(position)
+			//console.log(position);
+			
 			latitude  = position.coords.latitude;
 			longitude = position.coords.longitude;
 			//console.log("----- [geolocation] -----");
 			//console.log(latitude,longitude);
+			weather_show(); /* 20240302 백상희 수정부분 */
 			
 		},(error) => {
 			//geolocation 미지원 시, https://api.ip.pe.kr/ 통해서 구하기 (정확도 떨어짐)
@@ -39,7 +41,7 @@
 				dataType : "JSON",
 				success  : function(res_data){
 
-					alert(res_data.ip)
+					//alert(res_data.ip);
 					
 					$.ajax({
 						url      : "http://ip-api.com/json/" + res_data.ip,
@@ -47,6 +49,8 @@
 						success  : function(data){
 							latitude = data.lat;
 							longitude= data.lon;
+							
+							weather_show(); /* 20240302 백상희 수정부분 */
 						},
 						error    : function(err){
 							alert(err.responseText);
@@ -59,15 +63,21 @@
 			});
 		});
 		
-		weather_show();
 
 		
 		/* ajax weather-forecast */
-		function weather_show(){			
-			//Ajax
+		function weather_show(){
+			
+			//Ajax		
+			console.log(latitude);
+			console.log(longitude);
+			
 			$.ajax({
 				url		:	"weather/list.do",        //WeatherController
-				data	:	{"lat":latitude,"lon":longitude},
+				data	:	{
+							"lat":latitude,
+							"lon":longitude
+							},
 				success	:	function(res_data){					
 					$("#weather_forecast").html(res_data);
 				},
