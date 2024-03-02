@@ -25,11 +25,10 @@
 - webapp > header.jsp
   1. header 부분 이미지 추가
 - webapp > user > mypage_main.jsp
-  1. 스타일 적용
 - webapp > food > food_insert_form_basic.jsp
-  1. 스타일 적용
 - webapp > food > food_insert_form.jsp
-  1. 스타일 적용
+- webapp > food > food_search_list.jsp
+  1. 스타일 적용  
 
 ### 2024-02-20 최시환 PM 07:30
 자바파일 : BoardController, UserController BoardDao board.xml 수정하였습니다
