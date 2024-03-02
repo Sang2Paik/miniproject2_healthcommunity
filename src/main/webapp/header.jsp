@@ -16,8 +16,8 @@
       <!-- JQuery 3.7.1 -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     
-    
-    <link rel="stylesheet" href="/css/style.css">
+    <!-- 20240302 백상희 링크 수정 -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
   
 </head>
