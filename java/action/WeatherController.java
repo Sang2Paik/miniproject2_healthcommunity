@@ -15,9 +15,10 @@ public class WeatherController {
 	
 	@RequestMapping("/weather/list.do")
 	public String list(HttpServletRequest request, HttpServletResponse response) throws IOException { //invoke할 때 인자 두개 받아야 함
-		
-		double lon = 127.0249726;//경도
-		double lat = 37.5012336;//위도
+
+		// 20240302 백상희 수정
+		double lon;//경도
+		double lat;//위도
 		
 		String units = "metric";
 		
@@ -30,11 +31,11 @@ public class WeatherController {
 			lon = 127.0249726;
 			lat = 37.5012336;
 		}
-				
+		
 		String appid = "611b3f8090aed6b02f7c41b9259ea748";
 	
 		List<WeatherVo> weather_list = WeatherUtils.weather_list(lon,lat,units,appid);
-		
+		//System.out.printf("%f, %f", lon, lat);
 		//request binding
 		request.setAttribute("weather_list", weather_list);
 		//System.out.println(weather_list);
