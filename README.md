@@ -1,6 +1,6 @@
 ### 2024-03-02 백상희 
 -  user_insert_form.jsp | name="user_gender" => name="user_grade" 수정
--                         user_height, user_kg, user_target placeholder에 단위 추가
+-                       | user_height, user_kg, user_target placeholder에 단위 추가
 
 ### 2024-02-20 최시환 PM 07:30
 자바파일 : BoardController, UserController BoardDao board.xml 수정하였습니다
