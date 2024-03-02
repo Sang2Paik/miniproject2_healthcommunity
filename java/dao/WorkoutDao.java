@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import service.MyBatisConnector;
+import vo.WorkoutCaloryVo;
 import vo.WorkoutVo;
 
 public class WorkoutDao {
@@ -34,7 +35,7 @@ public class WorkoutDao {
 	public int insert(WorkoutVo vo) {
 		// TODO Auto-generated method stub
 		int res = 0;
-
+		
 		//1. SqlSession얻어오기                      true -> auto commit
 		SqlSession sqlSession = factory.openSession(true);
 		
@@ -140,7 +141,7 @@ public class WorkoutDao {
 		return list; //list 내에는 vo에서 가져온 레코드 값이 담겨있음
 	}
 
-	// 20240302 백상희 수정부분
+	// 백상희 수정 20240302
 	public double today_w_cal(int user_idx) {
 		// TODO Auto-generated method stub
 		
@@ -153,9 +154,9 @@ public class WorkoutDao {
 		
 		//2.작업수행                 namespace.mapper_id
 		today_w_cal = sqlSession.selectOne("workout.my_workout_list_cal_today", user_idx);
-		
-		if(today_w_cal == null)
-			today_w_cal = 0.0;
+        
+		if(today_w_cal==null)
+        	today_w_cal = 0.0;
 		//System.out.println(today_w_cal);
 		
 		//3.닫기
@@ -164,26 +165,40 @@ public class WorkoutDao {
 		return today_w_cal; //list 내에는 vo에서 가져온 레코드 값이 담겨있음
 	}
 
+	public int my_workout_delete(int w_idx) {
+		// TODO Auto-generated method stub
+		int res = 0;
+		//1.SqlSession 얻어오기					    true -> auto commit
+		SqlSession sqlSession = factory.openSession(true);
+				
+		//2.수행
+		//delete-update로 해야되나?
+		res = sqlSession.delete("workout.my_workout_delete", w_idx);
+		
+		//3.닫기
+		sqlSession.close();
+		
+		return res;
+	}
 
-
-//	public List<WorkoutVo> selectList(String w_regdate) {
-//		// TODO Auto-generated method stub
-//		List<WorkoutVo> list = null; //MyBatis가 만들어줌
-//		
-//		//String sql = "select * from workout_kcal where w_regdate=24-02-24 order by idx desc";
-//		
-//		//1.sqlSession 얻어오기 (MyBatis 실제 작업객체)
-//		SqlSession sqlSession= factory.openSession();
-//		
-//		//2.작업수행                 namespace.mapper_id
-//		list = sqlSession.selectList("workout.my_workout_list_date", w_regdate);
-//		
-//		//3.닫기
-//		sqlSession.close();
-//		
-//		return list; //list 내에는 vo에서 가져온 레코드 값이 담겨있음
-//	}
+	public WorkoutVo selectOne(int w_idx) {
+		// TODO Auto-generated method stub
+		WorkoutVo vo = null;
+		
+		//1.SqlSession 얻어오기					    true -> auto commit
+		SqlSession sqlSession = factory.openSession(true);
+						
+		//2.수행
+		vo = sqlSession.selectOne("workout.my_workout_select_one", w_idx);
+		
+		//3.닫기
+		sqlSession.close();
+		
+		return vo;
+	}
 	
+	
+
 	
 	
 	
