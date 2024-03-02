@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- user_idx로 조회 -->
 	<select id="user_list_idx_one" parameterType="int" resultType="vo.UserVo">
-		select * from user where user_idx=#{ user_idx }
+		select * from user_view where user_idx=#{ user_idx }
 	</select>
 
 	<!-- user_id로 조회 -->
