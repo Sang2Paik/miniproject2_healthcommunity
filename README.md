@@ -16,6 +16,8 @@
   1. 위치정보 가져오는 부분 수정
 - webapp > user > user_login_form.jsp
   1. form tag 추가
+- webaspp > board > board_list.jsp
+  1. 로그아웃부분 경로 수정
 
 
 ### 2024-02-20 최시환 PM 07:30
