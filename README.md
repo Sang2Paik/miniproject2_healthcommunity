@@ -3,6 +3,7 @@
   1. name="user_gender" => name="user_grade" 수정
   2. user_height, user_kg, user_target placeholder에 단위 추가
   3. service_menu 이미지 관련 수정
+  4. javascript 부분 weather_show() 부분 수정
 - img 폴더
   1. main_icon01.png, main_icon02.png 추가
 - webapp >css > style.css
@@ -11,6 +12,9 @@
   1. css 부분 .weather_box width 400px로 조정
 - webapp > header.jsp
   1. 하단에 style.css 관련 링크 수정
+- java > WeatherController.java
+  1. 위치정보 가져오는 부분 수정
+
 
 ### 2024-02-20 최시환 PM 07:30
 자바파일 : BoardController, UserController BoardDao board.xml 수정하였습니다
