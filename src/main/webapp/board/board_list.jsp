@@ -6,6 +6,10 @@
 
 <!DOCTYPE html>
 <html>
+
+<!-- 20240302 백상희 추가 -->
+<%@ include file="../header.jsp" %>
+
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -124,7 +128,6 @@
 </head>
 <body>
 	<div id="box">
-		<h1 id="title">제목혹은로고</h1>
 		
 		<div class="row" id="gird">
 			<div class="col-sm-1" style="margin-bottom: 5px; width: 5%">
