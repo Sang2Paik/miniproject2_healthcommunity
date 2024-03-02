@@ -7,8 +7,10 @@
 - img 폴더
   1. main_icon01.png, main_icon02.png 추가
   2. hellco_logo.png, hellco_logo_text.jsp 추가
+  3. healthy.png, obesity.png 추가
 - webapp >css > style.css
   1. service_menu 부분 스타일 추가
+  2. 버튼 스타일 추가
 - webapp > weather > weather_list.jsp
   1. css 부분 .weather_box width 400px로 조정
 - webapp > header.jsp
@@ -22,6 +24,8 @@
   2. header 추가 및 title 부분 삭제
 - webapp > header.jsp
   1. header 부분 이미지 추가
+- webapp > user > mypage_main.jsp
+  1. 스타일 적용
 
 
 ### 2024-02-20 최시환 PM 07:30
