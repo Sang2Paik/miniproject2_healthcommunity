@@ -1,6 +1,10 @@
 ### 2024-03-02 백상희 
--  user_insert_form.jsp | name="user_gender" => name="user_grade" 수정
--  user_insert_form.jsp | user_height, user_kg, user_target placeholder에 단위 추가
+- user_insert_form.jsp  수정
+1. name="user_gender" => name="user_grade" 수정
+2. user_height, user_kg, user_target placeholder에 단위 추가
+3. service_menu 이미지 관련 수정
+- img 폴더
+1. main_icon01.png, main_icon02.png 추가
 
 ### 2024-02-20 최시환 PM 07:30
 자바파일 : BoardController, UserController BoardDao board.xml 수정하였습니다
