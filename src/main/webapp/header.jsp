@@ -22,10 +22,10 @@
   
 </head>
 
-<body class="title">
+<body class="title" id="header_logo">
 <!-- header 이미지 추가 -->
-	<div id="header_logo">
-    	<img alt="hellco_logo" src="${pageContext.request.contextPath}/img/hellco_logo.png">
-    	<img alt="hellco_logo_text" src="${pageContext.request.contextPath}/img/hellco_logo_text.png" style="width: 400px;">
+	<div>
+    	<img alt="hellco_logo" src="${pageContext.request.contextPath}/img/hellco_logo.png" onclick="location.href='${pageContext.request.contextPath}/main.do;'">
+    	<img alt="hellco_logo_text" src="${pageContext.request.contextPath}/img/hellco_logo_text.png" style="width: 400px;" onclick="location.href='${pageContext.request.contextPath}/main.do;'">
     </div>
 </body>
