@@ -1,3 +1,6 @@
+### 2024-03-02 백상희 
+-  user_insert_form.jsp | name="user_gender" => name="user_grade" 수정
+
 ### 2024-02-20 최시환 PM 07:30
 자바파일 : BoardController, UserController BoardDao board.xml 수정하였습니다
 webapp 파일 : 어드민폴더 admin_page.jsp, 보드폴더 board_list.jsp, user폴더 mypage_main.jsp 변경하였으며 user폴더에 my_page_board_view.jsp 추가 하였습니다
