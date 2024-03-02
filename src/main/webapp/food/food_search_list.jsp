@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -144,13 +146,13 @@
 </head>
 <body>
 <c:forEach var="food" items="${food_search_list}">
-	<table style="border: 1px solid black; width: 500px; height: 80px; margin-bottom: 10px;">
+	<table style="border: 1px solid black; width: 480px; height: 80px; margin-bottom: 10px;">
 		<tr>
-			<th style="font-size: '15px'; color:purple; width: 90%;">${food.f_name} (1회제공량,${food.f_unit_g}g)</th>
-			<td rowspan="2"><input type="button" class="btn btn-info btn-lg" data-target="#myModal" data-dismiss="modal" value="담기" onclick="modal_add('${food.f_name}','${food.f_unit_g}', '${food.f_unit_kcal}', '${food.f_maker}');"></td>
+			<th style="font-size: '23px'; color:purple; width: 90%; text-align: left;">${food.f_name} (1회제공량,${food.f_unit_g}g)</th>
+			<td rowspan="2"><input type="button" class="btn btn-gradient yellow mini" data-target="#myModal" data-dismiss="modal" value="담기" onclick="modal_add('${food.f_name}','${food.f_unit_g}', '${food.f_unit_kcal}', '${food.f_maker}');"></td>
 		</tr>
 		<tr>
-			<td style="width: 90%;">
+			<td style="width: 90%; text-align: left;">
 				<b>칼로리 : ${food.f_unit_kcal}&nbsp;kcal</b> 
 				탄수화물 : ${food.carbo}g &nbsp; 단백질 : ${food.protein}g &nbsp; 지방 : ${food.fat}g &nbsp;
 				<c:if test="${not empty food.sweet}">
