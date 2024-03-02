@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"  %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     	<!-- Header -->
 
     
@@ -125,8 +126,20 @@
 					<div id="weather_forecast"></div>
 				</div>
 				<p class="f12 m_title">Service Menu</p>
-				<input type="image" src="./img/main_icon01.png" class="btn_img" value="운동 게시판" onclick="location.href='board/list.do'">
-				<input type="image" src="./img/main_icon02.png" class="btn_img" value="나의 건강정보" onclick="move_health_page();">
+				<div>
+					<!-- 백상희 20240302 이미지 관련 수정 -->
+					<div class="service_menu" onclick="location.href='board/list.do'">
+						<p class="f12">운동 게시판</p>
+						<input type="image" src="./img/main_icon01.png" class="btn_img" value="운동 게시판">
+					</div>
+					
+					<div class="service_menu" onclick="move_health_page();">
+						<p class="f12">나의 건강정보</p>
+						<input type="image" src="./img/main_icon02.png" class="btn_img" value="나의 건강정보">
+					</div>
+					
+				</div>
+				
 			</div>
 		</div>
 		
