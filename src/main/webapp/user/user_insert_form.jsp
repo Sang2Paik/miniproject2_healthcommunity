@@ -187,9 +187,11 @@
               
               <div class="form-outline form-white mb-4">
                 등급 : 
-                <input type="radio" class="form-check-input"  name="user_gender" 
+                
+                <!-- 20240302 백상희 name="user_grade" 수정 -->
+                <input type="radio" class="form-check-input"  name="user_grade" 
 		                 				value="man" checked="checked">일반 | 
-		                 	<input type="radio" class="form-check-input"  name="user_gender" 
+		                 	<input type="radio" class="form-check-input"  name="user_grade"" 
 		                 				value="woman">관리자
               </div>
               
@@ -279,6 +281,7 @@
 		              <tr>
 		                 <th><label>등급</label></th>
 		                 <td>
+
 		                 	<input type="radio" class="form-control"  name="user_grade" 
 		                 				value="user_user" checked="checked">일반&nbsp;&nbsp;&nbsp;
 		                 	<input type="radio" class="form-control"  name="user_grade" 
