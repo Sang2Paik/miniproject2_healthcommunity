@@ -65,7 +65,7 @@
 									<div>
 										<p class="mb-0">
 											<a href="#!" class="text-white-50 fw-bold"
-												onclick="location.href='${ pageContext.request.contextPath }/main.do'">메인화면</a>
+												onclick="location.href='${ pageContext.request.contextPath }/user/mypage_main.do'">마이페이지</a>
 										</p>
 
 									</div>
