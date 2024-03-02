@@ -169,21 +169,21 @@
 		                 				value="woman">여자
               </div>
               
-              
+              <!-- 20240302 백상희 : placeholder에 단위 추가 -->
               <div class="form-outline form-white mb-4">
-                <input class="form-control form-control-lg"  name="user_height" placeholder="키"/>
+                <input class="form-control form-control-lg"  name="user_height" placeholder="키(cm)"/>
               </div>
               
-              
+              <!-- 20240302 백상희 : placeholder에 단위 추가 -->
               <div class="form-outline form-white mb-4">
-                <input class="form-control form-control-lg"  name="user_kg" placeholder="체중"/>
+                <input class="form-control form-control-lg"  name="user_kg" placeholder="체중(kg)"/>
               </div>
               
-              
+              <!-- 20240302 백상희 : placeholder에 단위 추가 -->
               <div class="form-outline form-white mb-4">
-                <input class="form-control form-control-lg"  name="user_target" placeholder="목표체중"/>
+                <input class="form-control form-control-lg"  name="user_target" placeholder="목표체중(kg)"/>
               </div>
-              
+
               
               <div class="form-outline form-white mb-4">
                 등급 : 
@@ -281,7 +281,6 @@
 		              <tr>
 		                 <th><label>등급</label></th>
 		                 <td>
-
 		                 	<input type="radio" class="form-control"  name="user_grade" 
 		                 				value="user_user" checked="checked">일반&nbsp;&nbsp;&nbsp;
 		                 	<input type="radio" class="form-control"  name="user_grade" 
