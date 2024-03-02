@@ -1,14 +1,14 @@
 ### 2024-03-02 백상희 
 - user_insert_form.jsp  수정
-1. name="user_gender" => name="user_grade" 수정
-2. user_height, user_kg, user_target placeholder에 단위 추가
-3. service_menu 이미지 관련 수정
+  1. name="user_gender" => name="user_grade" 수정
+  2. user_height, user_kg, user_target placeholder에 단위 추가
+  3. service_menu 이미지 관련 수정
 - img 폴더
-1. main_icon01.png, main_icon02.png 추가
+  1. main_icon01.png, main_icon02.png 추가
 - webapp >css > style.css
-1. service_menu 부분 스타일 추가
+  1. service_menu 부분 스타일 추가
 - webapp > weather > weather_list.jsp
-1. css 부분 .weather_box width 400px로 조정
+  1. css 부분 .weather_box width 400px로 조정
 
 ### 2024-02-20 최시환 PM 07:30
 자바파일 : BoardController, UserController BoardDao board.xml 수정하였습니다
