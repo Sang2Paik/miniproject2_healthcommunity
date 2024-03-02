@@ -1,22 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@	taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<style>
-	.result_area {
-		width: 500px;
-		height: 800px;
-		border: 1px solid black;
-	}
+<title>식사 입력하기</title>
+<%@ include file="../header.jsp" %>
 
-</style>
 <script type="text/javascript">
 
 		
@@ -37,34 +30,53 @@
 </head>
 <body>
 
-<div id="box">
-		<form>
-			<table>
-				<tr>
-					<th colspan='3'><label>내가 먹은 칼로리 등록하기</label></th>
-				</tr>
-				<tr>
-					<th>식사종류</th>
-					<td><select name="meal_type" id="meal_type">
-							<c:forEach var="meal" items="${meal_type_list}">
-								<option value="${meal.m_idx}">${meal.m_name}</option>
-							</c:forEach>
-					</select></td>
-					<td></td>
-				</tr>
-				<tr>
-					<th>식사시간</th>
-					<td><input type="datetime-local" name="f_eattime"></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td colspan="3">
-						<input type="button" value="다음" onclick="next(this.form);">
-					</td>
-				</tr>
-			</table>
+<section class="vh-100 gradient-custom">
+	<form>
+		<div class="container py-5 h-100">
+				<div class="row d-flex justify-content-center align-items-center h-100">
+					<div class="col-12 col-md-8 col-lg-6 col-xl-5">
+						<div class="card main_bg text-white" style="border-radius: 1rem;">
+							<div class="card-body p-5 text-center">
+
+								<div class="mb-md-5 mt-md-4 pb-5">
+									<h2 class="fw-bold mb-2 text-uppercase">
+										<img
+											src="${ pageContext.request.contextPath }/img/login_title.png">
+										<br>식사 입력하기
+									</h2>
+
+									<div class="form-outline form-white mb-4" style="width: 80%; margin: 0 auto;">
+										<select class="form-control" name="meal_type"
+											id="meal_type">
+											<c:forEach var="meal" items="${meal_type_list}">
+												<option value="${meal.m_idx}">${meal.m_name}</option>
+											</c:forEach>
+										</select>
+									</div>
+
+									<div class="form-outline form-white mb-4" style="width: 80%; margin: 0 auto;">
+										<input class="form-control"
+											type="datetime-local" name="f_eattime" />
+									</div>
+									<div class="form-outline form-white mb-4" >
+										<input class="btn btn-gradient cyan block" type="button" value="다음" style="width: 80%; margin: 0 auto;" onclick="next(this.form);">
+									</div>
+
+									<div>
+										<p class="mb-0">
+											<a href="#!" class="text-white-50 fw-bold"
+												onclick="location.href='${ pageContext.request.contextPath }/main.do'">메인화면</a>
+										</p>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</form>
-</div>
-		
+	</section>
+
 </body>
 </html>
