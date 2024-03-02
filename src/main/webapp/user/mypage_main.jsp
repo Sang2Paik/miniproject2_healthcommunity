@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"  %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <!DOCTYPE html>
 <html>
+<!-- 20240302 백상희 추가 -->
+<%@ include file="../header.jsp" %>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -26,30 +29,38 @@
 	
 </style>
 
-<!-- Bootstrap 3.x -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
 <script type="text/javascript">
 
 	$(document).ready(function(){
 		
+		$("#my_health_info").show();
+		$("#my_basic_info").hide();
+		
 		let BMI = '${user.user_BMI}';
 		
 		if(BMI < 18.5){
-			$("#my_status").text("저체중");
+			$("#my_status").html("저체중입니다. <br> 오늘부터 1일 1닭가슴살 어떤가요?");
 			$("#my_status_img").attr("src", "../img/Lenny.png");
 		}else if (BMI > 18.5 && BMI <= 23){
-			$("#my_status").text("정상");
-			$("#my_status_img").attr("src", "../img/thumbs.png");
+			$("#my_status").html("정상입니다. <br> 유지어터군요!");
+			$("#my_status_img").attr("src", "../img/healthy.png");
 		}else if (BMI > 23 && BMI <= 25){
-			$("#my_status").text("과체중");
-			$("#my_status_img").attr("src", "../img/tongtong.jpeg");
+			$("#my_status").html("과체중입니다. <br> 오늘부터 만보걷기 챌린지는 어떤가요?");
+			$("#my_status_img").attr("src", "../img/tongtong.png");
 		}else if (BMI > 25){
-			$("#my_status").text("비만");
-			$("#my_status_img").attr("src", "../img/pig.jpeg");
+			$("#my_status").html("비만입니다. <br> 고강도의 운동이 필요합니다.");
+			$("#my_status_img").attr("src", "../img/obesity.png");
 		}
+		
+		let BMR;
+		if('${user.user_gender}' == 'man'){			
+			BMR = 66.5 + (13.75*'${user.user_kg}')+(5.003*'${user.user_height}')-(6.75*'${user.user_age}')
+		}else if('${user.user_gender}' == 'woman'){
+			BMR = 655.1 + (9.563*'${user.user_kg}')+(1.850*'${user.user_height}')-(4.676*'${user.user_age}')
+		}
+		
+		$("#user_BMR").html(BMR);
+		
 		
 	});
 
@@ -59,12 +70,14 @@
 	function show_health_info(){
 		
 		$("#my_health_info").show();
+		$("#my_basic_info").hide();
 		
 	}
 	
 	function show_basic_info(){
 		
 		$("#my_health_info").hide();
+		$("#my_basic_info").show();
 		
 	}
 
@@ -80,61 +93,69 @@
 </head>
 <body>
 
-	<table>
-		<tr>
-			<td>
-				<input type="button" value="나의 건강정보" onclick="show_health_info();">
-				<input type="button" value="나의 기본정보" onclick="show_basic_info();">
-				<input type="button" value="나의 갤러리" onclick="my_board_info();">
-			</td>
-		</tr>
-	</table>
-	
-	<div id="my_health_info">
-		<table>
+	<div class="container">
+		<table class="table">
 			<tr>
-				<th>나의 BMI 지수</th>
-				<td>${user.user_BMI}</td>
-				<td id="my_status" style="font-size: 20px;"></td>
-				<td><img id="my_status_img" alt="비만" src=""></td>
+				<td><input type="button" class="nav_btn" value="나의 건강정보"
+					onclick="show_health_info();"> <input type="button"
+					class="nav_btn" value="나의 기본정보" onclick="show_basic_info();">
+					<input type="button" class="nav_btn" value="나의 갤러리"
+					onclick="my_board_info();"></td>
 			</tr>
-			<tr>
-				<th>키</th>
-				<td>${user.user_height}&nbsp;cm</td>
-			</tr>
-			<tr>
-				<th>몸무게</th>
-				<td>${user.user_kg}&nbsp;kgs</td>
-			</tr>
-			<tr>
-				<th>나의 목표</th>
-				<td>${user.user_target}&nbsp;kgs</td>
-			</tr>
-			<tr>
-				<th>일일 활동 칼로리</th>
-				<td>
-					<input type="button" value="입력" onclick="location.href='../workout/workout_insert_form.do'">
-					<input type="button" value="보기" onclick="location.href='../workout/my_workout_list.do'">
-				</td>
-			</tr>
-			<tr>
-				<th>음식 칼로리</th>
-				<td>
-					<input type="button" value="입력" onclick="location.href='../food/insert_basic.do'">
-					<input type="button" value="보기" onclick="location.href='../food/food_cal_list.do'">
-				</td>
-			</tr>
-			<tr>
-				<td>오늘 먹은 칼로리<span id="today_cal">${today_food_kcal}</span>&nbsp;kcals</td>
-			</tr>
-			<tr>
-				<td>오늘 태운 칼로리<span id="today_cal">${today_workout_kal}</span>&nbsp;kcals</td>
-			</tr>
-		
 		</table>
+
+
+		<div id="my_health_info">
+			<table class="table">
+				<tr>
+					<th class="f16 text-center">체질량 지수(BMI)</th>
+					<td class="f16 text-center">${user.user_BMI}</td>
+					<td class="f16 text-center" id="my_status" style="font-size: 20px;"></td>
+					<td class="text-center"><img id="my_status_img" alt="비만"
+						src="" style="width: 100px; height: auto;"></td>
+				</tr>
+				<tr>
+					<th class="f16 text-center">키</th>
+					<td class="f16 text-center" colspan="3">${user.user_height}&nbsp;cm</td>
+				</tr>
+				<tr>
+					<th class="f16 text-center">몸무게</th>
+					<td class="f16 text-center" colspan="3">${user.user_kg}&nbsp;kgs</td>
+				</tr>
+				<tr>
+					<th class="f16 text-center">나의 목표</th>
+					<td class="f16 text-center" colspan="3">${user.user_target}&nbsp;kgs</td>
+				</tr>
+				<tr>
+					<th class="f16 text-center">기초 대사량</th>
+					<td class="f16 text-center"><span id="user_BMR"></span><span>&nbsp;kcal</span></td>
+					<td colspan="2"></td>
+				</tr>
+				<tr>
+					<th class="f16 text-center">일일 활동</th>
+					<td class="f16 text-center" id="today_cal">${today_workout_kal}
+						&nbsp; kcal</td>
+					<td class="text-center">
+						<input type="button" class="btn btn-gradient cyan mini" value="입력" onclick="location.href='../workout/workout_insert_form.do'">
+						<input type="button" class="btn btn-gradient blue mini" value="보기" onclick="location.href='../workout/my_workout_list.do'">
+					</td>
+					<td></td>
+				</tr>				
+				<tr>
+					<th class="f16 text-center">일일 섭취</th>
+					<td class="f16 text-center" id="today_cal">${today_food_kcal}
+						&nbsp; kcal</td>
+					<td class="text-center" >
+						<input type="button" class="btn btn-gradient cyan mini" value="입력" onclick="location.href='../food/insert_basic.do'"> 
+						<input type="button" class="btn btn-gradient blue mini" value="보기" onclick="location.href='../food/food_cal_list.do'">
+					</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
 	</div>
-	
-	
+
+
 	<div id="my_basic_info">
 		<div id="box">
 			<div class="panel panel-primary">
@@ -245,7 +266,7 @@
 					</tr>
 						
 					<tr>
-						<td colspan="2" align="center">
+						<td colspan="2" align="center" >
 							<input class="btn btn-danger" type="button" value="탈퇴하기" 
 								onclick="user_delete_form(${ user.user_idx });">
 								
