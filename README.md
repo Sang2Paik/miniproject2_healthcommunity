@@ -29,6 +29,8 @@
 - webapp > food > food_insert_form.jsp
 - webapp > food > food_search_list.jsp
 - webapp > food > add_food_list.jsp
+- webapp > food > confirm_food_list.jsp
+- webapp > food > food_cal_list.jsp
   1. 스타일 적용  
 
 ### 2024-02-20 최시환 PM 07:30
