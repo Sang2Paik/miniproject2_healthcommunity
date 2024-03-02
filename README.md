@@ -6,6 +6,7 @@
   4. javascript 부분 weather_show() 부분 수정
 - img 폴더
   1. main_icon01.png, main_icon02.png 추가
+  2. hellco_logo.png, hellco_logo_text.jsp 추가
 - webapp >css > style.css
   1. service_menu 부분 스타일 추가
 - webapp > weather > weather_list.jsp
@@ -16,8 +17,10 @@
   1. 위치정보 가져오는 부분 수정
 - webapp > user > user_login_form.jsp
   1. form tag 추가
-- webaspp > board > board_list.jsp
+- webapp > board > board_list.jsp
   1. 로그아웃부분 경로 수정
+- webapp > header.jsp
+  1. header 부분 이미지 추가
 
 
 ### 2024-02-20 최시환 PM 07:30
