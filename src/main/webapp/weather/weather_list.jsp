@@ -20,7 +20,7 @@
 <style type="text/css">
 
 	.weather_box {
-	 	width: 320px;
+	 	width: 400px;   /* width 400으로 조정 */
 	 	height: 180px;
 	 	background-color : rgb(101, 178, 255); 
 	 	margin: auto;
