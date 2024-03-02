@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,11 +69,11 @@
 		<c:forEach var="food" items="${add_food_list}" varStatus="i">
 			<input type="hidden" class="f_idx" name="f_idx" value="${food.f_idx}">
 			<table
-				style="border: 1px solid black; width: 500px; margin-bottom: 10px;">
+				style="border: 1px solid black; width: 450px; margin-bottom: 10px;">
 				<tr>
 					<th colspan="2" style="width: 90%;">${food.f_name}<br>
 					</th>
-					<td rowspan="2"><input type="button" value="X"
+					<td rowspan="2"><input class="btn btn-danger" type="button" value="X"
 						onclick="del('${food.f_idx}')"></td>
 				</tr>
 				<tr>
