@@ -15,7 +15,12 @@
 		height: 800px;
 		border: 1px solid black;
 	}
-
+	.food_search_title{
+		color: white !important; 
+		background: #16bcd7 !important; 
+		text-align: center;
+	}
+	
 </style>
 <script type="text/javascript">
 
@@ -115,14 +120,14 @@
 </head>
 <body>
 	<form class="form-inline">
-		<div class="form-outline form-white mb-4">
+		<div class="form-outline form-white mb-4" >
 			<input class="form-control" name="f_name" id="f_name" placeholder="검색어를 입력하세요." style="width: 80%; display: inline-block;">
 			<input class="btn btn-info" type="button" value="검색" onclick="find(this.form)" style="width: 15%; display: inline-block;">	
 		</div>
-		<table>
+		<table class="table">
 			<tr class="form-outline form-white mb-4">
-				<th class="f18" style="color: white; background: #16bcd7;">검색 결과</th>
-				<th class="f18" style="color: white; background: #16bcd7;">오늘 먹은 음식</th>
+				<th class="food_search_title f18" >검색 결과</th>
+				<th class="food_search_title f18" >오늘 먹은 음식</th>
 			</tr>
 			<tr class="form-outline form-white mb-4" >
 				<td class="result_area" style="vertical-align: top; overflow-y: auto;" >  	
