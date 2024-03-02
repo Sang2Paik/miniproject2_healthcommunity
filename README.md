@@ -9,6 +9,8 @@
   1. service_menu 부분 스타일 추가
 - webapp > weather > weather_list.jsp
   1. css 부분 .weather_box width 400px로 조정
+- webapp > header.jsp
+  1. 하단에 style.css 관련 링크 수정
 
 ### 2024-02-20 최시환 PM 07:30
 자바파일 : BoardController, UserController BoardDao board.xml 수정하였습니다
