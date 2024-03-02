@@ -19,6 +19,7 @@
   1. form tag 추가
 - webapp > board > board_list.jsp
   1. 로그아웃부분 경로 수정
+  2. header 추가 및 title 부분 삭제
 - webapp > header.jsp
   1. header 부분 이미지 추가
 
