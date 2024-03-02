@@ -140,10 +140,11 @@ public class WorkoutDao {
 		return list; //list 내에는 vo에서 가져온 레코드 값이 담겨있음
 	}
 
-	public Double today_w_cal(int user_idx) {
+	// 20240302 백상희 수정부분
+	public double today_w_cal(int user_idx) {
 		// TODO Auto-generated method stub
 		
-		double today_w_cal = 0;
+		Double today_w_cal = 0.0;
 		
 		//String sql = "select * from workout_kcal where w_regdate=24-02-24 order by idx desc";
 		
@@ -152,7 +153,9 @@ public class WorkoutDao {
 		
 		//2.작업수행                 namespace.mapper_id
 		today_w_cal = sqlSession.selectOne("workout.my_workout_list_cal_today", user_idx);
-
+		
+		if(today_w_cal == null)
+			today_w_cal = 0.0;
 		//System.out.println(today_w_cal);
 		
 		//3.닫기
