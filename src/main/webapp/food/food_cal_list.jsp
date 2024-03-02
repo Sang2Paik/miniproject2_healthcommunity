@@ -1,32 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%@ include file="../header.jsp" %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
-<!-- Bootstrap 3.x -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style type="text/css">
 .chartWrapper {
-      width: 500px;
+      width: 960px;
       overflow-x: scroll;
 }
 .chartAreaWrapper {
-            width: 800px; 
-            height: 400px; 
+            width: 960px; 
         }
 
 canvas {
-            width: 500px; 
-            height: 400px; 
+            width: 1500px; 
         }
 
 </style>
@@ -113,14 +108,18 @@ canvas {
 </script>
 </head>
 <body>
-	<div>나의 칼로리 차트보기</div>
+	<div>
+		<input type="button" class="nav_btn" value="마이페이지"	onclick="location.href='${pageContext.request.contextPath}/user/mypage_main.do'"> 
+		<input type="button" class="nav_btn" value="메인페이지" onclick="location.href='${pageContext.request.contextPath}/main.do'">
+		<input type="button" class="nav_btn" value="모두의 갤러리" onclick="location.href='${pageContext.request.contextPath}/board/list.do'">
+	</div>
+	<hr>
 	<div class="chartWrapper">
 		<div class="chartAreaWrapper">
 			<canvas id="myChart"></canvas>
 		</div>
 	</div>
 		
-	<input type="button" value="나의 페이지" onclick="location.href='../user/mypage_main.do'">
 	<div id="disp_food_list"></div>
 </body>
 </html>
