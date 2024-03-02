@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@	taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<title>음식 입력하기</title>
+<%@ include file="../header.jsp" %>
 <style>
 	.result_area {
 		width: 500px;
@@ -114,30 +114,26 @@
 </script>
 </head>
 <body>
-	<form>
+	<form class="form-inline">
+		<div class="form-outline form-white mb-4">
+			<input class="form-control" name="f_name" id="f_name" placeholder="검색어를 입력하세요." style="width: 80%; display: inline-block;">
+			<input class="btn btn-info" type="button" value="검색" onclick="find(this.form)" style="width: 15%; display: inline-block;">	
+		</div>
 		<table>
-			<tr>
-				<th>검색어</th>
-				<td>
-					<input name="f_name" id="f_name">
-					<input type="button" value="검색" onclick="find(this.form)">
-				</td>
-				<td>내가 담은 음식</td>
+			<tr class="form-outline form-white mb-4">
+				<th class="f18" style="color: white; background: #16bcd7;">검색 결과</th>
+				<th class="f18" style="color: white; background: #16bcd7;">오늘 먹은 음식</th>
 			</tr>
-			<tr>
-				<td colspan="2" class="result_area" style="vertical-align: top;">
-				   검색 결과	
-				   <div id="disp"></div>
+			<tr class="form-outline form-white mb-4" >
+				<td class="result_area" style="vertical-align: top; overflow-y: auto;" >  	
+				   <div id="disp" style="height: 300px;"></div>
 							
 				</td>
-				<td class="result_area" style="vertical-align: top;">
-					내가 담은 음식 결과
-					<div id="disp_add"></div>
+				<td class="result_area" style="vertical-align: top; overflow-y: auto;">
+					<div id="disp_add" style="height: 300px;"></div>
 				</td>
 			</tr>
 		</table>		
 	</form>
-
-
 </body>
 </html>
