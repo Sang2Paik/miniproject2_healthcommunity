@@ -43,6 +43,10 @@
 .table th, td {
         vertical-align: middle;
     }
+    
+.food_basic_info {
+	text-align: left;
+}
 
 .btn-gradient {
   margin: 5px;
@@ -51,7 +55,15 @@
 
 .btn-gradient.mini {
   padding: 4px 12px;  
-  font-size: 12px;
+  font-size: 14px;
+}
+
+.btn-gradient.block {
+  display: block;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 .btn-gradient {
