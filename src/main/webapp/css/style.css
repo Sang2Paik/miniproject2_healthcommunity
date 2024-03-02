@@ -29,6 +29,17 @@
 	height: 600px;
 }
 
+/* 백상희 추가 20240302*/
+.service_menu{
+	
+	display: inline-block;
+}
+
+.service_menu input[type=image] {
+   	width: 150px;
+   	height: 150px;
+}
+
 
 /* 공통 */
 .tt{		border: 1px solid #16bcd7;	}
