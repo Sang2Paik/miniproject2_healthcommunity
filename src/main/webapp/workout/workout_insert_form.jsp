@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<%@ include file="../header.jsp" %>
 
 <!-- Bootstrap 3.x -->
 
@@ -22,12 +23,25 @@
 
 
 <style type="text/css">
-	#box{
+/* 	#box{
 
-		/* border: solid green 1px; */
 		margin: auto;
 		margin-top: 30px;
 		padding: 10px;
+	}
+	 */
+	#myDatePicker {
+		color: black !important;
+		width: 200px !important;
+		
+	}
+	.btn {
+		margin: 0px;
+		padding: 0px;
+		font-size: 10px;
+	}
+	.row {
+		padding: 0px;
 	}
 
 </style>
@@ -122,27 +136,49 @@
 
 </head>
 <body>
-	<div id="box">
-		<div id="workout_select">
-			<h3>${ user.user_name }님의 운동 입력</h3>
-	 		<div>
+<section class="vh-100 gradient-custom">
+<div class="container py-5 h-100">
+<div class="row d-flex justify-content-center align-items-center h-100">
+<div class="col-12 col-md-8 col-lg-6 col-xl-5">
+<div class="card main_bg text-white" style="border-radius: 1rem;">
+<div class="card-body p-5 text-center">
+<div class="mb-md-5 mt-md-4 pb-5">
+
+			<h2 class="fw-bold mb-2 text-uppercase">
+				<img src="${ pageContext.request.contextPath }/img/login_title.png">
+				<br>${ user.user_name }님의 운동 입력
+			</h2>
+			<div class="form-outline form-white mb-4" style="width: 80%; margin: 0 auto;">	
+	 		<div style="text-align: center !important;">
 				날짜<br>
-				<input id="myDatePicker" name="w_regdate" value="${ param.search_text }">
+				<input class="form-control" id="myDatePicker" name="w_regdate" value="${ param.search_text }">
+			</div>
 			</div>
 			운동 검색
-			<div>
-				<input id="search_text" type="text">
-				<input id="" type="button" value="검색" onclick="workout_search();">
-				<input id="" type="button" value="전체보기" onclick="workout_search_all();">
-				<input id="" type="button" value="MyPage" onclick="location.href='../user/mypage_main.do'">
+			<div class="form-outline form-white mb-4 row" style="width: 80%; margin: 0 auto;">
+				<div class="col-sm-6">
+					<input class="form-control btn" id="search_text" type="text">
+				</div>
+				<div class="btn col-sm-2">
+					<input class="form-control btn" id="search" type="button" value="검색" onclick="workout_search();">
+				</div>
+				<div class="btn col-sm-2">
+					<input class="form-control btn" id="search_all" type="button" value="전체보기" onclick="workout_search_all();">
+				</div>
+				<div class="btn col-sm-2">
+					<input class="form-control btn" id="goto_mypage" type="button" value="MyPage" onclick="location.href='../user/mypage_main.do'">
+				</div>
 			</div>
-		</div>
 		
 		
 		<div id="workout_info"></div>
 		
-	</div>
-
-	
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>	
 </body>
 </html>
