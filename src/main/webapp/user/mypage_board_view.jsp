@@ -45,6 +45,11 @@
 		width: 100%;
 		height: 80px;
 	}
+	/* 20230303 최시환 추가 */
+	#my_img{
+		width: 200px;
+		height: 200px;
+	}
 	
 </style>
 
