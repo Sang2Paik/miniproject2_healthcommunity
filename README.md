@@ -1,3 +1,11 @@
+### 2024-03-03 이영준
+  1. workout_insert_form.jsp 전체 수정
+  2. workout_list.jsp 전체 수정
+  3. my_workout_list.jsp 전체 수정
+  4. my_workout_list_search_popup.jsp 전체 수정
+  5. mypage_main.jsp
+     내 운동/Food 이미지 출력, 수평으로 출력 수정
+
 ### 2024-03-03 최시환
   1. admin_page.jsp
       i. include 추가
@@ -7,15 +15,17 @@
      
   4. user_view.jsp
       i. include 추가
+  5. mypage_board_view.jsp
+      i. 이미지 크기 설정코드 추가
 
-  5. board_view.jsp
+  6. board_view.jsp
       i. include 추가
       ii. 댓글기능이 가운데 기준으로 나와 위치 수정
      
   7. board_list.jsp
       i. 로그아웃 경로 수정
   8. board_modify_form.jsp
-      i.<html> include 추가
+      i. <html> include 추가
   9. board_comment_list.jsp
       i. 두번째줄 b태그 추가
 
