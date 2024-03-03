@@ -21,6 +21,7 @@
 		margin: auto;
 		margin-top: 30px;
 		padding: 10px;
+		color: black;
 	}
 	
 	th, td {
@@ -78,6 +79,8 @@
 
 </head>
 <body>
+
+<div id="box_modal">
 <!-- Button to Open the Modal -->
 <button  style="display:none;" id="btn_modal" type="button"  data-toggle="modal" data-target="#myModal">
   Open modal
@@ -102,7 +105,7 @@
 		</div>
 		<div id="my_workout_list">
 			
-			<table>
+			<table class="list_table2">
 
 				<div id="disp1"></div>
 
@@ -117,7 +120,6 @@
 </div>
 </div>
 
-
-	
+</div>
 </body>
 </html>
