@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+<!-- 20240303 최시환 추가 -->
+<%@ include file="../header.jsp" %>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>

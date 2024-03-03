@@ -6,6 +6,8 @@
     
 <!DOCTYPE html>
 <html>
+<!-- 20240303 최시환 추가 -->
+<%@ include file="../header.jsp" %>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -102,7 +104,7 @@
 <body>
 
 	<div id="box">
-	   <h1 id="title">::::관리자화면::::</h1>
+	   <!-- 20240303 최시환 <h1> 태그삭제 -->
 	   
 	   <!-- 로그인 / 로그아웃 -->
 	   <div style="text-align: right;">
