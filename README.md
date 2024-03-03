@@ -1,17 +1,19 @@
 ### 2024-03-03 최시환
   1. admin_page.jsp
-      i.<html> include 추가
+      i. include 추가
       ii.h1 태그삭제
   3. admin_user_modify_form.jsp
-      i.<html> include 추가
+      i. include 추가
      
   4. user_view.jsp
-      i.<html> include 추가
-     
+      i. include 추가
+
   5. board_view.jsp
-      i.<html> include 추가
+      i. include 추가
      
-  6. board_modify_form.jsp
+  7. board_list.jsp
+      i. 로그아웃 경로 수정
+  9. board_modify_form.jsp
       i.<html> include 추가
 
 ### 2024-03-02 백상희 
