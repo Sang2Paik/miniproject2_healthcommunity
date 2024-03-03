@@ -225,9 +225,5 @@
 	</div>
 
 		
-		<%-- <div id="pageMenu">
-			<!-- Page Menu -->
-			${ pageMenu }
-		</div> --%>
 </body>
 </html>
