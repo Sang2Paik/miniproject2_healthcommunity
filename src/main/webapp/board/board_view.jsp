@@ -3,9 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+<head>
 <!-- 20240303 최시환 추가 -->
 <%@ include file="../header.jsp" %>
-<head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- Bootsrap 3.x -->
@@ -46,6 +46,11 @@
 		height: 80px;
 	}
 	
+	#disp {
+	    text-align: left; /* 내용을 왼쪽 정렬합니다. */
+	    margin: 0 auto; /* 좌우 여백을 자동으로 설정하여 가운데 정렬을 해제합니다. */
+	}
+	
 </style>
 
 <script type="text/javascript">
@@ -70,7 +75,8 @@
 <script type="text/javascript">
 
 	var g_cmt_page=1;
-
+	
+	
 	$(document).ready(function(){
 		comment_list(1);
 	});

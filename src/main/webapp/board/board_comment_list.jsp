@@ -81,7 +81,7 @@
 		
 		<!-- 2번째줄 -->
 		<div class="cmt_2">
-			${ cmt.cmt_regdate }
+			<b>${ cmt.cmt_regdate }</b>
 		</div>
 		
 		<!-- 3번째줄 -->
