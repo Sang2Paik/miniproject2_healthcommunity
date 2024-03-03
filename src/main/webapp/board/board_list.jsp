@@ -157,7 +157,7 @@
 				<div class="form-inline">
 	
 					<!-- 로그인 된경우 -->
-					<!-- 20240302 백상희 로그아웃 경로 수정 -->
+					<!-- 20240303 최시환 로그아웃 경로 수정 -->
 					<c:if test="${ not empty user }">
 						<span class="user_name"><b>${ user.user_name }</b></span><span class="welcome_tag">님 환영합니다</span>
 	         			<input class="btn btn-primary" type="button" value="로그아웃"
