@@ -24,9 +24,9 @@
 
 	#workout_select_list{
 		float: left;
-		border: solid gray 1px;
+		border: solid white 2px;
 		max-height: 200px;
-		width: 380px;
+		width: 100%;
 		resize: none; 
 		margin: 0px;
 		padding: 10px;
@@ -53,10 +53,10 @@
 		font-size: 10px;
 	}
 	
-	table{
+/* 	table{
 		width: 370px important;
 		resize: none;
-	}
+	} */
 	
 	td, th{
 		
@@ -67,17 +67,25 @@
 		color: black; 
 	} */
 	
-	.btn {
+/* 	.btn {
 		margin: 0px;
 		padding: 0px;
 		font-size: 10px;
-	}
+	} */
 	.row {
 		padding: 0px;
 	}
 	#btn_select{
 		width: 30px;
 		height: 20px;
+		padding: 0px;
+		text-align: center;
+	}
+	
+	.list_table{
+		width: 100%;
+		resize: none;
+		color: white;
 	}
 
 
@@ -192,7 +200,7 @@
 		<form class="form-inline">
 	
 			<div id="workout_select_list">
-				<table class="form-class">
+				<table class="form-class list_table">
 					<tr>
 						<th style="width:10%;">
 							번호
