@@ -1,7 +1,7 @@
 ### 2024-03-03 최시환
   1. admin_page.jsp
       i.<html> include 추가
-      ii.<h1> 태그삭제
+      ii.h1 태그삭제
   2. admin_user_modify_form.jsp
       i.<html> include 추가
 	3. user_view.jsp
