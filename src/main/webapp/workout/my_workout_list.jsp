@@ -34,14 +34,20 @@
 
  	#box{
 		margin: auto;
-		padding: 0px;
-		width: 400px;
+		padding: 0px; 
+		width: 100%;
+		color: white;
 	} 
-		
-	#myDatePicker {
+	
+ 	#box_modal{
+		color: black;
+	} 
+
+	
+/* 	#myDatePicker {
 		color: black !important;
 		width: 150px !important;
-	}
+	} */
 	
 	th, td {
 		text-align: center;
@@ -71,13 +77,35 @@
 	
 	.workout_btn{
 		font-size: 15px;
+		border: 0px;
+		width: 100px;
+		height: 30px;
+		background: white;
+		color: black;
 	}
 	
-	.btn {
+	.list_table1{
+		boder: solid white 1px;
+		width: 100%;
+		color: white;
+		padding: 10px;
+	}
+	.list_table2{
+		width: 400px;
+		color: black;
+	}
+	
+/* 	table{
+		width: 370px important;
+		resize: none;
+		
+	} */
+	
+/* 	.btn {
 		margin: 0px;
 		padding: 0px;
 		font-size: 10px;
-	}
+	} */
 
 </style>
 
@@ -308,26 +336,26 @@
 <%@include file="my_workout_list_search_popup.jsp" %>
 
  	<div id="box"> 
-
-		<div>
-			<h3><span id="myself">${ user.user_name }</span>님의 운동 내역</h3>
-		</div>
-		<div class="form-outline form-white mb-4 row" style="width: 100	%; margin: 0 auto;">
-			<div class="col-sm-6">
+		<div style="color:white;">
+			<h3><b><span id="myself">${ user.user_name }</span>님의 일별 운동 내역</b></h3>
+		</div><br>
+		<div class="form-outline form-white mb-4 row" style="width: 80	%; margin: 0 auto;">
 				<input class="form-control" id="myDatePicker" name="search_text" value="${ param.search_text }">
+		</div>
+
+		<div class="form-outline form-white mb-4 row" style="width: 80	%; margin: 0 auto;">
+			<div class="col-sm-4" style="margin: 0px;">
+			<input class="btn btn-gradient cyan block" type="button" value="날짜검색" onclick="search();">
 			</div>
-			<div class="col-sm-2">
-			<input class="form-control btn" type="button" value="날짜검색" onclick="search();">
+			<div class="col-sm-4" style="margin: 0px;">
+			<input class="btn btn-gradient cyan block" type="button" value="전체보기" onclick="show_list();">
 			</div>
-			<div class="col-sm-2">
-			<input class="form-control btn" type="button" value="전체보기" onclick="show_list();">
-			</div>
-			<div class="col-sm-2">
-			<input class="form-control btn" id="" type="button" value="MyPage" onclick="location.href='../user/mypage_main.do'">
+			<div class="col-sm-4" style="margin: 0px;">
+			<input class="btn btn-gradient cyan block" id="" type="button" value="MyPage" onclick="location.href='../user/mypage_main.do'">
 			</div>
 		</div>
 
-		<div id="my_workout_stat">
+		<div id="my_workout_stat" style="color:white;">
 			<br>
 			일일 소모 칼로리
 			<br>
@@ -342,19 +370,19 @@
 				
 				<!-- 모달로 상세보기 -->
 				
-				<input type="button" class="workout_btn" value="상세보기" onclick="workout_detail();">
-				<input type="button" class="workout_btn" value="운동추가" onclick="location.href='workout_insert_form.do?w_regdate= ${ param.search_text}'">
+				<input type="button" class="btn btn-gradient cyan mini" value="상세보기" onclick="workout_detail();">
+				<input type="button" class="btn btn-gradient cyan mini" value="운동추가" onclick="location.href='workout_insert_form.do?w_regdate= ${ param.search_text}'">
 			</div>
 		</div>
 		
 		
 		<br>
-		<div>
+		<div style="text-align:left;">
 			<b>전체 운동 상세정보</b>
 		</div>
 		<div id="my_workout_list">
 			
-			<table>
+			<table class="list_table1">
 				<tr>
 					<th>
 						날짜
