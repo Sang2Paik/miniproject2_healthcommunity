@@ -10,6 +10,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%@ include file="../header.jsp" %>
+
 
 <!-- Bootstrap 3.x -->
 
@@ -30,11 +32,15 @@
 
 <style type="text/css">
 
-	#box{
-		/* border: solid green 1px; */
+ 	#box{
 		margin: auto;
-		margin-top: 10px;
-		padding: 10px;
+		padding: 0px;
+		width: 400px;
+	} 
+		
+	#myDatePicker {
+		color: black !important;
+		width: 150px !important;
 	}
 	
 	th, td {
@@ -43,13 +49,14 @@
 	
 	#my_workout_list {
 		border: solid gray 1px;
-		width:500px;
+		width: 100% !important;
 		max-height: 300px;
 		overflow-y: scroll;
 	}
 	
 	#my_workout_stat {
-		width: 500px;
+		width: 100% !important;
+		resize: none;
 	}
 	#search_date{
 		font-size: 17px;
@@ -64,6 +71,12 @@
 	
 	.workout_btn{
 		font-size: 15px;
+	}
+	
+	.btn {
+		margin: 0px;
+		padding: 0px;
+		font-size: 10px;
 	}
 
 </style>
@@ -282,20 +295,37 @@
 </head>
 <body>
 
+<section class="vh-100 gradient-custom">
+<div class="container py-5 h-100">
+<div class="row d-flex justify-content-center align-items-center h-100">
+<div class="col-12 col-md-8 col-lg-6 col-xl-5">
+<div class="card main_bg text-white" style="border-radius: 1rem;">
+<div class="card-body p-5 text-center">
+<div class="mb-md-5 mt-md-4 pb-5">
+
+
 <!-- Modal창(팝업창)  -->
 <%@include file="my_workout_list_search_popup.jsp" %>
 
-	<div id="box">
+ 	<div id="box"> 
 
 		<div>
 			<h3><span id="myself">${ user.user_name }</span>님의 운동 내역</h3>
 		</div>
-		<form>
-			<input id="myDatePicker" name="search_text" value="${ param.search_text }">
-			<input type="button" value="날짜검색" onclick="search();">
-			<input type="button" value="전체보기" onclick="show_list();">
-			<input id="" type="button" value="MyPage" onclick="location.href='../user/mypage_main.do'">
-		</form>
+		<div class="form-outline form-white mb-4 row" style="width: 100	%; margin: 0 auto;">
+			<div class="col-sm-6">
+				<input class="form-control" id="myDatePicker" name="search_text" value="${ param.search_text }">
+			</div>
+			<div class="col-sm-2">
+			<input class="form-control btn" type="button" value="날짜검색" onclick="search();">
+			</div>
+			<div class="col-sm-2">
+			<input class="form-control btn" type="button" value="전체보기" onclick="show_list();">
+			</div>
+			<div class="col-sm-2">
+			<input class="form-control btn" id="" type="button" value="MyPage" onclick="location.href='../user/mypage_main.do'">
+			</div>
+		</div>
 
 		<div id="my_workout_stat">
 			<br>
@@ -365,8 +395,15 @@
 	
 	<div id="disp_res_data">
 	
-	</div>
+ 	</div>
 	
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 	
 </body>
 </html>
