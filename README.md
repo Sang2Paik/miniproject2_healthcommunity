@@ -4,11 +4,14 @@
       ii.h1 태그삭제
   2. admin_user_modify_form.jsp
       i.<html> include 추가
-	3. user_view.jsp
+     
+  3. user_view.jsp
       i.<html> include 추가
-	4. board_view.jsp
+     
+  4. board_view.jsp
       i.<html> include 추가
-	5. board_modify_form.jsp
+     
+  5. board_modify_form.jsp
       i.<html> include 추가
 
 ### 2024-03-02 백상희 
