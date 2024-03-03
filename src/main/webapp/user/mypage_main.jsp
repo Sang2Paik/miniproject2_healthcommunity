@@ -303,12 +303,15 @@
 					        	<!-- c_idx가 같은 항목을 출력 -->
 					            <c:if test="${ board.c_idx eq category.c_idx }">
 					                <!-- 해당 카테고리에 속하는 게시물 출력 -->
-					                <img src="${ pageContext.request.contextPath }/upload/${ board_vo.b_photo }" onclick="mypage_image_view('${ board.b_idx }');"
-					   						class="image-hover" id="board_image">
-					                <div style="display: inline;">
-					                    <div>${ board.b_subject }</div>
-					                    <div>${ board.b_content }</div>
-					                </div>
+					                   <!-- 이미지 수평으로 나오게 수정 -->
+					                   <div style="display: inline-block;">
+						                <img src="${ pageContext.request.contextPath }/upload/${ board.b_photo }" onclick="mypage_image_view('${ board.b_idx }');"
+						   						class="image-hover" id="board_image">
+						                <div style="display: inline;">
+						                    <div>${ board.b_subject }</div>
+						                    <div>${ board.b_content }</div>
+						                </div>
+					                   </div>
 					            </c:if>
 					        </c:forEach>
 					        
