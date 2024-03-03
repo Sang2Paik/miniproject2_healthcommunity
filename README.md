@@ -2,16 +2,16 @@
   1. admin_page.jsp
       i.<html> include 추가
       ii.h1 태그삭제
-  2. admin_user_modify_form.jsp
+  3. admin_user_modify_form.jsp
       i.<html> include 추가
      
-  3. user_view.jsp
+  4. user_view.jsp
       i.<html> include 추가
      
-  4. board_view.jsp
+  5. board_view.jsp
       i.<html> include 추가
      
-  5. board_modify_form.jsp
+  6. board_modify_form.jsp
       i.<html> include 추가
 
 ### 2024-03-02 백상희 
