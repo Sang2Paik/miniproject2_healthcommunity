@@ -128,44 +128,44 @@
 </head>
 <body>
 	<div id="box">
-		
-		<div class="row" id="gird">
-			<div class="col-sm-1" style="margin-bottom: 5px; width: 5%">
-					<input class="btn btn-primary" type="button" value="글쓰기"
-						onclick="insert_form();">
-			</div>
-			
-			
-			<!-- 검색 및  Page Menu  -->
-			<form class="form-inline">
-				
-				<div class="col-sm-9" id="gird" style="width: 75%; min-width: 10%;">
-					<select id="search" class="form-control">
-						<option value="all">전체보기</option>
-						<option value="name">이름</option>
-						<option value="subject">제목</option>
-						<option value="content">내용</option>
-						<option value="subject_content">제목+내용</option>
-					</select> 
-					<input id="search_text" class="form-control" value="${ param.search_text }" style="width: 80%;">
-					<input type="button" value="검색" class="btn btn-primary" class="search_btn" onclick="find();" style="width: auto;">
-				</div>
+		<!-- 20240303 최시환 위치수정 -->
+		<div class="row" style="position: relative;">
+			<div style="margin-bottom: 5px;">
+				<input class="btn btn-primary" type="button" value="글쓰기" style="position: absolute; left: 0px;"
+					onclick="insert_form();">
 
-			</form>
+				<!-- 검색 및  Page Menu  -->
+				<form class="form-inline">
+					
+					<div style="position: absolute; left: 50%; transform: translateX(-50%);">
+						<select id="search" class="form-control">
+							<option value="all">전체보기</option>
+							<option value="name">이름</option>
+							<option value="subject">제목</option>
+							<option value="content">내용</option>
+							<option value="subject_content">제목+내용</option>
+						</select> 
+						<input id="search_text" class="form-control" value="${ param.search_text }">
+						<input type="button" value="검색" class="btn btn-primary" class="search_btn" onclick="find();">
+					</div>
 	
-			<div class="col-sm-2" id="gird" style="width: 20%;">
-				<div class="form-inline">
-	
+				</form>
+			
+				<div>
 					<!-- 로그인 된경우 -->
 					<!-- 20240303 최시환 로그아웃 경로 수정 -->
 					<c:if test="${ not empty user }">
-						<span class="user_name"><b>${ user.user_name }</b></span><span class="welcome_tag">님 환영합니다</span>
-	         			<input class="btn btn-primary" type="button" value="로그아웃"
-								onclick="location.href='${ pageContext.request.contextPath }/logout.do'">
+							<div class="user_name" style="position: absolute; right: 0px;" ><b>${ user.user_name }님</b>
+			        			<input class="btn btn-primary" type="button" style="right: 0;" value="로그아웃"
+									onclick="location.href='${ pageContext.request.contextPath }/logout.do'">
+							</div>
 					</c:if>
 				</div>
+
 			</div>
-		</div> <!-- end : grid -->
+			<br>	
+			
+		</div> <!-- end : class .row -->
 		
 		<br>
 		
@@ -222,6 +222,8 @@
 
 		</div>
 				
+		
+		
 	</div>
 
 		
