@@ -10,11 +10,14 @@
 
   5. board_view.jsp
       i. include 추가
+      ii. 댓글기능이 가운데 기준으로 나와 위치 수정
      
   7. board_list.jsp
       i. 로그아웃 경로 수정
-  9. board_modify_form.jsp
+  8. board_modify_form.jsp
       i.<html> include 추가
+  9. board_comment_list.jsp
+      i. 두번째줄 b태그 추가
 
 ### 2024-03-02 백상희 
 - user_insert_form.jsp  수정
