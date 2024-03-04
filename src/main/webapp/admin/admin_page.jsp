@@ -227,7 +227,7 @@
 		                    </div>
 		            </div>
 		            <div class="modal-footer">
-		                <input type="button" class="btn btn-primary" onclick="createCategory(this.form)" value="생성">
+		                <input type="button" class="btn btn-gradient green" onclick="createCategory(this.form)" value="생성">
 		            </div>
 	            </form>
 	        </div>
