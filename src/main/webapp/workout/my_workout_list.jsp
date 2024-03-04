@@ -36,12 +36,14 @@
 		margin: auto;
 		padding: 0px; 
 		width: 100%;
-		color: white;
+		color: black;
+		text-align: center;
 	} 
 	
  	#box_modal{
 		color: black;
 	} 
+
 
 	
 /* 	#myDatePicker {
@@ -54,15 +56,24 @@
 	}
 	
 	#my_workout_list {
-		border: solid gray 1px;
+		
+		padding: 0px;
+		border: solid #16b4ce 3px;
 		width: 100% !important;
 		max-height: 300px;
 		overflow-y: scroll;
+		text-align: center !important;
 	}
 	
 	#my_workout_stat {
 		width: 100% !important;
 		resize: none;
+		text-align: center !important;
+	}
+	
+	#myChart{
+		width: 100% !important;
+		height: 300px !important;
 	}
 	#search_date{
 		font-size: 17px;
@@ -72,26 +83,24 @@
 		width: 100px;
 		font-size: 20px; 
 		color: black
-	
 	}
 	
-	.workout_btn{
+/* 	.workout_btn{
 		font-size: 15px;
 		border: 0px;
 		width: 100px;
 		height: 30px;
 		background: white;
 		color: black;
-	}
+	} */
 	
 	.list_table1{
 		boder: solid white 1px;
 		width: 100%;
-		color: white;
-		padding: 10px;
 	}
 	.list_table2{
-		width: 400px;
+		width: 100%;
+		resize: none;
 		color: black;
 	}
 	
@@ -101,11 +110,21 @@
 		
 	} */
 	
-/* 	.btn {
+   	.btn_wa, .btn_da {
+		width: 120px !important;
+		height: 30px !important;
+		margin-left: 10px;
+		padding: 0px;
+
+	}   
+	
+	.del_btn{
+		width: 40px !important;
+		height: 20px;
 		margin: 0px;
 		padding: 0px;
-		font-size: 10px;
-	} */
+		text-align: center;
+	}
 
 </style>
 
@@ -299,7 +318,7 @@
 	  	 				html_tr += "<td>" + res_data.list[i].w_time   + "</td>";
 	  	 				html_tr += "<td>" + res_data.list[i].w_unit_kcal_dot2  + "</td>";
 	  	 				//html_tr += "<td><input id='my_w_modify' type='button' value='수정' onclick='modify(" + res_data.list[i].w_idx + "," + res_data.list[i].regdate + ");'></td>";
-	  	 				html_tr += "<td><input id='my_w_delete' type='button' value='삭제' onclick='del(" + res_data.list[i].w_idx + "," + res_data.list[0].regdate + ");'></td>";
+	  	 				html_tr += "<td><input class= 'btn btn_del btn-gradient red mini' id='my_w_delete' type='button' value='삭제' onclick='del(" + res_data.list[i].w_idx + "," + res_data.list[0].regdate + ");'></td>";
 	  	 				html_tr += "</tr>";
 						
 	  	 				//console.log(res_data.list[i].regdate);
@@ -323,115 +342,102 @@
 </head>
 <body>
 
-<section class="vh-100 gradient-custom">
-<div class="container py-5 h-100">
-<div class="row d-flex justify-content-center align-items-center h-100">
-<div class="col-12 col-md-8 col-lg-6 col-xl-5">
-<div class="card main_bg text-white" style="border-radius: 1rem;">
-<div class="card-body p-5 text-center">
-<div class="mb-md-5 mt-md-4 pb-5">
-
 
 <!-- Modal창(팝업창)  -->
 <%@include file="my_workout_list_search_popup.jsp" %>
+	<table class="table">
+		<tr>
+			<td><input type="button" class="nav_btn" value="나의 건강정보"
+				onclick="show_health_info();"> <input type="button"
+				class="nav_btn" value="나의 기본정보" onclick="show_basic_info();">
+				<input type="button" class="nav_btn" value="나의 갤러리"
+				onclick="my_board_info();"></td>
+		</tr>
+	</table>
+
 
  	<div id="box"> 
-		<div style="color:white;">
+		<div>
 			<h3><b><span id="myself">${ user.user_name }</span>님의 일별 운동 내역</b></h3>
 		</div><br>
-		<div class="form-outline form-white mb-4 row" style="width: 80	%; margin: 0 auto;">
-				<input class="form-control" id="myDatePicker" name="search_text" value="${ param.search_text }">
+		<div class="form-outline form-white mb-4 row" style="width: 60%; margin: 0 auto;">
+			<input class="form-control" style="width:40%; display:inline-block;" id="myDatePicker" name="search_text" value="${ param.search_text }">
+
+	<!-- 	<div class="form-outline form-white mb-4 row" style="width: 80	%; margin: 0 auto;">
+ -->
+			<input class="btn btn_wa btn-gradient cyan mini"  type="button" value="날짜검색" onclick="search();">
+			<input class="btn btn_wa btn-gradient cyan mini" type="button" value="전체보기" onclick="show_list();">
+<!-- 			<input class="btn btn-gradient cyan block" style="display:inline-block" type="button" value="MyPage" onclick="location.href='../user/mypage_main.do'">
+ -->
+		</div>
+		<div class="form-outline form-white mb-4 row" style="width: 80%; margin: 0 auto; text-align: center;">
+			<div id="my_workout_stat">
+				<br>
+				일일 소모 칼로리
+				<br>
+				<canvas id="myChart"></canvas>
+				<br>
+				<div id="cal_sum">
+					<span id="search_date"></span>
+					<span> 소모 칼로리는 </span>
+					<span id="kcal_sum_list"></span>
+	<!-- 				<input type="text" id="kcal_sum_list" disabled="disabled"> -->
+					<span style="font-size: 15px; color: red">kcal</span>
+					
+					<!-- 모달로 상세보기 -->
+					&nbsp;
+					<input type="button" class="btn btn_da btn-gradient cyan mini" value="상세보기" onclick="workout_detail();">
+					<input type="button" class="btn btn_da btn-gradient cyan mini" value="운동추가" onclick="location.href='workout_insert_form.do?w_regdate= ${ param.search_text}'">
+				</div>
+			</div>
 		</div>
 
-		<div class="form-outline form-white mb-4 row" style="width: 80	%; margin: 0 auto;">
-			<div class="col-sm-4" style="margin: 0px;">
-			<input class="btn btn-gradient cyan block" type="button" value="날짜검색" onclick="search();">
-			</div>
-			<div class="col-sm-4" style="margin: 0px;">
-			<input class="btn btn-gradient cyan block" type="button" value="전체보기" onclick="show_list();">
-			</div>
-			<div class="col-sm-4" style="margin: 0px;">
-			<input class="btn btn-gradient cyan block" id="" type="button" value="MyPage" onclick="location.href='../user/mypage_main.do'">
-			</div>
-		</div>
-
-		<div id="my_workout_stat" style="color:white;">
-			<br>
-			일일 소모 칼로리
-			<br>
-			<canvas id="myChart"></canvas>
-			
-			<div id="cal_sum">
-				<span id="search_date"></span>
-				<span> 소모 칼로리는 </span>
-				<span id="kcal_sum_list"></span>
-<!-- 				<input type="text" id="kcal_sum_list" disabled="disabled"> -->
-				<span style="font-size: 15px; color: red">kcal</span>
-				
-				<!-- 모달로 상세보기 -->
-				
-				<input type="button" class="btn btn-gradient cyan mini" value="상세보기" onclick="workout_detail();">
-				<input type="button" class="btn btn-gradient cyan mini" value="운동추가" onclick="location.href='workout_insert_form.do?w_regdate= ${ param.search_text}'">
-			</div>
-		</div>
-		
-		
 		<br>
-		<div style="text-align:left;">
-			<b>전체 운동 상세정보</b>
-		</div>
-		<div id="my_workout_list">
-			
-			<table class="list_table1">
-				<tr>
-					<th>
-						날짜
-					</th>
-					<th>
-						운동명
-					</th>
-					<th>
-						운동시간(분)
-					</th>
-					<th>
-						소모칼로리 (Kcal)
-					</th>
-				<c:forEach var="vo" items="${ list }" varStatus="i">
+		<div class="form-outline form-white mb-4 row" style="width: 80%; margin: 0 auto; text-align: center;">
+			<div style="text-align:left;">
+				<b>전체 운동 상세정보</b>
+			</div>
+			<div id="my_workout_list">
+				
+				<table class="table form-class list_table1">
 					<tr>
-						<td>
-							<span id="regdate">${ fn:substring(vo.w_regdate, 0, 10) }</span>
-						</td>
-						<td>
-							${ vo.w_name }
-						</td>
-						<td>
-							${ vo.w_time }
-						</td>
-						<td>
-							<span id="kcal">${ vo.w_unit_kcal_dot2 }</span>
-						</td>
-					</tr>
-				</c:forEach>
-			</table>
+						<th>
+							날짜
+						</th>
+						<th>
+							운동명
+						</th>
+						<th>
+							운동시간(분)
+						</th>
+						<th>
+							소모칼로리 (Kcal)
+						</th>
+					<c:forEach var="vo" items="${ list }" varStatus="i">
+						<tr>
+							<td>
+								<span id="regdate">${ fn:substring(vo.w_regdate, 0, 10) }</span>
+							</td>
+							<td>
+								${ vo.w_name }
+							</td>
+							<td>
+								${ vo.w_time }
+							</td>
+							<td>
+								<span id="kcal">${ vo.w_unit_kcal_dot2 }</span>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
 		</div>
-		
-		
-
-	
-	
 	</div>
 	
-	<div id="disp_res_data">
+<!-- 	<div id="disp_res_data"> 
 	
- 	</div>
+ 	</div> -->
 	
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
 	
 </body>
 </html>
