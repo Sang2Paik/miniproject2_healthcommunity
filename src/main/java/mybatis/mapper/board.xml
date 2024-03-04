@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 전체조회 -->
 	<select id="board_list" resultType="vo.BoardVo">
-		select * from board order by b_idx
+		select * from board order by b_idx desc
 	</select>
 
 	<!-- 검색된 게시물 수 얻어오기 -->
@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- user_idx에 해당하는 board리스트 얻어오기 -->
 	<select id="board_user_idx_list" parameterType="int" resultType="vo.BoardVo">
-		select * from board where user_idx=#{ user_idx }
+		select * from board where user_idx=#{ user_idx } order by b_idx desc
 	</select>
 
 	<!-- 전체게시물 수 얻어오기 -->
