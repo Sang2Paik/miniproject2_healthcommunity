@@ -190,14 +190,14 @@
 	                
 	                <!-- 20240302 백상희 name="user_grade" 수정 -->
 	                <input type="radio" class="form-check-input"  name="user_grade" 
-			                 				value="man" checked="checked" onclick="return false;">일반
+			                 				value="user_user" checked="checked" onclick="return false;">일반
 			        <input type="radio" class="form-check-input"  name="user_grade" 
-			                 				value="woman" onclick="return false;">관리자
+			                 				value="user_admin" onclick="return false;">관리자
               </div>
               
               
 
-				<input class="btn btn-outline-light btn-lg px-5" type="button"  value="화원가입" onclick="send(this.form);">
+				<input class="btn btn-outline-light btn-lg px-5" type="button"  value="회원가입" onclick="send(this.form);">
               
 
 
