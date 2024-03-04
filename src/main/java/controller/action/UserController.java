@@ -1,6 +1,5 @@
 package controller.action;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,7 +44,7 @@ public class UserController {
 	
 	
 	//로그인
-	@RequestMapping(value = "/user/login.do")
+	@RequestMapping(value = "/login.do")
 	public String user_login(HttpServletRequest request, HttpServletResponse response) {
 		
 		// /user/login.do?user_id=one&user_pwd=1234&url=
@@ -79,7 +78,7 @@ public class UserController {
 		
 		//메인페이지 이동: 현재경로 /user/login.do
 		if(url.isEmpty()) {
-			//response.sendRedirect("../product/list.do");
+			
 			return "redirect:../main.do";
 		}else {
 			//response.sendRedirect(url);
@@ -111,13 +110,13 @@ public class UserController {
 	
 	//마이페이지에서 로그아웃
 	@RequestMapping(value = "/user/logout.do")
-	public String user_logout(HttpServletRequest request, HttpServletResponse response) {
+	public String mypage_logout(HttpServletRequest request, HttpServletResponse response) {
 
 		//로그아웃: session에 저장된 user삭제
 		request.getSession().removeAttribute("user");
 		
 		return "redirect:../main.do";
-	} // end : user_logout
+	} // end : index_jsp_user_logout
 	
 	
 	//멤버view
@@ -139,7 +138,7 @@ public class UserController {
 	} // end : user_view
 	
 	
-	//회원가입 form
+	//회원수정 form
 	@RequestMapping(value = "/user/modify_form.do")
 	public String user_modify_form(HttpServletRequest request, HttpServletResponse response) {
 
@@ -280,7 +279,7 @@ public class UserController {
 	} // end : user_insert
 	
 	
-	//멤버delete
+	//유저delete
 	@RequestMapping(value = "/user/delete.do")
 	public String user_delete(HttpServletRequest request, HttpServletResponse response) {
 
@@ -292,10 +291,12 @@ public class UserController {
 		//2.DB delete : DML(insert/update/delete)처리후 결과행수반환(res)
 		int res = UserDao.getInstance().delete(user_idx);
 		if(res==1) {
+			request.removeAttribute("user");
 			//성공
 		}else {
 			//실패
 		}
+		
 		
 		return "redirect:../main.do";
 	} // end : user_delete
