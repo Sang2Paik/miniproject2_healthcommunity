@@ -22,7 +22,7 @@
 	.weather_box {
 	 	width: 400px;   /* width 400으로 조정 */
 	 	height: 180px;
-	 	background-color : rgb(101, 178, 255); 
+	 	background-color : rgb(22,180,180);   /* 색깔 수정 03-04 */
 	 	margin: auto;
 	 	padding : 10px;
 	 	padding-top: 0px;

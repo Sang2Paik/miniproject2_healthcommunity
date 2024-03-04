@@ -28,8 +28,8 @@
 		text-align: center;
 	}
 	
-	#my_workout_list {
-		border: solid gray 1px;
+ 	#my_workout_list {
+		border: solid #16b4ce 1px;
 		width:500px;
 		max-height: 450px;
 		overflow-y: scroll;
@@ -38,8 +38,7 @@
 	#my_workout_stat {
 		
 		width: 500px;
-		
-		
+
 		font-size: 20px; 
 		font-weight: bold;
 		
@@ -50,6 +49,15 @@
 		color: black
 	
 	}
+	
+	#btn_select{
+		width: 40px;
+		height: 20px;
+		margin: 0px;
+		padding: 0px;
+		text-align: center;
+	}
+
 
 </style>
 	
@@ -79,7 +87,7 @@
 
 </head>
 <body>
-
+<form>
 <div id="box_modal">
 <!-- Button to Open the Modal -->
 <button  style="display:none;" id="btn_modal" type="button"  data-toggle="modal" data-target="#myModal">
@@ -105,7 +113,7 @@
 		</div>
 		<div id="my_workout_list">
 			
-			<table class="list_table2">
+			<table class="table form-class list_table2">
 
 				<div id="disp1"></div>
 
@@ -113,7 +121,7 @@
 		</div>
 	 </div>
 	 <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
       </div>
 	 
 	</div>
@@ -121,5 +129,7 @@
 </div>
 
 </div>
+
+</form>
 </body>
 </html>
