@@ -186,13 +186,13 @@
 
               
               <div class="form-outline form-white mb-4">
-                등급 : 
-                
-                <!-- 20240302 백상희 name="user_grade" 수정 -->
-                <input type="radio" class="form-check-input"  name="user_grade" 
-		                 				value="man" checked="checked">일반 | 
-		                 	<input type="radio" class="form-check-input"  name="user_grade"" 
-		                 				value="woman">관리자
+	                등급 : 
+	                
+	                <!-- 20240302 백상희 name="user_grade" 수정 -->
+	                <input type="radio" class="form-check-input"  name="user_grade" 
+			                 				value="man" checked="checked" onclick="return false;">일반
+			        <input type="radio" class="form-check-input"  name="user_grade" 
+			                 				value="woman" onclick="return false;">관리자
               </div>
               
               
