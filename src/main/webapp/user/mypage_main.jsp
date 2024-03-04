@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"  %>    
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
@@ -35,6 +35,7 @@
 		
 		$("#my_health_info").show();
 		$("#my_basic_info").hide();
+		$("#my_board_info").hide();
 		
 		let BMI = '${user.user_BMI}';
 		
@@ -71,23 +72,32 @@
 		
 		$("#my_health_info").show();
 		$("#my_basic_info").hide();
-		
+		$("#my_biard_info").hide();
 	}
 	
 	function show_basic_info(){
 		
 		$("#my_health_info").hide();
 		$("#my_basic_info").show();
-		
+		$("#my_board_info").hide();
 	}
-
+	
+	function show_board_info(){
+		$("#my_health_info").hide();
+		$("#my_basic_info").hide();
+		$("#my_board_info").show();
+	}
 	
 	// 이미지 URL을 클릭한 경우, 해당 URL로 이동합니다.
 	function mypage_image_view(b_idx) {
-		
+	
 		location.href='mypage_board_view.do?b_idx=' + b_idx;
 	}
-	
+	/* 20240304 최시환 추가 */
+	function user_modify_form(user_idx){
+		
+		location.href='modify_form.do?user_idx=' + user_idx;
+	}
 	
 </script>
 </head>
@@ -97,10 +107,13 @@
 		<table class="table">
 			<tr>
 				<td><input type="button" class="nav_btn" value="나의 건강정보"
-					onclick="show_health_info();"> <input type="button"
-					class="nav_btn" value="나의 기본정보" onclick="show_basic_info();">
+					onclick="show_health_info();"> 
+					<input type="button" class="nav_btn" value="나의 기본정보" 
+					onclick="show_basic_info();">
 					<input type="button" class="nav_btn" value="나의 갤러리"
-					onclick="my_board_info();"></td>
+					onclick="show_board_info();">
+					
+					</td>
 			</tr>
 		</table>
 
@@ -154,49 +167,42 @@
 			</table>
 		</div>
 	</div>
-
-
+	
+	
 	<div id="my_basic_info">
 		<div id="box">
 			<div class="panel panel-primary">
 				<table class="table">
 				
 					<tr>
-						<th><label>이름</label></th>
+						<th class="f16 text-center">이름</th>
 						<td>
 							<input class="form-control" name="user_name" 
 								value="${ user.user_name }" readonly="readonly">
 						</td>
 					</tr>		   
 					<tr>
-					   <th><label>아이디</label></th>
+					   <th class="f16 text-center">아이디</th>
 					   <td>
 					   		<input class="form-control" name="user_id" 
 					   			value="${ user.user_id }" readonly="readonly"></td>
 					</tr>		
 					<tr>
-					   <th><label>비밀번호</label></th>
+					   <th class="f16 text-center">비밀번호</th>
 					   <td>
 					   		<input class="form-control" type="password" name="user_pwd" 
 					   			value="${ user.user_pwd }" readonly="readonly">
 					   	</td>
-					</tr>		   
+					</tr>		   	   
 					<tr>
-					   <th><label>이메일</label></th>
-					   <td>
-					   		<input class="form-control" name="user_age"  
-					   			value="${ user.user_age }" readonly="readonly">
-					   	</td>
-					</tr>		   
-					<tr>
-					   <th><label>나이</label></th>
+					   <th class="f16 text-center">나이</th>
 					   <td>
 					   		<input class="form-control" name="user_age"  
 					   			value="${ user.user_age }" readonly="readonly">
 					   </td>
 					</tr>
 					<tr>
-						<th><label>이메일</label></th>
+						<th class="f16 text-center">이메일</th>
 						<td>
 							<input class="form-control"  name="user_email" 
 								value="${ user.user_email }" readonly="readonly">
@@ -204,61 +210,51 @@
 					</tr>
 					
 					<tr>
-						<th><label>성별</label></th>
+						<th class="f16 text-center">성별</th>
 						<td>
-						 	<c:if test="${ user.user_gender eq 'man'}">
-								<input type="radio" class="form-control"  name="user_gender" 
-									value="man" checked="checked" onclick="return false;">남자&nbsp;&nbsp;&nbsp;
-								<input type="radio" class="form-control"  name="user_gender" 
-									value="woman" onclick="return false;">여자
-							</c:if>
-						
-							<c:if test="${ user.user_gender eq 'woman'}">
-								<input type="radio" class="form-control"  name="user_gender" 
-									value="man" onclick="return false;">남자&nbsp;&nbsp;&nbsp;
-								<input type="radio" class="form-control"  name="user_gender" 
-									value="woman" checked="checked" onclick="return false;">여자
-							</c:if>
+						 	<input class="form-control" type="text" name="user_gender" 
+						 		value="${ user.user_gender }" readonly="readonly">
+
 						</td>
 			         </tr>
 			         
 			         <tr>
-						<th><label>가입일자</label></th>
+						<th class="f16 text-center">가입일자</th>
 						<td>
 							<input class="form-control" name="user_created_date" 
 								value="${ fn:substring(user.user_created_date,0,16) }" readonly="readonly">
 						</td>
 					</tr>		
 					<tr>
-						<th><label>마지막수정일자</label></th>
+						<th class="f16 text-center">마지막수정일자</th>
 						<td>
 							<input class="form-control" name="user_modifified_date" 
 								value="${ fn:substring(user.user_modified_date,0,16)}" readonly="readonly">
 						</td>
 					</tr>		
 					<tr>
-						<th><label>키</label></th>
+						<th class="f16 text-center">키</th>
 						<td>
 							<input class="form-control" name="user_height" 
 								value="${ user.user_height }" readonly="readonly">
 						</td>
 					</tr>
 					<tr>
-						<th><label>몸무게</label></th>
+						<th class="f16 text-center">몸무게</th>
 						<td>
 							<input class="form-control" name="user_kg" 
 								value="${ user.user_kg }" readonly="readonly">
 						</td>
 					</tr>
 					<tr>
-						<th><label>목표몸무게</label></th>
+						<th class="f16 text-center">목표몸무게</th>
 						<td>
 							<input class="form-control" name="user_target" 
 								value="${ user.user_target }" readonly="readonly">
 						</td>
 					</tr>
 					<tr>
-						<th><label>회원등급</label></th>
+						<th class="f16 text-center">회원등급</th>
 						<td>
 							<input class="form-control" name="user_target" 
 								value="${ fn:substring(user.user_grade, 5, fn:length(user.user_grade)) }" readonly="readonly">

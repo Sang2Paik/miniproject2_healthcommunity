@@ -155,17 +155,7 @@
 		              <tr>
 		                 <th><label>등급</label></th>
 		                 <td>
-		                     
-		                     <select  class="form-control" name="user_grade" id="user_grade">
-		                         <option value="user_user" >일반</option>
-		                         <option value="user_admin">관리자</option>
-		                     </select>
-		                     
-		                     <!-- 일반이면 -->
-		                     <%-- <c:if test="${ user.user_grade eq '일반' }">
-		                         <input  class="form-control" name="user_grade" value="일반" readonly="readonly">
-		                     </c:if> --%>
-		                     
+		                     <input class="form-control" type="text" name="user_grade" value="${ vo.user_grade }" readonly="readonly">
 		                 </td>
 		              </tr>		
 		              
@@ -175,7 +165,7 @@
 		                        <input  class="btn  btn-primary" type="button"  value="회원수정"
 		                                onclick="send(this.form);">
 		                        <input  class="btn  btn-success" type="button"  value="목록보기"
-		                                onclick="location.href='${ pageContext.request.contextPath }/user/list.do'">  
+		                                onclick="location.href='${ pageContext.request.contextPath }/user/mypage_main.do'">  
 		                  </td>
 		              </tr>
 		              
