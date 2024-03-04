@@ -6,9 +6,9 @@
     
 <!DOCTYPE html>
 <html>
+<head>
 <!-- 20240303 최시환 추가 -->
 <%@ include file="../header.jsp" %>
-<head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
@@ -104,44 +104,41 @@
 <body>
 
 	<div id="box">
-	   <!-- 20240303 최시환 <h1> 태그삭제 -->
-	   
 	   <!-- 로그인 / 로그아웃 -->
 	   <div style="text-align: right;">
-	        
 	        <!-- 로그인이 안된경우 : session영역에 user가 없냐? -->
 	        <c:if test="${ empty sessionScope.user }">
-	            <input class="btn btn-primary" type="button"  value="로그인"
+	            <input class="nav_btn" type="button"  value="로그인"
 	                   onclick="location.href='${ pageContext.request.contextPath }/user/login_form.do'">
 	        </c:if>
 	        
 	        <!-- 로그인이 된 경우 : session영역에 user가 있냐? -->
 	        <c:if test="${ not empty sessionScope.user }">
-	             <b>${ sessionScope.user.user_name }</b>님 환영합니다
-	             <input class="btn btn-primary" type="button"  value="로그아웃"
-	                   onclick="location.href='${ pageContext.request.contextPath }/user/login_form.do'">
+	             <b>${ sessionScope.user.user_name }님 </b>
+	             <input class="nav_btn" type="button"  value="로그아웃"
+	                   onclick="location.href='${ pageContext.request.contextPath }/logout.do'">
 	        </c:if>
 	   
 	   </div>
 	   
 	   
 	   <!-- 게시판가기 -->
-	   <div style="margin-bottom: 5px;">
-	      <button  class="btn btn-primary" onclick="location.href='${ pageContext.request.contextPath }/board/list.do'" >게시판가기</button>
+	   <div style="margin-bottom: 5px; text-align: left;">
+	      <button  class="btn btn-gradient blue" onclick="location.href='${ pageContext.request.contextPath }/board/list.do'" >게시판가기</button>
 	   </div> 
 	
 	   
 	   <table class="table">
 	      <!-- head -->
 	      <tr class="info">
-		 <th>순번</th>
-	         <th>회원번호</th>
-	         <th>회원명</th>
-	         <th>아이디</th>
-	         <th>이메일</th>
-	         <th>가입(갱신)일자</th>
-	         <th>회원등급</th>
-	         <th>편집</th>
+	      	 <th  class="f16 text-center">순번</th>
+	         <th  class="f16 text-center">회원번호</th>
+	         <th  class="f16 text-center">회원명</th>
+	         <th  class="f16 text-center">아이디</th>
+	         <th  class="f16 text-center">이메일</th>
+	         <th  class="f16 text-center">가입(갱신)일자</th>
+	         <th  class="f16 text-center">회원등급</th>
+	         <th  class="f16 text-center">편집</th>
 	      </tr>
 	      <!-- Data출력 -->
 	      <!-- for( Uservo user_vo : admin_user_list )   -->
@@ -160,11 +157,11 @@
 	                <!-- 3개의 버튼이 활성화되는 조건: (로그인유저가 관리자) 또는 (로그인 본인) --> 
 	                <c:if test="${ (user.user_grade eq 'user_admin')  or (user.user_idx == user_vo.user_idx) }">
 	             
-		                <input class="btn btn-success" type="button"  value="수정"
+		                <input class="btn btn-gradient green" type="button"  value="수정"
 		                       onclick="location.href='${ pageContext.request.contextPath }/admin/admin_user_modify_form.do?user_idx=${ user_vo.user_idx }'">
-		                <input class="btn btn-danger"  type="button"  value="삭제"  onclick="user_del(${ user_vo.user_idx });">
+		                <input class="btn btn-gradient red" type="button"  value="삭제"  onclick="user_del(${ user_vo.user_idx });">
 		                
-		                <input class="btn btn-info" type="button"  value="보기"
+		                <input class="btn btn-gradient blue" type="button"  value="보기"
 		                       onclick="location.href='${ pageContext.request.contextPath }/user/view.do?user_idx=${ user_vo.user_idx }'">
 		                       
 	                </c:if>
@@ -178,17 +175,17 @@
 	   <br>
 	   
 	    <!-- 카테고리 생성 -->
-	   <div style="margin-bottom: 5px;">
-	       <button class="btn btn-primary" data-toggle="modal" data-target="#categoryModal">카테고리 생성</button>
+	   <div style="margin-bottom: 5px; text-align: left;">
+	       <button class="btn btn-gradient blue" data-toggle="modal" data-target="#categoryModal">카테고리 생성</button>
 	   </div> 
 	   
 	   <table class="table">
 	      <!-- head -->
 	      <tr class="info">
-	      	 <th>순번</th>
-	         <th>고유번호</th>
-	         <th>카테고리 명</th>
-	         <th>편집</th>
+	      	 <th  class="f16 text-center">순번</th>
+	         <th  class="f16 text-center">고유번호</th>
+	         <th  class="f16 text-center">카테고리 명</th>
+	         <th  class="f16 text-center">편집</th>
 	      </tr>
 	      <!-- Data출력 -->
 	      <!-- for( CategoryVo Category_vo : admin_category_list )   -->
@@ -201,7 +198,7 @@
 	            <td>
 	            	 <!-- 버튼이 활성화되는 조건: (관리자) --> 
 	                <c:if test="${ (user.user_grade eq 'user_admin') }">
-	                	<input class="btn btn-danger"  type="button"  value="삭제"  onclick="category_del(${ category.c_idx });">
+	                	<input class="btn btn-gradient red" type="button"  value="삭제"  onclick="category_del(${ category.c_idx });">
 	                </c:if>
 	            </td>
 	         </tr>

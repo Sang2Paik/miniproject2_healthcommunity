@@ -35,8 +35,8 @@
 <!-- 어드민이 보는 userpage -->
 <body>
 		<div id="box">
-			<div class="panel panel-primary">
-				<div class="panel-heading"><h4>::::회원정보::::</h4></div>
+			<div class="panel panel-info">
+				<div class="panel-heading"><h4>회원정보</h4></div>
 				<div class="panel-body">
 				   <table class="table">
 		              <tr>
@@ -86,7 +86,7 @@
 		              
 		              <tr>
 		                  <td colspan="2" align="center">
-		                           <input  class="btn  btn-success" type="button"  value="목록보기"
+		                           <input  class="btn btn-gradient green" type="button"  value="목록보기"
 		                                onclick="location.href='../admin/admin_page.do'">  
 		                  </td>
 		              </tr>

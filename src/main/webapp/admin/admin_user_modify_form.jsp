@@ -98,8 +98,8 @@
 	<form class="form-inline">
 	    <input type="hidden"  name="user_idx"  value="${ user_vo.user_idx }">
 		<div id="box">
-			<div class="panel panel-primary">
-				<div class="panel-heading"><h4>::::회원수정::::</h4></div>
+			<div class="panel panel-success">
+				<div class="panel-heading"><h4>회원수정</h4></div>
 				<div class="panel-body">
 				   <table class="table">
 		              <tr>
@@ -127,9 +127,9 @@
 		              <tr>
 		                 <th><label><font color="red">*</font>성별</label></th>
 		                 <td>
-		                 	<input type="radio" class="form-control"  name="user_gender" 
+		                 	<input type="radio"  name="user_gender" 
 		                 				value="man" checked="checked" onclick="return false;">남자&nbsp;&nbsp;&nbsp;
-		                 	<input type="radio" class="form-control"  name="user_gender" 
+		                 	<input type="radio"  name="user_gender" 
 		                 				value="woman" onclick="return false;">여자
 		                 </td>
 		              </tr>
@@ -156,15 +156,15 @@
 		                     </select>
 		                     
 		                 </td>
-		              </tr>		
+		              </tr>	
 		              
 		              <tr>
 		                  <td colspan="2" align="center">
 		                          
-		                        <input  class="btn  btn-primary" type="button"  value="회원수정"
+		                        <input  class="btn btn-gradient blue" type="button"  value="회원수정"
 		                                onclick="send(this.form);">
-		                        <input  class="btn  btn-success" type="button"  value="목록보기"
-		                                onclick="location.href='${ pageContext.request.contextPath }/board/admin_page.do'">  
+		                        <input  class="btn btn-gradient green" type="button"  value="목록보기"
+		                                onclick="location.href='${ pageContext.request.contextPath }/admin/admin_page.do'">  
 		                  </td>
 		              </tr>
 		              
