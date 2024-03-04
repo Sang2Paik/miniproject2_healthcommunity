@@ -291,14 +291,13 @@ public class UserController {
 		//2.DB delete : DML(insert/update/delete)처리후 결과행수반환(res)
 		int res = UserDao.getInstance().delete(user_idx);
 		if(res==1) {
-			request.getSession().removeAttribute("user");
 			//성공
 		}else {
 			//실패
 		}
 		
 		
-		return "redirect:../main.do";
+		return "redirect:../logout.do";
 	} // end : user_delete
 	
 	//멤버 id 여부 확인
