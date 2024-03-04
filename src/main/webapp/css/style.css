@@ -236,7 +236,10 @@
         width: 100px;
         height: auto;
        }
-       
+/* 20240304 최시환추가 */
+#header_logo img:hover {
+    cursor: pointer; /* 마우스 포인터를 포인터 형태로 변경합니다. */
+} 
 
 /* 푸터 */
 
