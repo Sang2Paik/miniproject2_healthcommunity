@@ -50,6 +50,14 @@
 	    text-align: left; /* 내용을 왼쪽 정렬합니다. */
 	    margin: 0 auto; /* 좌우 여백을 자동으로 설정하여 가운데 정렬을 해제합니다. */
 	}
+	/* 2020304 최시환 추가 */
+	#user_name,#subject,#content,#regdate{
+		text-align: left;
+	}
+	
+	#b_photo{
+		margin-bottom: 7px;
+	}
 	
 </style>
 
@@ -152,12 +160,12 @@
 
 	<div id="box">
 		<div class="panel panel-primary">
-			<div class="panel-heading"><b>${ vo.user_name }</b>님의 글:</div>
+			<div id="user_name" class="panel-heading"><b>${ vo.user_name }</b>님의 글:</div>
 			<div class="panel-body">
 			
 				<div id="subject"><b>제목 : ${ vo.b_subject }</b></div>
 				<div id="content">${ vo.b_content }</div>
-				<div><img src="../upload/${ vo.b_photo }"></div>
+				<div id="b_photo"><img src="../upload/${ vo.b_photo }"></div>
 				
 				<div id="regdate"><b>작성일자 : ${ vo.b_regdate }</b></div>
 				
