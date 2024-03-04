@@ -9,6 +9,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+<%@ include file="../header.jsp" %>
+
+
 <!-- Bootstrap 3.x -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -22,14 +25,14 @@
 
 <style type="text/css">
 
-	#workout_select_list{
-		float: left;
-		border: solid white 2px;
+	.workout_select_list{
+/* 		float: left; */
+ 		border: solid #16b4ce 3px; 
 		max-height: 200px;
 		width: 100%;
 		resize: none; 
 		margin: 0px;
-		padding: 10px;
+		padding: 0px;
 		overflow-y: scroll;
 		
 	}
@@ -76,16 +79,19 @@
 		padding: 0px;
 	}
 	#btn_select{
-		width: 30px;
+		width: 40px;
 		height: 20px;
+		margin: 0px;
 		padding: 0px;
 		text-align: center;
 	}
 	
 	.list_table{
 		width: 100%;
+		max-height: 300px;
 		resize: none;
-		color: white;
+		overflow-y: scroll;
+
 	}
 
 
@@ -127,7 +133,7 @@
 		workout_selected_name = $( "#workout_selected_name" ).val();
 		cal_per_unit = $( "#workout_selected_met" ).val();
 		
-		console.log(workout_selected_name)
+		//console.log(workout_selected_name)
 		
 		user_kg	     = $( "#weight" ).val();
 		workout_time = $( "#workout_time" ).val();
@@ -155,7 +161,7 @@
 
 		burned_calory = Math.round(3.5* cal_per_unit * user_kg * workout_time /1000 * 5);
 		
-		console.log(burned_calory);
+		//console.log(burned_calory);
 		
 		//결과값을 결과창에 출력
 		$("#burned_calory").html(burned_calory);
@@ -164,7 +170,8 @@
 	
 	function workout_insert() {
 		
-		let w_regdate = $("#myDatePicker").val().trim();
+		let w_regdate = $("#w_regdate").val();
+		
 		//console.log(w_regdate);
 		if(w_regdate==''){
 			alert('날짜를 선택하세요!');
@@ -182,7 +189,7 @@
 			return;
 		}
 
-		
+		//alert(w_name);
 		
 		location.href="workout_insert.do?w_name=" + encodeURIComponent(w_name,"utf-8") + "&w_unit_kcal=" + w_unit_kcal + "&w_time=" + w_time + "&w_regdate=" + w_regdate;
 //		location.href = String.format("my_workout_list.do?w_name=%s&w_unit_kcal=%s&w_time=%d", w_name, w_unit_kcal, w_time);
@@ -198,9 +205,14 @@
  	<div id="box">
 
 		<form class="form-inline">
-	
-			<div id="workout_select_list">
-				<table class="form-class list_table">
+			<!-- 3/4 수정 -->
+			<b>날짜</b> <input class="form-control" style="width:120px;"  type="text" id="w_regdate" value="${ w_regdate }" readonly="readonly">
+			<b>검색어</b> <input class="form-control" style="width:200px;" type="text" id="w_name" value="${ param.search_text }" readonly="readonly">
+			<input class="btn btn-gradient cyan mini" type="button" id="goback" onclick="location.href='workout_insert_form.do'" value="검색창 돌아가기">
+			<br>
+			<br>
+			<div class="form-outline form-white mb-4 workout_select_list" style="width: 60%; margin: 0 auto;">
+				<table class="table form-class list_table">
 					<tr>
 						<th style="width:10%;">
 							번호
@@ -227,7 +239,7 @@
 								${ vo.cal_per_unit }
 							</td>
 							<td>
-								<input class="form-control btn btn-sm" id="btn_select" type="button" value="선택" onclick="workout_select('${ vo.workout_name }', '${ vo.cal_per_unit }');">
+								<input class="btn btn-gradient yellow mini" id="btn_select" type="button" value="선택" onclick="workout_select('${ vo.workout_name }', '${ vo.cal_per_unit }');">
 							</td>
 						</tr>
 					</c:forEach>
@@ -243,24 +255,30 @@
 			 	<div>
 			 		<b>선택된 운동</b>
 			 	</div>
-			    <input class="form-control" id="workout_selected_name" type="text" placeholder="운동명을 선택하세요">
-			    <br>
-			    <input class="form-control" id="workout_selected_met" type="text" placeholder="MET">(MET) 
+			 	<div class="form-outline form-white mb-4" style="width: 30%; margin: 0 auto;">	
+			    	<input class="form-control" id="workout_selected_name" type="text" placeholder="운동명을 선택하세요">
+				    <br>
+				    <input class="form-control" style="width:60%; display:inline-block;" id="workout_selected_met" type="text" placeholder="MET">&nbsp;(MET) 
+			    </div>
 			</div>
 			<br>
 			<div>
 				<b>운동 시간 입력</b>
 				<br>
-				<input class="form-control" id="workout_time" type="text" placeholder="분 단위로 입력하세요">(분)
+				<div class="form-outline form-white mb-4" style="width: 30%; margin: 0 auto;">	
+					<input class="form-control" style="width:60%; display:inline-block;" id="workout_time" type="text" placeholder="분 단위로 입력하세요">&nbsp;(분)
+				</div>
 			</div>
 			<br>
 			<div>
 				<b>나의 몸무게 입력</b>
 				<br>
-				<input class="form-control" id="weight" type="text" placeholder="kg단위로 입력하세요">(kg)
+				<div class="form-outline form-white mb-4" style="width: 30%; margin: 0 auto;">	
+					<input class="form-control" style="width:60%; display:inline-block;" id="weight" type="text" placeholder="kg단위로 입력하세요">&nbsp;(kg)
+				</div>
 			</div>
 			<br>
-			<input class="form-control" type="button" id="workout_cal_calulate" value="태운 칼로리 계산 Click!" onclick="workout_cal_calulate();">
+			<input class="btn btn-gradient cyan mini" type="button" id="workout_cal_calulate" value="태운 칼로리 계산 Click!" onclick="workout_cal_calulate();">
 			<br>	
 			<div>
 				<span id="burned_calory" style="font-size: 30px; font-weight: bold;"></span>
@@ -277,7 +295,7 @@
 			
 			
 			<div>
-				<input class="form-control" class="" type="button" value="내 운동으로 등록하기" onclick="workout_insert();">
+				<input class="btn btn-gradient cyan mini" class="" type="button" value="내 운동으로 등록하기" onclick="workout_insert();">
 			</div>
 		<!-- </form> -->
 		</div> 
