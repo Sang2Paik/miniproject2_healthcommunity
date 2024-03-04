@@ -4,14 +4,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+<%@ include file="../header.jsp" %>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
 <!-- Bootsrap 3.x -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <style type="text/css">
 	#box{
@@ -58,8 +57,8 @@
 <body>
 	<form class="form-inline"  method="POST" enctype="multipart/form-data">
 		<div id="box">
-			<div class="panel panel-primary">
-				<div class="panel-heading"><h4>새글쓰기</h4></div>
+			<div class="panel panel-success">
+				<div class="panel-heading"><h4 class="f20">새글쓰기</h4></div>
 				<div class="panel-body">
 					<table class="table">
 						<tr>
@@ -69,10 +68,10 @@
 						<tr>
 							<th>카테고리</th>
 							<td>
-								<select name="c_name">
-								<c:forEach var="c_list" items="${ c_list }">
-									<option value="${ c_list.c_name }">${ c_list.c_name }</option>
-								</c:forEach>
+								<select name="c_name" class="form-control">
+									<c:forEach var="c_list" items="${ c_list }">
+										<option value="${ c_list.c_name }">${ c_list.c_name }</option>
+									</c:forEach>
 								</select>
 							 </td>
 						</tr>
@@ -87,15 +86,15 @@
 						<tr>
 			            	<th>공개여부</th>
 			         		<td>
-			         			<label><input type="radio" class="form-control" name="b_open" value="Y">공개</label>
-			         			<label><input type="radio" class="form-control" name="b_open" checked="checked" value="N">비공개</label>
+			         			<input type="radio" name="b_open" value="Y">공개
+			         			<input type="radio" name="b_open" checked="checked" value="N">비공개
 			         		</td>
 			       		</tr>
 						<tr>
 							<td colspan="2" align="center">
-								<input type="button" class="btn btn-primary" value="새글쓰기" 
+								<input type="button" class="btn btn-gradient blue" value="새글쓰기" 
 										onclick="send(this.form);">
-								<input type="button" class="btn btn-success" value="목록보기" 
+								<input type="button" class="btn btn-gradient green" value="목록보기" 
 										onclick="location.href='list.do?page=${ param.page }&search=${ param.search }&search_text=${ param.search_text }'">
 							</td>
 						</tr>
