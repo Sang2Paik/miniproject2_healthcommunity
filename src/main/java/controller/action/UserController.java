@@ -291,7 +291,7 @@ public class UserController {
 		//2.DB delete : DML(insert/update/delete)처리후 결과행수반환(res)
 		int res = UserDao.getInstance().delete(user_idx);
 		if(res==1) {
-			request.removeAttribute("user");
+			request.getSession().removeAttribute("user");
 			//성공
 		}else {
 			//실패
