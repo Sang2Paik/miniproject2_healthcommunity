@@ -98,6 +98,12 @@
 		
 		location.href='modify_form.do?user_idx=' + user_idx;
 	}
+	function user_delete_form(user_idx){
+		
+		if(confirm('탈퇴하시겠습니까?') == false ) return;
+		
+		location.href='delete.do?user_idx=' + user_idx;
+	}
 	
 </script>
 </head>
@@ -257,20 +263,19 @@
 						<th class="f16 text-center">회원등급</th>
 						<td>
 							<input class="form-control" name="user_target" 
-								value="${ fn:substring(user.user_grade, 5, fn:length(user.user_grade)) }" readonly="readonly">
+								value="${ user.user_grade }" readonly="readonly">
 						</td>
 					</tr>
 						
 					<tr>
 						<td colspan="2" align="center" >
-							<input class="btn btn-danger" type="button" value="탈퇴하기" 
+							<input class="btn btn-gradient red" type="button" value="탈퇴하기" 
 								onclick="user_delete_form(${ user.user_idx });">
 								
-							<input class="btn btn-info" type="button" value="수정하기" 
+							<input class="btn btn-gradient blue" type="button" value="수정하기" 
 								onclick="user_modify_form(${ user.user_idx });">
 								
-							<input class="btn btn-success" type="button"  value="게시판보기"
-								onclick="location.href='${ pageContext.request.contextPath }/board/list.do'">  
+							
 						</td>
 					</tr>
 					         
@@ -301,8 +306,8 @@
 					                <!-- 해당 카테고리에 속하는 게시물 출력 -->
 					                   <!-- 이미지 수평으로 나오게 수정 -->
 					                   <div style="display: inline-block;">
-						                <img src="${ pageContext.request.contextPath }/upload/${ board.b_photo }" onclick="mypage_image_view('${ board.b_idx }');"
-						   						class="image-hover" id="board_image">
+						                <img src="${ pageContext.request.contextPath }/upload/${ board.b_photo }" 
+						                		onclick="mypage_image_view('${ board.b_idx }');" class="image-hover" id="board_image">
 						                <div style="display: inline;">
 						                    <div>${ board.b_subject }</div>
 						                    <div>${ board.b_content }</div>
@@ -315,13 +320,22 @@
 					    
 					</c:forEach>
 				</c:if>
-				
-				
+				<!-- 올린게시물이 없을 경우 -->
+				<c:if test="${ empty mypage_board }">
+						아직 게시물을 작성하지 않으셨군요!<br>
+						여기서 운동이나 식단에 관한 경험을 나누어보세요.<br> 
+						다른 사용자들과 소통하고 정보를 공유할 수 있는 좋은 기회일 거예요.<br>
+						운동 계획이나 식단 관리법에 대한 이야기도 환영합니다!<br>
+						게시판으로 이동하여 첫 번째 글을 작성해보세요!
+				</c:if>
 			</table> <!-- end : table -->
 		</div> <!-- end : box -->
 	</div> <!-- end : my_basic_info -->
-
 	
-
+	<input class="btn btn-gradient green" type="button"  value="게시판 보기"
+			onclick="location.href='${ pageContext.request.contextPath }/board/list.do'">
+	
+	
+	
 </body>
 </html>
