@@ -25,6 +25,29 @@
 		margin-left: 20px;
 	}
 	
+	#myboard_list{
+		
+		width:100%;
+		max-height: 250px;
+		resize: none;
+		border: solid rgb(16,172,172) 2px;
+		box-shadow: -1px -1px 2px gray;
+		padding: 10px;
+		overflow-y: scroll;
+	}
+	#board_list_one{
+		width: 150px;
+		resize:none;
+		text-overflow: ellipsis;
+    	overflow: hidden;
+    	white-space: nowrap;
+	}
+	
+	.image-hover:hover {
+	    opacity: 0.8; /* 투명도를 조절하여 hover 시 효과를 줍니다. */
+	    cursor: pointer; /* 마우스 커서를 변경하여 클릭 가능함을 나타냅니다. */
+    }
+	
 	
 	
 </style>
@@ -297,27 +320,30 @@
 					
 						<!-- 카테고리 별로 div태그로 묶기 -->
 					    <div>
-				        	<h2>${ category.c_name }</h2>
-					        
+				        	<h1><b>${ category.c_name }</b></h1>
 					        <!-- board의 갯수만큼 수행 -->
-					        <c:forEach var="board" items="${ mypage_board }">
-					        	<!-- c_idx가 같은 항목을 출력 -->
-					            <c:if test="${ board.c_idx eq category.c_idx }">
-					                <!-- 해당 카테고리에 속하는 게시물 출력 -->
-					                   <!-- 이미지 수평으로 나오게 수정 -->
-					                   <div style="display: inline-block;">
-						                <img src="${ pageContext.request.contextPath }/upload/${ board.b_photo }" 
-						                		onclick="mypage_image_view('${ board.b_idx }');" class="image-hover" id="board_image">
-						                <div style="display: inline;">
-						                    <div>${ board.b_subject }</div>
-						                    <div>${ board.b_content }</div>
-						                </div>
-					                   </div>
-					            </c:if>
-					        </c:forEach>
-					        
+					        <div id="myboard_list">
+						        <c:forEach var="board" items="${ mypage_board }">
+						        	<!-- c_idx가 같은 항목을 출력 -->
+						            <c:if test="${ board.c_idx eq category.c_idx }">
+						                <!-- 해당 카테고리에 속하는 게시물 출력 -->
+						                   <!-- 이미지 수평으로 나오게 수정 -->
+						                   <div id="board_list_one" style="display: inline-block;">
+								               <img src="${ pageContext.request.contextPath }/upload/${ board.b_photo }" onclick="mypage_image_view('${ board.b_idx }');"
+								   						class="image-hover" id="board_image">
+								               <div style="display: inline;">
+								                    <div>${ board.b_subject }</div>
+								                    <%-- <div>${ board.b_content }</div> --%>
+								                    <div><c:if test="${ board.b_open eq 'Y' }">[공개]</c:if>
+								                    	 <c:if test="${ board.b_open eq 'N' }">[비공개]</c:if> 
+								                    </div>
+								               </div>
+						                   </div>
+						            </c:if>
+						        </c:forEach>
+							</div>
 					    </div>
-					    
+					    <br><br>
 					</c:forEach>
 				</c:if>
 				<!-- 올린게시물이 없을 경우 -->

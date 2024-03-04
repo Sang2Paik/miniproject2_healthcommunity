@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%@ include file="../header.jsp" %>
+
 <!-- Bootstrap 3.x -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -18,6 +20,11 @@
 		width: 800px;
 		margin: auto;
 		margin-top: 20px;
+	}
+	.panel-heading{
+		text-overflow: ellipsis;
+    	overflow: hidden;
+    	white-space: nowrap;
 	}
 	
 	#subject,#regdate{
@@ -36,8 +43,8 @@
 	}
 	
 	textarea {
-		resize: none;
 		width: 100%;
+		resize: none;
 	}
 	
 	#cmt_btn_register, #cmt_content{
@@ -138,7 +145,7 @@ function photo_upload() {
 	    
 		<div id="box">
 			<div class="panel panel-info">
-				<div class="panel-heading"><h4>${ user.user_name } 님의 글 : ${ vo.b_subject }</h4></div>
+				<div class="panel-heading"><h4><b>${ user.user_name } 님의 글 : ${ vo.b_subject }</b></h4></div>
 				<div class="panel-body">
 				   <table class="table">
 				       <tr>
@@ -151,7 +158,7 @@ function photo_upload() {
 				       <tr>
 				          <th>내용</th>
 				          <td>
-				              <textarea class="form-control" rows="5" name="b_content">${ vo.b_content }</textarea>
+				              <textarea class="form-control" rows="5" name="b_content" style="width:100%; resize:none;">${ vo.b_content }</textarea>
 				          </td>
 				       </tr>
 				       <tr>
@@ -165,7 +172,7 @@ function photo_upload() {
 				          <td>
 				          	  <img id="my_img" src="../upload/${ vo.b_photo }">
 				          	  <br>
-				              <input class="form-control" type="button" name="b_photo" value="이미지수정" onclick="ajaxFileUpload();">
+				              <input class="btn btn-gradient yellow mini" type="button" name="b_photo" value="이미지수정" onclick="ajaxFileUpload();">
 				          </td>
 				       </tr>
 				       <tr>
@@ -174,18 +181,18 @@ function photo_upload() {
 				       	  <!-- 공개여부 Y라면 체크된 상태로 보여주기 -->
 				       	  <c:if test="${ vo.b_open eq 'Y' }">
 					          <td>
-						          <input type="radio" class="form-control"  name="b_open" 
+						          <input type="radio" class="form-check-input"  name="b_open" 
 				                 			value="Y" checked="checked">공개&nbsp;&nbsp;&nbsp;
-				                  <input type="radio" class="form-control"  name="b_open" 
+				                  <input type="radio" class="form-check-input"  name="b_open" 
 				                 			value="N">비공개
 			                  </td>
 		                   </c:if>
 		                   <!-- 공개여부 Y라면 체크된 상태로 보여주기 -->
 				       	  <c:if test="${ vo.b_open eq 'N' }">
 					           <td>
-						          <input type="radio" class="form-control"  name="b_open" 
+						          <input type="radio" class="form-check-input"  name="b_open" 
 				                 			value="Y" >공개&nbsp;&nbsp;&nbsp;
-				                   <input type="radio" class="form-control"  name="b_open" 
+				                   <input type="radio" class="form-check-input"  name="b_open" 
 				                 			value="N" checked="checked">비공개
 			                 	</td>
 			              </c:if>
@@ -193,9 +200,9 @@ function photo_upload() {
 				       
 				       <tr>
 				          <td colspan="2" align="center">
-				              <input type="button" class="btn btn-primary"  value="수정하기"
+				              <input type="button" class="btn btn-gradient cyan mini"  value="수정하기"
 				                     onclick="send(this.form);">
-				              <input type="button" class="btn btn-success"  value="돌아가기"
+				              <input type="button" class="btn btn-gradient cyan mini"  value="돌아가기"
 				                     onclick="location.href='mypage_main.do'">
 				          </td>
 				       </tr>
