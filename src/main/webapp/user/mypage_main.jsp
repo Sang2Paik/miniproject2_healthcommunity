@@ -263,7 +263,7 @@
 						<th class="f16 text-center">회원등급</th>
 						<td>
 							<input class="form-control" name="user_target" 
-								value="${ user.user_grade }" readonly="readonly">
+								value="${ fn:substring(user.user_grade, 5, fn:length(user.user_grade)) }" readonly="readonly">
 						</td>
 					</tr>
 						

@@ -24,7 +24,7 @@
 		// board_view.jsp에 ajax로 응답된 페이지이기 때문에 view.do와 한페이지로 인식된다
 		//comment_list(g_cmt_page)
 		
-		if(confirm("정말 삭제하시겠습나까?")==false) return;
+		if(confirm("댓글을 삭제하시겠습니까?")==false) return;
 		
 		//Ajax 통해서 삭제
 		$.ajax({
