@@ -160,12 +160,15 @@ public class WorkoutController {
 		double cal_per_unit = 0.0;
 		
 		WorkoutCaloryVo vo = new WorkoutCaloryVo(cal_per_unit, workout_name);
-
+		
 		
 		//request binding
 		request.setAttribute("list", list);
 		//System.out.println(list);
 
+		//3/4 수정
+		request.setAttribute("w_regdate", w_regdate);
+		
 		return "workout_list.jsp";
 	}
 	
@@ -181,6 +184,7 @@ public class WorkoutController {
 		int page = Integer.parseInt(request.getParameter("page"));
 		int perPage = Integer.parseInt(request.getParameter("perPage"));
 				
+		String w_regdate = request.getParameter("w_regdate");
 		
 		String search_text = request.getParameter("search_text");
 		
@@ -195,6 +199,8 @@ public class WorkoutController {
 		
 		//request binding
 		request.setAttribute("list", workout_list);
+		//3/4 수정
+		request.setAttribute("w_regdate", w_regdate);
 		//System.out.println(list);
 		
 		
