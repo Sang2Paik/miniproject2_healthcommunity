@@ -1,5 +1,5 @@
 # 미니프로젝트 - 헬스케어 커뮤니티 서비스
-
+<img src="https://github.com/Sang2Paik/miniproject2_healthcommunity/assets/147046089/17149eb5-855a-4db0-bed2-3319dcc175a9">
 
 <hr>
 
