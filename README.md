@@ -1,136 +1,88 @@
-### 2024-03-03 이영준
-  1. workout_insert_form.jsp 전체 수정
-  2. workout_list.jsp 전체 수정
-  3. my_workout_list.jsp 전체 수정
-  4. my_workout_list_search_popup.jsp 전체 수정
-  5. mypage_main.jsp
-     내 운동/Food 이미지 출력, 수평으로 출력 수정
-
-### 2024-03-03 최시환
-  1. admin_page.jsp
-      i. include 추가
-      ii.h1 태그삭제
-  3. admin_user_modify_form.jsp
-      i. include 추가
-     
-  4. user_view.jsp
-      i. include 추가
-  5. mypage_board_view.jsp
-      i. 이미지 크기 설정코드 추가
-
-  6. board_view.jsp
-      i. include 추가
-      ii. 댓글기능이 가운데 기준으로 나와 위치 수정
-     
-  7. board_list.jsp
-      i. 로그아웃 경로 수정
-  8. board_modify_form.jsp
-      i. <html> include 추가
-  9. board_comment_list.jsp
-      i. 두번째줄 b태그 추가
-
-### 2024-03-02 백상희 
-- user_insert_form.jsp  수정
-  1. name="user_gender" => name="user_grade" 수정
-  2. user_height, user_kg, user_target placeholder에 단위 추가
-  3. service_menu 이미지 관련 수정
-  4. javascript 부분 weather_show() 부분 수정
-- img 폴더
-  1. main_icon01.png, main_icon02.png 추가
-  2. hellco_logo.png, hellco_logo_text.jsp 추가
-  3. healthy.png, obesity.png 추가
-- webapp >css > style.css
-  1. service_menu 부분 스타일 추가
-  2. 버튼 스타일 추가
-- webapp > weather > weather_list.jsp
-  1. css 부분 .weather_box width 400px로 조정
-- webapp > header.jsp
-  1. 하단에 style.css 관련 링크 수정
-- java > WeatherController.java
-  1. 위치정보 가져오는 부분 수정
-- webapp > user > user_login_form.jsp
-  1. form tag 추가
-- webapp > board > board_list.jsp
-  1. 로그아웃부분 경로 수정
-  2. header 추가 및 title 부분 삭제
-- webapp > header.jsp
-  1. header 부분 이미지 추가
-- webapp > user > mypage_main.jsp
-- webapp > food > food_insert_form_basic.jsp
-- webapp > food > food_insert_form.jsp
-- webapp > food > food_search_list.jsp
-- webapp > food > add_food_list.jsp
-- webapp > food > confirm_food_list.jsp
-- webapp > food > food_cal_list.jsp
-  1. 스타일 적용  
-
-### 2024-02-20 최시환 PM 07:30
-자바파일 : BoardController, UserController BoardDao board.xml 수정하였습니다
-webapp 파일 : 어드민폴더 admin_page.jsp, 보드폴더 board_list.jsp, user폴더 mypage_main.jsp 변경하였으며 user폴더에 my_page_board_view.jsp 추가 하였습니다
-
-그리고 index.jsp 로그인쪽 if문 변경되었습니다 
-디자인쪽 현재까지 올리신 index.jsp파일이랑 비교해가면서 수정하였는데 잘못 수정한 부분이 있을수도 있어서 확인 부탁드립니다
+# 미니프로젝트 - 헬스케어 커뮤니티 서비스
 
 
-### 2024-02-29 최병훈 PM 06:00 
-index.jsp, header.jsp, footer.jsp<br>
-./css/style.css<br>
-./img/main_intro.png<br>
-Update
+<hr>
 
-### 2024-02-29 이영준 PM 02:20
-- 운동정보 모든 파일(vo, dao, util, controller, jsp) 업데이트
+# :clipboard: 목차
+### 1. [프로젝트 설명](#movie_camera-프로젝트-설명)
+### 2. [개발 기간](#calendar-개발-기간)
+### 3. [팀원소개](#family-팀원소개)
+### 4. [사용기술](#wrench-사용기술)
+### 5. [개선해야할 점](#cry-개선해야할-점)
 
-### 2024-02-29 최병훈 AM 10:30 
-index.jsp, header.jsp, footer.jsp<br>
-./user/user_login_form.jsp<br>
-./user/user_insert_form.jsp<br>
-./css/style.css<br>
-./img/intro.png, login_title.png<br>
-Update
+<hr>
 
-### 2024-02-28 최병훈
-index.jsp, header.jsp, footer.jsp
-./css/style.css
-Update
+ # :movie_camera: 프로젝트 설명
 
-## 2024-02-28 이영준 
-- 운동 정보 파일 추가 (vo, dao, util, controller(mapper추가, web.xml에 controller 추가, jsp)
-- workout_kcal table에 user_name (String) 추가해야 합니다.
+ 1. 기능 개요
+  - 회원가입 및 로그인 기능이 제공됩니다.
+  - 위치 정보 기반으로 실시간 날씨 정보 제공
+  - 운동, 식단에 대한 게시판
+  - 마이페이지에서 일일 활동량, 일일 섭취량에 대한 정보 관리
+ 2. 기능 상세 설명
+  - 회원가입 및 로그인: 사용자는 회원가입을 통해 서비스를 이용할 수 있고, 로그인하여 개인 정보를 관리할 수 있습니다.
+  - 위치 정보에 따라 실시간 날씨를 확인할 수 있고, 야외 활동 또는 실내 활동을 추천해줍니다.
+  - 가입 유저는 운동, 식단에 대한 인증 게시글을 등록할 수 있고, 등록된 게시물에 대해서 댓글을 달 수 있습니다.
+  - 게시글은 공개/비공개 선택이 가능하며, 비공개한 게시글은 나의 페이지에서 볼 수 있습니다.
+  - 나의 페이지에서는 나의 건강정보(키와 몸무게, BMI, 기초대사량 등), 나의 기본정보, 나의 게시글을 볼 수 있습니다.
+  - 일일 활동, 일일 식사를 등록할 수 있고, 칼로리를 계산하여 나의 정보를 관리할 수 있습니다.
 
-## 2024-02-27 최시환
-- admin폴더 경로 변경하였습니다
+  ## <a href="https://github.com/Sang2Paik/miniproject1/">Source Repository</a>
 
-## 2024-02-27 최시환
-- 로그인폼에서 회원가입 누를 시 메인화면으로 이동돼서 경로 수정하였습니다
+<hr>
 
-## 2024-02-27 최시환
-- user폴더에 user_list.jsp 삭제, UserController 경로변경, board 로그인기능 제거, admin폴더 생성+ admin.xml&Controller추가
+# :calendar: 개발 기간
+- ` 2024년 2월 22일 (목) ~ 2024년 3월 4일(월) `
+- ` 설계 1일 / 개발 6일 `
 
-## 2024-02-27 백상희
-- 음식 칼로리 계산 기능 파일 추가 (FoodVo, MealTypeVo, FoodController, FoodSearchUtils, Mapper, jsp)
-- src/main/webapp index.jsp 파일 업로드 및 index.html 수정
+<hr>
 
-## 2024-02-27 이영준
-- 메인페이지(wepapp - index.html) 추가 (제컴에선 회원가입 등등 링크가 동작이 안되는데 주소는 잘 넘어가서 각자 컴에선 되시는지 확인 부탁드려요)
+# :family: 팀원소개
+  
+  ## WEB DESIGN  
+  ## BACK END 
+  * 백상희
+    * DB 설계 
+    * 공공 API를 활용한 식단에 대한 정보 CRUD 기능 구현 및 페이지 디자인
+  * 이영준
+    * 날씨 API를 활용한 위치정보 기반 날씨정보 출력
+    * 공공 API를 활용한 운동에 대한 정보 CRUD 기능 구현 및 페이지 디자인
+  * 최시환
+    * 로그인, 로그아웃, 회원가입 기능 구현
+    * 게시판 정보 CRUD 기능 구현 및 페이지 디자인
+    * 댓글, 좋아요, 조회수에 대한 기능 구현
+    * 회원 정보 관리에 대한 어드민 페이지 기능 구현 및 페이지 디자인
 
-## 2024-02-26 최시환
-- Board 검색기능, 카테고리기능 추가하였습니다
+<hr>
 
-## 2024-02-26 최시환
-- Comment기능(Dao,Vo,Controller,Comment.xml,Comment.jsp폴더) 추가하였습니다
+# :wrench: 사용기술
 
-## 2024-02-23 최시환
-- BoardController,board.xml.board_list.jsp,board_view.jsp 변경하였으며 board_reply삭제하였습니다
+  #### Front-End 
+  <div style="display:inline-block">
+    <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white" />
+    <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white" />
+    <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white" />
+    <img src="https://img.shields.io/badge/Bootstrap-7952B3?style=flat&logo=bootstrap&logoColor=white" /> 
+  </div>
+  
+  #### Back-End
+  <div style="display:inline-block">
+    <img src="https://img.shields.io/badge/Java-007396?style=flat&logo=Java&logoColor=white" /> 
+    <img src="https://img.shields.io/badge/Apache Tomcat-F8DC75?style=flat&logo=apachetomcat&logoColor=white" /> 
+    <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white" />  
+    <img src="https://img.shields.io/badge/MyBatis-red"/>
+  </div>
+  
+  #### Tools
+  <div style="display:inline-block">
+    <img src="https://img.shields.io/badge/Elipse-2C2255?style=flat&logo=eclipseide&logoColor=white" /> 
+  </div>
 
-## 2024-02-23 이영준
-- weather 업로드 (vo, Controller, Utils, jsp(main, list), web.xml에 controller 추가)
+<hr>
 
-## 2024-02-22 최시환
-- user DB 회원가입,로그인 업로드
+# :cry: 개선해야할 점
 
-## 2024-02-22 백상희
-- Database schema 업로드
-- Database sql 업로드
-  (기존의 mysql database 사용할 경우, 수업때 사용한 테이블명이 중복된 테이블은 삭제해야합니다.
-  그 부분이 싫으시면 다른 데이터베이스를 생성하시고 진행하시면 됩니다.)
+1. 음식을 등록할 때, 공공 API를 활용했는데 공공 API 검색어에서는 같은 음식명에 성분이 약간 다른 것이 중복된 것이 많아서 가독성이 떨어졌다.
+   그리고 사용자에게 친근한 단어로 찾는 것도 힘든 것이 많았다. 그래서 검색을 했을때 나오지 않는 경우에는 직접 등록하는 것도 구현해야하지 않았나하는 아쉬움이 있다.
+2. 음식이나 운동에 대한 정보를 등록하면 그래프로 보여주는 부분은 데이터가 들어가야만 그래프로 나와, 입력하지 않은 날은 데이터가 없다.
+   이 부분도 0kcal로 등록을 해줘야하지 않을까하는 아쉬움이 있다. 
