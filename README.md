@@ -27,7 +27,7 @@
   - 나의 페이지에서는 나의 건강정보(키와 몸무게, BMI, 기초대사량 등), 나의 기본정보, 나의 게시글을 볼 수 있습니다.
   - 일일 활동, 일일 식사를 등록할 수 있고, 칼로리를 계산하여 나의 정보를 관리할 수 있습니다.
 
-  ## <a href="https://github.com/Sang2Paik/miniproject1/">Source Repository</a>
+  ## <a href="https://github.com/Sang2Paik/miniproject2_healthcommunity/tree/main">Source Repository</a>
 
 <hr>
 
