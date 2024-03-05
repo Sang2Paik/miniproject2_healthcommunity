@@ -1,0 +1,120 @@
+
+#box {
+	width: 100%;
+	margin: auto;
+	margin-top: 20px;
+}
+
+#title {
+	text-align: center;
+	font-size: 28px;
+	font-weight: bold;
+	color: #3366ff;
+	text-shadow: 1px 1px 2px black;
+}
+
+#gird {
+	padding: 0;
+	margin: 0;
+}
+#pageMenu{
+	text-align: center;
+}
+.row{
+	text-align: center;
+}
+
+#columns{
+        column-width:350px;
+        column-gap: 15px;
+      }
+#columns figure{
+  display: inline-block;
+  border:1px solid rgba(0,0,0,0.2);
+  margin:10;
+  margin-bottom: 15px;
+  padding:10px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+  text-align: left;
+}
+#columns figure img{
+  width:100%;
+}
+#columns figure figcaption{
+  border-top:1px solid rgba(0,0,0,0.2);
+  padding:10px;
+  margin-top:11px;
+}
+
+
+#category_span > input, #category_all {
+    border: none; /* 버튼의 테두리를 없앱니다 */
+    background-color: transparent; /* 배경색을 투명하게 설정합니다 */
+    color: blue; /* 텍스트 색상을 하이퍼링크 색상으로 설정합니다 */
+    text-decoration: underline; /* 텍스트에 밑줄을 추가합니다 */
+    cursor: pointer; /* 마우스를 올렸을 때 포인터 모양으로 변경됩니다 */
+    font-size: 16px; /* 글꼴 크기를 16px로 설정합니다 */
+}
+
+/* 이미지에 마우스를 올렸을 때 마우스 포인터 변경 */
+.image-hover:hover {
+    cursor: pointer; /* 마우스 포인터를 포인터 형태로 변경 */
+}
+
+.custom-btn {
+  width: 130px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+/* 13 */
+.btn-13 {
+  background-color: #89d8d3;
+background-image: linear-gradient(315deg, #89d8d3 0%, #03c8a8 74%);
+  border: none;
+  z-index: 1;
+}
+.btn-13:after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  border-radius: 5px;
+   background-color: #4dccc6;
+background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
+  box-shadow:
+   -7px -7px 20px 0px #fff9,
+   -4px -4px 5px 0px #fff9,
+   7px 7px 20px 0px #0002,
+   4px 4px 5px 0px #0001;
+  transition: all 0.3s ease;
+}
+.btn-13:hover {
+  color: #fff;
+}
+.btn-13:hover:after {
+  top: 0;
+  height: 100%;
+}
+.btn-13:active {
+  top: 2px;
+}
+
+
+

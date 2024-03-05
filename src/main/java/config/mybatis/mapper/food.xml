@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="food">
+
+<!-- 음식 검색 -->
+<select id="food_select_list" parameterType="String" resultType="vo.FoodVo">
+	select * from food_kcal_view where f_name like concat('%','#{f_name}','%')
+</select>
+
+<!-- 식사 타입 리스트  -->
+<select id="meal_type_list"  resultType="vo.MealTypeVo">
+	select * from meal_type
+</select>
+
+<!-- 담기한 음식 리스트 출력 -->
+<select id="add_selectList" parameterType="int" resultType="vo.FoodVo">
+	select * from food_kcal_view where f_no is null and user_idx=#{user_idx}
+</select>
+
+<!-- 음식 담기에서 중복값 찾기 -->
+<select id="find_check_vo" parameterType="vo.FoodVo" resultType="vo.FoodVo">
+	select * from food_kcal where f_name=#{f_name} and f_unit_kcal=#{f_unit_kcal} and f_maker=#{f_maker} and user_idx=#{user_idx} and f_no is null
+</select>
+
+<!-- 수정용 음식 담기에서 중복값 찾기 -->
+<select id="find_check_vo_modify" parameterType="vo.FoodVo" resultType="vo.FoodVo">
+	select * from food_kcal where f_name=#{f_name} and f_unit_kcal=#{f_unit_kcal} and f_maker=#{f_maker} and user_idx=#{user_idx} and f_no=#{f_no}
+</select>
+
+<!-- 등록번호 만들기 -->
+<select id="f_no_select" resultType="int">
+	select ifnull(max(f_no),0)+1 from food_kcal
+</select>
+
+<select id="confirm_food_list" parameterType="int" resultType="vo.FoodVo">
+	select f_no, f_eattime, date_format(f_eattime, '%Y-%m-%d') as f_eat_date, 
+			m_name, m_idx, sum(f_csum_kcal) as f_total_kcal, user_idx 
+	from food_kcal_view 
+	where user_idx=#{user_idx}
+	group by 
+	f_no, m_name, m_idx, f_eattime
+	order by
+	f_eattime desc
+
+</select>
+
+<!-- 오늘 먹은 총 칼로리 -->
+<select id="today_cal" parameterType="int" resultType="double">
+	select sum(f_csum_kcal) from food_kcal_view 
+								where user_idx=#{user_idx} and date_format(f_eattime, '%Y-%m-%d')=curdate();
+</select>
+
+<select id="food_chart_list" parameterType="int" resultType="vo.FoodVo">
+	select sum(f_csum_kcal) as f_total_kcal,
+	   date_format(f_eattime, '%Y-%m-%d') as f_eat_date
+	from food_kcal_view 
+	where user_idx=#{user_idx}
+	group by 
+	date_format(f_eattime, '%Y-%m-%d')
+	order by 
+	date_format(f_eattime, '%Y-%m-%d')
+</select>
+
+<select id="modify_food_select_list" parameterType="int" resultType="vo.FoodVo">
+	select * from food_kcal_view where f_no=#{f_no}
+</select>
+
+<!-- 선택한 음식 담기 -->
+<insert id="add_food" parameterType="vo.FoodVo">
+	insert into food_kcal(f_name, f_unit_g, f_unit_kcal, f_maker, m_idx, m_name, f_eattime, f_csum_g, user_idx) 
+						values(#{f_name}, 
+								#{f_unit_g}, 
+								#{f_unit_kcal}, 
+								#{f_maker}, 
+								#{m_idx}, 
+								#{m_name}, 
+								#{f_eattime}, 
+								#{f_csum_g}, 
+								#{user_idx})
+</insert>
+
+<!-- 음식 담기에서 삭제 -->
+<delete id="delete_food" parameterType="int">
+	delete from food_kcal where f_idx=#{f_idx}
+</delete>
+
+<!-- 담기한 리스트 컴펌상태로  -->
+<update id="food_confirm_update" parameterType="vo.FoodVo">
+	update food_kcal set f_no=#{f_no}, f_confirm='Y' where f_idx=#{f_idx}
+</update>
+
+<!-- 컴펌된 음식 삭제 -->
+<delete id="confirm_food_delete" parameterType="int">
+	delete from food_kcal where f_no=#{f_no}
+</delete>
+
+<insert id="food_modify_insert" parameterType="vo.FoodVo">
+	insert into food_kcal(f_no, f_name, f_unit_g, f_unit_kcal, f_maker, m_idx, m_name, f_eattime, f_csum_g, user_idx) 
+						values( #{f_no},
+								#{f_name}, 
+								#{f_unit_g}, 
+								#{f_unit_kcal}, 
+								#{f_maker}, 
+								#{m_idx}, 
+								#{m_name}, 
+								#{f_eattime}, 
+								#{f_csum_g}, 
+								#{user_idx})
+</insert>
+
+<update id="food_modify_list_update" parameterType="int">
+	update food_kcal set f_confirm='Y' where f_idx=#{f_idx}
+</update>
+
+<!-- 컴펌한 리스트를 수정하기 위해 Y => N -->
+<update id="modify_y_to_n" parameterType="int">
+	update food_kcal set f_confirm='N' where f_idx=#{f_idx}
+</update>
+
+<!-- 수정하기에서 기본 정보 수정 -->
+<update id="modify_basic_info" parameterType="vo.FoodVo">
+	update food_kcal set f_eattime=#{f_eattime}, 
+						 m_idx=#{m_idx},
+						 m_name=#{m_name}
+					where f_idx=#{f_idx}
+</update>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
