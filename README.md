@@ -40,8 +40,6 @@ https://github.com/Sang2Paik/miniproject2_healthcommunity/assets/147046089/17149
 
 # :family: 팀원소개
   
-  ## WEB DESIGN  
-  ## BACK END 
   * 백상희
     * DB 설계 
     * 공공 API를 활용한 식단에 대한 정보 CRUD 기능 구현 및 페이지 디자인
