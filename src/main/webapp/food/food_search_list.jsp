@@ -104,7 +104,7 @@
 		let f_name = $("#f_name_value").text();
 		let f_unit_g = $("#f_unit_g").text();
 		let f_csum_g = $("#f_csum_g").val();
-		let f_unit_kcal = $("#result_kcal").text();
+		let f_unit_kcal = $("#f_unit_kcal").text();
 		let f_maker = $("#f_maker").text();
 		
 		let f_eattime = '${f_eattime}';
