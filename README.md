@@ -1,6 +1,6 @@
 # 미니프로젝트 - 헬스케어 커뮤니티 서비스
 
-https://github.com/Sang2Paik/miniproject2_healthcommunity/assets/147046089/17149eb5-855a-4db0-bed2-3319dcc175a9
+https://github.com/Sang2Paik/miniproject2_healthcommunity/assets/147046089/dc8c0dd9-65b7-44ae-bd49-0a9c3e16df17
 
 <hr>
 
